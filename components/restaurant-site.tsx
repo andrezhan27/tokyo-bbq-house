@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { copy, restaurant, type Locale } from "../lib/site";
+import { copy, restaurant, menuPath, type Locale } from "../lib/site";
 import { Gallery } from "./gallery";
 import { Icon } from "./icon";
 import { LanguageDropdown } from "./language-dropdown";
@@ -85,7 +85,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <p className="hero-intro">{t.intro}</p>
             <div className="button-row">
               <Link className="button button-red" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
-              <a className="button button-outline" href="#menu">{t.menu}<Icon name="arrow" /></a>
+              <Link className="button button-outline" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>
             </div>
           </div>
           <div className="hero-footer">
@@ -133,7 +133,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               ))}
             </dl>
             <p className="drinks-note">{t.drinksIncluded}</p>
-            <a className="button button-red" href={restaurant.menu} target="_blank" rel="noreferrer">{t.menu}<Icon name="external" /></a>
+            <Link className="button button-red" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>
           </div>
         </div>
       </section>

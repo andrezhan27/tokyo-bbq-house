@@ -1,4 +1,5 @@
 export type Locale = "pt" | "en";
+export const menuPath = (locale: Locale) => locale === "pt" ? "/menu/" : "/en/menu/";
 
 const rodizioPrices = { adultsMonThu: 28, adultsFriSun: 30, childrenMonFri: 15 };
 
@@ -10,7 +11,6 @@ export const restaurant = {
   email: "geral@tokyobbqhouse.com",
   instagram: "https://www.instagram.com/tokyobbq.house/",
   directions: "https://www.google.com/maps/search/?api=1&query=Tokyo%20BBQ%20House%2C%20Passeio%20das%20T%C3%A1gides%2C%20Lisboa",
-  menu: "https://heyzine.com/flip-book/094db5cd76.html",
   press: "https://www.nit.pt/comida/restaurantes/toquio-bbq-house-neste-novo-barbecue-japones-pode-comer-tudo-o-que-quiser-por-22e",
 };
 

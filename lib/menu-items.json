@@ -1,0 +1,502 @@
+{
+  "starters": [
+    [
+      "miso",
+      "Sopa miso vegetariana",
+      "Vegetarian miso soup"
+    ],
+    [
+      "seafood-soup",
+      "Sopa de frutos do mar",
+      "Seafood soup"
+    ],
+    [
+      "tempura",
+      "Tempura de legumes",
+      "Vegetable tempura"
+    ],
+    [
+      "takoyaki",
+      "Takoyaki",
+      "Takoyaki"
+    ],
+    [
+      "prawn-roll",
+      "Crepe de camarão",
+      "Prawn spring roll"
+    ],
+    [
+      "vegetable-roll",
+      "Crepe de legumes",
+      "Vegetable spring roll"
+    ],
+    [
+      "fried-prawns",
+      "Camarão frito",
+      "Fried prawns"
+    ],
+    [
+      "chicken-gyoza",
+      "Gyozas de frango",
+      "Chicken gyoza"
+    ],
+    [
+      "pork-gyoza",
+      "Gyozas de porco",
+      "Pork gyoza"
+    ],
+    [
+      "vegetable-gyoza",
+      "Gyozas de legumes",
+      "Vegetable gyoza"
+    ],
+    [
+      "vegetable-crepe",
+      "Crepe de legumes na chapa",
+      "Griddled vegetable crêpe"
+    ],
+    [
+      "seafood-cakes",
+      "Bolinhas de frutos do mar à japonesa",
+      "Japanese seafood cakes"
+    ]
+  ],
+  "beef": [
+    [
+      "beef-selection",
+      "Seleção de carne de vaca",
+      "Beef selection"
+    ],
+    [
+      "short-ribs",
+      "Costela pequena de paleta",
+      "Beef chuck short ribs"
+    ],
+    [
+      "marbled-shank",
+      "Canela bovina marmorizada",
+      "Marbled beef shank"
+    ],
+    [
+      "picanha",
+      "Picanha",
+      "Picanha"
+    ],
+    [
+      "beef-fillet-slices",
+      "Filé de boi",
+      "Sliced beef fillet"
+    ],
+    [
+      "onion-fillet",
+      "Filé mignon com cebola",
+      "Fillet steak with onion"
+    ],
+    [
+      "beef-tongue",
+      "Língua de boi",
+      "Beef tongue"
+    ],
+    [
+      "striploin",
+      "Vazia",
+      "Striploin"
+    ],
+    [
+      "beef-fillet",
+      "Filete de vaca",
+      "Beef fillet"
+    ],
+    [
+      "skirt-steak",
+      "Entraña",
+      "Skirt steak"
+    ],
+    [
+      "ribeye",
+      "Entrecôte de lombo alto",
+      "Ribeye"
+    ],
+    [
+      "garlic-beef",
+      "Cubos de bovino com manteiga e alho",
+      "Beef cubes with garlic butter"
+    ],
+    [
+      "tongue-onion",
+      "Língua de boi com sal e cebola",
+      "Beef tongue with salt and onion"
+    ],
+    [
+      "beef-fruit",
+      "Carne de vaca com frutas",
+      "Beef with fruit"
+    ],
+    [
+      "fillet-salt-onion",
+      "Filete de vaca com cebola e sal",
+      "Beef fillet with salt and onion"
+    ],
+    [
+      "wasabi-roll",
+      "Rolinho de carne com wasabi",
+      "Beef roll with wasabi"
+    ],
+    [
+      "coriander-beef",
+      "Carne de vaca com coentros",
+      "Beef with coriander"
+    ],
+    [
+      "beef-cheese",
+      "Rolinho de carne com queijo",
+      "Beef and cheese roll"
+    ],
+    [
+      "ribeye-sauce",
+      "Entrecôte de lombo alto com molho",
+      "Ribeye with sauce"
+    ],
+    [
+      "grilled-beef",
+      "Churrasco de vaca",
+      "Barbecue beef"
+    ]
+  ],
+  "pork": [
+    [
+      "orange-pork",
+      "Costeleta de porco com laranja",
+      "Pork chop with orange"
+    ],
+    [
+      "bacon-thick",
+      "Bacon em tiras grossas",
+      "Thick-cut bacon"
+    ],
+    [
+      "japanese-sausage",
+      "Salsicha japonesa",
+      "Japanese sausage"
+    ],
+    [
+      "luncheon-meat",
+      "Carne enlatada",
+      "Luncheon meat"
+    ],
+    [
+      "creole-sausage",
+      "Salsicha crioula",
+      "Creole sausage"
+    ],
+    [
+      "taiwan-sausage",
+      "Salsicha de Taiwan",
+      "Taiwanese sausage"
+    ],
+    [
+      "pork-tripe",
+      "Tripas de porco",
+      "Pork tripe"
+    ],
+    [
+      "bacon",
+      "Bacon fatiado",
+      "Sliced bacon"
+    ],
+    [
+      "pork-slices",
+      "Porco fatiado",
+      "Sliced pork"
+    ],
+    [
+      "lamb-chop",
+      "Costeleta de cordeiro",
+      "Lamb chop"
+    ]
+  ],
+  "chicken": [
+    [
+      "orleans-wings",
+      "Asas de frango à Orleans",
+      "Orleans-style chicken wings"
+    ],
+    [
+      "sweet-chicken",
+      "Frango com molho doce japonês",
+      "Chicken with Japanese sweet sauce"
+    ],
+    [
+      "chicken-onion",
+      "Frango com cebola salgada",
+      "Chicken with salted onion"
+    ],
+    [
+      "chicken-thigh",
+      "Coxa de frango grelhada clássica",
+      "Classic grilled chicken thigh"
+    ],
+    [
+      "gizzards",
+      "Moelas",
+      "Chicken gizzards"
+    ]
+  ],
+  "seafood": [
+    [
+      "butter-clams",
+      "Amêijoas com manteiga",
+      "Clams with butter"
+    ],
+    [
+      "cheese-prawns",
+      "Camarão com queijo",
+      "Prawns with cheese"
+    ],
+    [
+      "cuttlefish",
+      "Choco",
+      "Cuttlefish"
+    ],
+    [
+      "whole-squid",
+      "Pota inteira",
+      "Whole squid"
+    ],
+    [
+      "squid",
+      "Pota",
+      "Squid"
+    ],
+    [
+      "mackerel",
+      "Cavalinha",
+      "Mackerel"
+    ],
+    [
+      "prawns",
+      "Camarão",
+      "Prawns"
+    ]
+  ],
+  "rice": [
+    [
+      "udon",
+      "Udon de carne de vaca",
+      "Beef udon"
+    ],
+    [
+      "spicy-noodles",
+      "Massa japonesa picante",
+      "Spicy Japanese noodles"
+    ],
+    [
+      "macarrao",
+      "Macarrão",
+      "Macarrão"
+    ],
+    [
+      "ramen",
+      "Ramen",
+      "Ramen"
+    ],
+    [
+      "sukiyaki",
+      "Sukiyaki",
+      "Sukiyaki"
+    ],
+    [
+      "white-rice",
+      "Arroz branco",
+      "White rice"
+    ],
+    [
+      "egg-rice",
+      "Arroz Cêso Chao com ovo japonês",
+      "Cêso Chao rice with Japanese egg"
+    ],
+    [
+      "japanese-beef-rice",
+      "Arroz com carne bovina japonesa",
+      "Japanese beef rice"
+    ],
+    [
+      "black-rice",
+      "Arroz negro",
+      "Black rice"
+    ]
+  ],
+  "sides": [
+    [
+      "lotus-root",
+      "Fatias de raiz de lótus",
+      "Sliced lotus root"
+    ],
+    [
+      "asparagus",
+      "Espargos",
+      "Asparagus"
+    ],
+    [
+      "sweetcorn",
+      "Milho doce",
+      "Sweetcorn"
+    ],
+    [
+      "potato",
+      "Fatias de batata",
+      "Sliced potato"
+    ],
+    [
+      "okra",
+      "Quiabo",
+      "Okra"
+    ],
+    [
+      "mixed-vegetables",
+      "Seleção de legumes",
+      "Mixed vegetables"
+    ],
+    [
+      "cherry-tomatoes",
+      "Tomate-cereja",
+      "Cherry tomatoes"
+    ],
+    [
+      "padron",
+      "Pimentos Padrón",
+      "Padrón peppers"
+    ],
+    [
+      "sweet-potato",
+      "Batata-doce",
+      "Sweet potato"
+    ],
+    [
+      "stuffed-mushrooms",
+      "Cogumelos recheados",
+      "Stuffed mushrooms"
+    ],
+    [
+      "enoki",
+      "Enoki",
+      "Enoki mushrooms"
+    ],
+    [
+      "pumpkin",
+      "Abóbora",
+      "Pumpkin"
+    ],
+    [
+      "courgette",
+      "Courgette",
+      "Courgette"
+    ],
+    [
+      "egg",
+      "Ovo",
+      "Egg"
+    ]
+  ],
+  "sauces": [
+    [
+      "bbq-sauce",
+      "Molho BBQ",
+      "BBQ sauce"
+    ],
+    [
+      "ketchup",
+      "Ketchup",
+      "Ketchup"
+    ],
+    [
+      "mayo",
+      "Maionese",
+      "Mayonnaise"
+    ],
+    [
+      "sweet-chilli",
+      "Molho sweet chilli",
+      "Sweet chilli sauce"
+    ],
+    [
+      "spicy-rub",
+      "Tempero seco picante para carne",
+      "Spicy dry rub"
+    ],
+    [
+      "chopped-garlic",
+      "Alho picado",
+      "Chopped garlic"
+    ],
+    [
+      "garlic",
+      "Alho",
+      "Garlic"
+    ]
+  ],
+  "desserts": [
+    [
+      "matcha-cheesecake",
+      "Cheesecake de matcha",
+      "Matcha cheesecake"
+    ],
+    [
+      "pistachio-cheesecake",
+      "Cheesecake de pistácio",
+      "Pistachio cheesecake"
+    ],
+    [
+      "mochi",
+      "Mochi",
+      "Mochi"
+    ],
+    [
+      "viennetta",
+      "Viennetta",
+      "Viennetta"
+    ],
+    [
+      "mini-ice-cream",
+      "Mini gelado",
+      "Mini ice lolly"
+    ],
+    [
+      "tiramisu",
+      "Tiramisú",
+      "Tiramisu"
+    ]
+  ],
+  "drinks": [
+    [
+      "beer",
+      "Cerveja",
+      "Beer"
+    ],
+    [
+      "soft-drinks",
+      "Refrigerantes com refill",
+      "Soft drinks with refills"
+    ],
+    [
+      "house-drinks",
+      "Bebidas da casa",
+      "House drinks"
+    ],
+    [
+      "cocktails",
+      "Cocktails",
+      "Cocktails"
+    ],
+    [
+      "wine",
+      "Vinho",
+      "Wine"
+    ],
+    [
+      "sake",
+      "Saké",
+      "Sake"
+    ]
+  ]
+}
