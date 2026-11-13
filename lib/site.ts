@@ -16,8 +16,8 @@ export const restaurant = {
 
 export const copy = {
   pt: {
-    home: "/", alternateHome: "/en/",
-    lang: "pt-PT", switchLanguage: "View in English", skip: "Saltar para o conteúdo",
+    home: "/",
+    lang: "pt-PT", languageLabel: "Idioma", skip: "Saltar para o conteúdo",
     nav: ["Experiência", "Rodízio", "Galeria", "Contactos"],
     openNavigation: "Abrir navegação",
     closeNavigation: "Fechar navegação",
@@ -41,7 +41,6 @@ export const copy = {
       { audience: "Crianças dos 4 aos 9 anos", days: "Segunda a sexta-feira", amount: rodizioPrices.childrenMonFri },
     ],
     drinksIncluded: "O rodízio inclui cerveja, refrigerantes com refill e bebidas da casa.",
-    wagyu: "Wagyu disponível à parte.",
     guideLabel: "Da grelha à mesa", guideTitle: "O NOSSO YAKINIKU",
     guideIntro: "Do karubi ao wagyu, descobre o sabor e a textura dos cortes que fazem parte da tradição yakiniku.",
     carousel: { label: "Fotografias de yakiniku", previous: "Fotografia anterior", next: "Fotografia seguinte", pause: "Pausar", play: "Reproduzir" },
@@ -55,8 +54,8 @@ export const copy = {
     description: "Tokyo BBQ House no Parque das Nações, em Lisboa. Barbecue japonês à mesa, menu all you can eat e reservas online.",
   },
   en: {
-    home: "/en/", alternateHome: "/",
-    lang: "en", switchLanguage: "Ver em português", skip: "Skip to content",
+    home: "/en/",
+    lang: "en", languageLabel: "Language", skip: "Skip to content",
     nav: ["Experience", "Rodízio", "Gallery", "Visit"],
     openNavigation: "Open navigation",
     closeNavigation: "Close navigation",
@@ -80,7 +79,6 @@ export const copy = {
       { audience: "Children aged 4–9", days: "Monday to Friday", amount: rodizioPrices.childrenMonFri },
     ],
     drinksIncluded: "The rodízio includes beer, soft drinks with refills and house drinks.",
-    wagyu: "Wagyu is available at an extra charge.",
     guideLabel: "From the grill to the table", guideTitle: "OUR YAKINIKU",
     guideIntro: "From karubi to wagyu, discover the flavours and textures of the cuts at the heart of yakiniku.",
     carousel: { label: "Yakiniku photos", previous: "Previous photo", next: "Next photo", pause: "Pause", play: "Play" },

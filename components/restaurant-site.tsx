@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { copy, restaurant, type Locale } from "../lib/site";
 import { Gallery } from "./gallery";
 import { Icon } from "./icon";
+import { LanguageDropdown } from "./language-dropdown";
 import { MobileNav } from "./mobile-nav";
 import { YakinikuCarousel } from "./yakiniku-carousel";
 
@@ -43,7 +44,7 @@ export function SiteFrame({ locale, reservation = false, children }: {
             {links.map(({ href, label }) => <Link href={href} key={href}>{label}</Link>)}
           </nav>
           <div className="nav-actions">
-            <Link className="language" href={t.alternateHome} aria-label={t.switchLanguage} hrefLang={locale === "pt" ? "en" : "pt-PT"}>{locale === "pt" ? "EN" : "PT"}</Link>
+            <LanguageDropdown locale={locale} />
             <Link className="button button-red nav-book" href={restaurant.reservationPath} aria-current={reservation ? "page" : undefined}><Icon name="calendar" />{t.book}</Link>
             <MobileNav openLabel={t.openNavigation} closeLabel={t.closeNavigation} links={links} />
           </div>
@@ -87,8 +88,10 @@ export function HomePage({ locale }: { locale: Locale }) {
               <a className="button button-outline" href="#menu">{t.menu}<Icon name="arrow" /></a>
             </div>
           </div>
-          <a className="hero-scroll" href="#historia"><Icon name="down" />{t.scroll}</a>
-          <span className="hero-japanese" lang="ja" aria-hidden="true">焼肉</span>
+          <div className="hero-footer">
+            <a className="hero-scroll" href="#historia"><Icon name="down" />{t.scroll}</a>
+            <span className="hero-japanese" lang="ja" aria-hidden="true">焼肉</span>
+          </div>
         </div>
       </section>
 
@@ -130,7 +133,6 @@ export function HomePage({ locale }: { locale: Locale }) {
               ))}
             </dl>
             <p className="drinks-note">{t.drinksIncluded}</p>
-            <p className="wagyu-note">{t.wagyu}</p>
             <a className="button button-red" href={restaurant.menu} target="_blank" rel="noreferrer">{t.menu}<Icon name="external" /></a>
           </div>
         </div>
