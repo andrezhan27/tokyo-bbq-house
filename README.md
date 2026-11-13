@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. Portuguese is at `/` and English is at `/en/`. The two guide pages are `/guia/` and `/en/guide/`.
+Open http://localhost:3000. Portuguese is at `/` and English is at `/en/`.
 
 Run `npm run build` to generate the static site in `out/`.
 

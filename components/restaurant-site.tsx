@@ -8,28 +8,29 @@ import { Icon } from "./icon";
 import { MobileNav } from "./mobile-nav";
 import { YakinikuCarousel } from "./yakiniku-carousel";
 
-export function siteMetadata(locale: Locale, guide = false): Metadata {
+export function siteMetadata(locale: Locale): Metadata {
   const t = copy[locale];
   return {
-    title: guide ? `${t.guideTitle} | Tokyo BBQ House` : `Tokyo BBQ House | ${locale === "pt" ? "Yakiniku em Lisboa" : "Yakiniku in Lisbon"}`,
-    description: guide ? t.guideIntro : t.description,
+    title: `Tokyo BBQ House | ${locale === "pt" ? "Yakiniku em Lisboa" : "Yakiniku in Lisbon"}`,
+    description: t.description,
     alternates: {
-      languages: { "pt-PT": guide ? "/guia/" : "/", en: guide ? "/en/guide/" : "/en/" },
+      languages: { "pt-PT": "/", en: "/en/" },
     },
     openGraph: { type: "website", locale: locale === "pt" ? "pt_PT" : "en_GB", siteName: "Tokyo BBQ House" },
     icons: "/photos/favicon.png",
   };
 }
 
-export function SiteFrame({ locale, guide = false, reservation = false, children }: {
+export function SiteFrame({ locale, reservation = false, children }: {
   locale: Locale;
-  guide?: boolean;
   reservation?: boolean;
   children: ReactNode;
 }) {
   const t = copy[locale];
-  const links = [`${t.home}#historia`, `${t.home}#menu`, t.guide, `${t.home}#galeria`, `${t.home}#contacto`];
-  const alternate = guide ? t.alternateGuide : t.alternateHome;
+  const links = ["historia", "menu", "galeria", "contacto"].map((section, index) => ({
+    href: `${t.home}#${section}`,
+    label: t.nav[index],
+  }));
   return (
     <div className={reservation ? "reservation-layout" : undefined}>
       <a className="skip-link" href="#main">{t.skip}</a>
@@ -39,12 +40,12 @@ export function SiteFrame({ locale, guide = false, reservation = false, children
             <Image src="/photos/logo.png" alt="Tokyo BBQ House" width={123} height={38} priority />
           </Link>
           <nav className="desktop-nav" aria-label={t.openNavigation}>
-            {links.map((href, index) => <Link href={href} key={href} aria-current={guide && index === 2 ? "page" : undefined}>{t.nav[index]}</Link>)}
+            {links.map(({ href, label }) => <Link href={href} key={href}>{label}</Link>)}
           </nav>
           <div className="nav-actions">
-            <Link className="language" href={alternate} aria-label={t.switchLanguage} hrefLang={locale === "pt" ? "en" : "pt-PT"}>{locale === "pt" ? "EN" : "PT"}</Link>
+            <Link className="language" href={t.alternateHome} aria-label={t.switchLanguage} hrefLang={locale === "pt" ? "en" : "pt-PT"}>{locale === "pt" ? "EN" : "PT"}</Link>
             <Link className="button button-red nav-book" href={restaurant.reservationPath} aria-current={reservation ? "page" : undefined}><Icon name="calendar" />{t.book}</Link>
-            <MobileNav label={t.openNavigation} links={links.map((href, index) => ({ href, label: t.nav[index], current: guide && index === 2 }))} />
+            <MobileNav openLabel={t.openNavigation} closeLabel={t.closeNavigation} links={links} />
           </div>
         </div>
       </header>
@@ -127,12 +128,9 @@ export function HomePage({ locale }: { locale: Locale }) {
       <section className="guide-callout light-section" aria-labelledby="guide-title">
         <div className="container">
           <div className="guide-callout-header">
-            <div>
-              <p className="eyebrow"><span />{t.guideLabel}</p>
-              <h2 id="guide-title">{t.guideTitle}</h2>
-              <p>{t.guideIntro}</p>
-            </div>
-            <Link className="text-link" href={t.guide}>{t.guideLink}<Icon name="arrow" /></Link>
+            <p className="eyebrow"><span />{t.guideLabel}</p>
+            <h2 id="guide-title">{t.guideTitle}</h2>
+            <p>{t.guideIntro}</p>
           </div>
           <YakinikuCarousel locale={locale} />
         </div>
