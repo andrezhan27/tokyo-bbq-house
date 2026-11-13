@@ -15,4 +15,4 @@ Open http://localhost:3000. Portuguese is at `/` and English is at `/en/`. The t
 
 Run `npm run build` to generate the static site in `out/`.
 
-Restaurant links, prices and translations live in `lib/site.ts`. The contact form creates a draft in the visitor’s email app. Reservations use the restaurant’s phone number.
+Restaurant links, prices and translations live in `lib/site.ts`. The reservation page at `/reservaiton/` embeds the restaurant’s Intelis booking form.

@@ -3,10 +3,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { copy, restaurant, type Locale } from "../lib/site";
-import { ContactForm } from "./contact-form";
 import { Gallery } from "./gallery";
 import { Icon } from "./icon";
 import { MobileNav } from "./mobile-nav";
+import { YakinikuCarousel } from "./yakiniku-carousel";
 
 export function siteMetadata(locale: Locale, guide = false): Metadata {
   const t = copy[locale];
@@ -21,12 +21,17 @@ export function siteMetadata(locale: Locale, guide = false): Metadata {
   };
 }
 
-export function SiteFrame({ locale, guide = false, children }: { locale: Locale; guide?: boolean; children: ReactNode }) {
+export function SiteFrame({ locale, guide = false, reservation = false, children }: {
+  locale: Locale;
+  guide?: boolean;
+  reservation?: boolean;
+  children: ReactNode;
+}) {
   const t = copy[locale];
   const links = [`${t.home}#historia`, `${t.home}#menu`, t.guide, `${t.home}#galeria`, `${t.home}#contacto`];
   const alternate = guide ? t.alternateGuide : t.alternateHome;
   return (
-    <>
+    <div className={reservation ? "reservation-layout" : undefined}>
       <a className="skip-link" href="#main">{t.skip}</a>
       <header className="site-header">
         <div className="nav-shell">
@@ -38,13 +43,13 @@ export function SiteFrame({ locale, guide = false, children }: { locale: Locale;
           </nav>
           <div className="nav-actions">
             <Link className="language" href={alternate} aria-label={t.switchLanguage} hrefLang={locale === "pt" ? "en" : "pt-PT"}>{locale === "pt" ? "EN" : "PT"}</Link>
-            <a className="button button-red nav-book" href={restaurant.call}><Icon name="phone" />{t.book}</a>
+            <Link className="button button-red nav-book" href={restaurant.reservationPath} aria-current={reservation ? "page" : undefined}><Icon name="calendar" />{t.book}</Link>
             <MobileNav label={t.openNavigation} links={links.map((href, index) => ({ href, label: t.nav[index], current: guide && index === 2 }))} />
           </div>
         </div>
       </header>
-      <main id="main">{children}</main>
-      <footer className="site-footer">
+      <main id="main" className={reservation ? "reservation-main" : undefined}>{children}</main>
+      {!reservation && <footer className="site-footer">
         <div className="container footer-inner">
           <Link href={t.home} aria-label="Tokyo BBQ House"><Image src="/photos/logo.png" alt="Tokyo BBQ House" width={106} height={33} /></Link>
           <p>Passeio das Tágides · 1990-280 Lisboa</p>
@@ -54,8 +59,8 @@ export function SiteFrame({ locale, guide = false, children }: { locale: Locale;
             <a href={restaurant.call} aria-label={t.phone}><Icon name="phone" /></a>
           </div>
         </div>
-      </footer>
-    </>
+      </footer>}
+    </div>
   );
 }
 
@@ -69,10 +74,10 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="container hero-inner">
           <div className="hero-copy">
             <p className="eyebrow"><span />{t.heroLabel}</p>
-            <h1 id="hero-title">{t.heroLines[0]}<br /><em>{t.heroLines[1]}</em></h1>
+            <h1 id="hero-title">Tokyo <br /><em>BBQ House</em></h1>
             <p className="hero-intro">{t.intro}</p>
             <div className="button-row">
-              <a className="button button-red" href={restaurant.call}><Icon name="phone" />{t.book}</a>
+              <Link className="button button-red" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
               <a className="button button-outline" href="#menu">{t.menu}<Icon name="arrow" /></a>
             </div>
           </div>
@@ -84,7 +89,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       <aside className="booking-strip">
         <div className="container booking-inner">
           <p><span lang="ja" aria-hidden="true">焼肉</span>{t.bookingTitle}</p>
-          <a href={restaurant.call}><Icon name="phone" />{restaurant.phone}<Icon name="external" /></a>
+          <Link href={restaurant.reservationPath}><Icon name="calendar" />{t.book}<Icon name="arrow" /></Link>
         </div>
       </aside>
 
@@ -120,14 +125,16 @@ export function HomePage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="guide-callout light-section" aria-labelledby="guide-title">
-        <div className="container split guide-callout-grid">
-          <div>
-            <p className="eyebrow"><span />{t.guideLabel}</p>
-            <h2 id="guide-title">{t.guideTitle}</h2>
-            <p>{t.guideIntro}</p>
+        <div className="container">
+          <div className="guide-callout-header">
+            <div>
+              <p className="eyebrow"><span />{t.guideLabel}</p>
+              <h2 id="guide-title">{t.guideTitle}</h2>
+              <p>{t.guideIntro}</p>
+            </div>
             <Link className="text-link" href={t.guide}>{t.guideLink}<Icon name="arrow" /></Link>
           </div>
-          <div className="guide-image"><Image src="/photos/wagyu.webp" alt={t.photoAlts[5]} fill sizes="(max-width: 750px) 92vw, 48vw" /></div>
+          <YakinikuCarousel locale={locale} />
         </div>
       </section>
 
@@ -157,11 +164,11 @@ export function HomePage({ locale }: { locale: Locale }) {
               <div><Icon name="mail" /><p><span>{t.email}</span><a href={`mailto:${restaurant.email}`}>{restaurant.email}</a></p></div>
             </address>
             <div className="button-row">
-              <a className="button button-red" href={restaurant.call}><Icon name="phone" />{t.call}</a>
+              <Link className="button button-red" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
               <a className="button button-outline" href={restaurant.directions} target="_blank" rel="noreferrer">{t.directions}<Icon name="external" /></a>
             </div>
           </div>
-          <ContactForm locale={locale} />
+          <div className="visit-image"><Image src="/photos/yakiniku/n2.webp" alt={t.visitPhotoAlt} fill sizes="(max-width: 750px) 92vw, 45vw" /></div>
         </div>
       </section>
     </SiteFrame>

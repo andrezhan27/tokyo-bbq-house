@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-type IconName = "arrow" | "external" | "down" | "phone" | "pin" | "instagram" | "mail" | "menu" | "close" | "left" | "right";
+type IconName = "arrow" | "external" | "down" | "phone" | "pin" | "instagram" | "mail" | "menu" | "close" | "left" | "right" | "calendar" | "pause" | "play";
 
 const paths: Record<IconName, string> = {
   arrow: "M4 12h15m-6-6 6 6-6 6",
@@ -14,6 +14,9 @@ const paths: Record<IconName, string> = {
   close: "m5 5 14 14M19 5 5 19",
   left: "m15 5-7 7 7 7",
   right: "m9 5 7 7-7 7",
+  calendar: "M4 6h16v15H4zm0 5h16M8 3v5m8-5v5",
+  pause: "M9 5v14m6-14v14",
+  play: "m8 5 11 7-11 7Z",
 };
 
 export function Icon({ name, ...props }: SVGProps<SVGSVGElement> & { name: IconName }) {

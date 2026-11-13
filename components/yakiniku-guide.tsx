@@ -31,7 +31,7 @@ export function YakinikuGuide({ locale }: { locale: Locale }) {
               </div>
             </details>
           ))}
-          <a className="button button-red" href={restaurant.call}><Icon name="phone" />{t.call}</a>
+          <Link className="button button-red" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
         </div>
       </section>
     </SiteFrame>

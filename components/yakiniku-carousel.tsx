@@ -1,0 +1,214 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { copy, type Locale } from "../lib/site";
+import { Icon } from "./icon";
+
+const photos = [
+  ["n1", "Fatias de carne marmorizada com cogumelo", "Marbled beef slices with a mushroom"],
+  ["MENU-TOKYO-1", "Cortes de carne com limão e flores", "Beef cuts with lemon and flowers"],
+  ["n3", "Fatias finas de carne com verduras", "Thin slices of beef with greens"],
+  ["MENU-TOKYO-62", "Costeletas com lima e especiarias", "Chops with lime and spices"],
+  ["MENU-TOKYO-68", "Carne marinada com fruta", "Marinated beef with fruit"],
+  ["MENU-TOKYO-73", "Fatias de carne com sal grosso e flores", "Beef slices with coarse salt and flowers"],
+  ["n2", "Cortes de carne marmorizada sobre uma folha", "Marbled beef cuts served on a leaf"],
+  ["MENU-TOKYO-70", "Carne fatiada com lima e legumes", "Sliced beef with lime and vegetables"],
+  ["MENU-TOKYO-69", "Carne marinada numa taça azul", "Marinated beef in a blue bowl"],
+  ["TOKYO-BBQ-HOUSE-18", "Costeletas com tempero verde", "Chops with green seasoning"],
+  ["MENU-TOKYO-95", "Fatias de carne num tabuleiro de madeira", "Beef slices on a wooden tray"],
+  ["MENU-TOKYO-63", "Dois cortes de carne com lima", "Two meat cuts with lime"],
+  ["MENU-TOKYO-72", "Carne fatiada com alecrim e rabanete", "Sliced beef with rosemary and radish"],
+  ["TOKYO-BBQ-HOUSE-28", "Fatias de carne com rabanete e milho", "Beef slices with radish and corn"],
+  ["MENU-TOKYO-81", "Carne fatiada com pimenta em grão", "Sliced beef with peppercorns"],
+  ["TOKYO-BBQ-HOUSE-30", "Cortes de carne com milho, tomate e lima", "Beef cuts with corn, tomato and lime"],
+] as const;
+
+const autoplaySpeed = 0.038; // Pixels per millisecond.
+
+export function YakinikuCarousel({ locale }: { locale: Locale }) {
+  const labels = copy[locale].carousel;
+  const viewport = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const group = useRef<HTMLUListElement>(null);
+  const controls = useRef<{ toggle: () => void; step: (direction: number) => void }>(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const viewportElement = viewport.current;
+    const trackElement = track.current;
+    const groupElement = group.current;
+    if (!viewportElement || !trackElement || !groupElement) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let playing = !reducedMotion.matches;
+    let visible = false;
+    let width = 0;
+    let offset = 0;
+    let momentum = 0;
+    let stepRemaining = 0;
+    let frame = 0;
+    let lastFrame = 0;
+    let drag: { id: number; x: number; time: number; speed: number } | null = null;
+
+    function moveBy(distance: number) {
+      if (!width) return;
+      offset = ((offset + distance) % width + width) % width;
+      trackElement!.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    }
+
+    function animate(time: number) {
+      frame = 0;
+      const elapsed = Math.min(time - lastFrame, 40);
+      lastFrame = time;
+      if (visible && !drag) {
+        const step = Math.abs(stepRemaining) < 0.25
+          ? stepRemaining
+          : stepRemaining * (1 - Math.exp(-elapsed / 85));
+        stepRemaining -= step;
+        moveBy(step + ((playing ? autoplaySpeed : 0) + momentum) * elapsed);
+        momentum *= Math.exp(-elapsed / 155);
+        if (Math.abs(momentum) < 0.005) momentum = 0;
+        schedule(time);
+      }
+    }
+
+    function schedule(time = performance.now()) {
+      if (frame || !visible || drag || !(playing || momentum || stepRemaining)) return;
+      lastFrame = time;
+      frame = requestAnimationFrame(animate);
+    }
+
+    function measure() {
+      const nextWidth = groupElement!.getBoundingClientRect().width;
+      if (width) offset *= nextWidth / width;
+      width = nextWidth;
+      moveBy(0);
+    }
+
+    function startDrag(event: PointerEvent) {
+      if (drag || !event.isPrimary || event.button !== 0) return;
+      drag = { id: event.pointerId, x: event.clientX, time: event.timeStamp, speed: 0 };
+      momentum = 0;
+      stepRemaining = 0;
+      viewportElement!.setPointerCapture(event.pointerId);
+      viewportElement!.setAttribute("data-dragging", "");
+    }
+
+    function dragBy(event: PointerEvent) {
+      if (drag?.id !== event.pointerId) return;
+      const distance = drag.x - event.clientX;
+      const elapsed = Math.max(event.timeStamp - drag.time, 1);
+      const speed = distance / elapsed;
+      drag.speed += (speed - drag.speed) * (1 - Math.exp(-elapsed / 28));
+      drag.x = event.clientX;
+      drag.time = event.timeStamp;
+      moveBy(distance);
+    }
+
+    function endDrag(event: PointerEvent) {
+      if (drag?.id !== event.pointerId) return;
+      if (event.type === "pointerup" && !reducedMotion.matches) {
+        const speed = drag.speed * Math.exp(-(event.timeStamp - drag.time) / 55);
+        momentum = Math.max(-2.1, Math.min(2.1, speed - (playing ? autoplaySpeed : 0)));
+        if (Math.abs(speed) < 0.04) momentum = 0;
+      }
+      drag = null;
+      viewportElement!.removeAttribute("data-dragging");
+      schedule();
+    }
+
+    function setPlaying(next: boolean) {
+      playing = next;
+      setPaused(!next);
+      if (!next) momentum = 0;
+      schedule();
+    }
+
+    function updateMotionPreference() {
+      setPlaying(!reducedMotion.matches);
+    }
+
+    controls.current = {
+      toggle: () => setPlaying(!playing),
+      step: (direction) => {
+        momentum = 0;
+        const distance = direction * width / photos.length;
+        if (reducedMotion.matches) {
+          moveBy(distance);
+        } else {
+          stepRemaining += distance;
+          schedule();
+        }
+      },
+    };
+
+    const resize = new ResizeObserver(measure);
+    resize.observe(groupElement);
+    const intersection = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      schedule();
+    });
+    intersection.observe(viewportElement);
+    measure();
+    viewportElement.setAttribute("data-ready", "");
+    viewportElement.scrollLeft = 0;
+    updateMotionPreference();
+    reducedMotion.addEventListener("change", updateMotionPreference);
+    viewportElement.addEventListener("pointerdown", startDrag);
+    viewportElement.addEventListener("pointermove", dragBy);
+    viewportElement.addEventListener("pointerup", endDrag);
+    viewportElement.addEventListener("pointercancel", endDrag);
+    viewportElement.addEventListener("lostpointercapture", endDrag);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      intersection.disconnect();
+      controls.current = null;
+      reducedMotion.removeEventListener("change", updateMotionPreference);
+      viewportElement.removeEventListener("pointerdown", startDrag);
+      viewportElement.removeEventListener("pointermove", dragBy);
+      viewportElement.removeEventListener("pointerup", endDrag);
+      viewportElement.removeEventListener("pointercancel", endDrag);
+      viewportElement.removeEventListener("lostpointercapture", endDrag);
+      viewportElement.removeAttribute("data-ready");
+      viewportElement.removeAttribute("data-dragging");
+      trackElement.style.transform = "";
+    };
+  }, []);
+
+  return (
+    <div className="guide-carousel" role="group" aria-label={labels.label}>
+      <div className="guide-carousel-viewport" ref={viewport}>
+        <div className="guide-carousel-track" ref={track}>
+          {[false, true].map((duplicate) => (
+            <ul
+              className={duplicate ? "guide-carousel-photos guide-carousel-duplicate" : "guide-carousel-photos"}
+              key={String(duplicate)}
+              ref={duplicate ? undefined : group}
+              aria-hidden={duplicate || undefined}
+            >
+              {photos.map(([file, pt, en]) => (
+                <li key={file}>
+                  <Image
+                    src={`/photos/yakiniku/${file}.webp`}
+                    alt={duplicate ? "" : locale === "pt" ? pt : en}
+                    fill
+                    draggable={false}
+                    sizes="(max-width: 750px) 79vw, (max-width: 1440px) 34vw, 490px"
+                  />
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
+      <div className="guide-carousel-controls">
+        <button type="button" aria-label={labels.previous} onClick={() => controls.current?.step(-1)}><Icon name="left" /></button>
+        <button type="button" aria-label={paused ? labels.play : labels.pause} onClick={() => controls.current?.toggle()}><Icon name={paused ? "play" : "pause"} /></button>
+        <button type="button" aria-label={labels.next} onClick={() => controls.current?.step(1)}><Icon name="right" /></button>
+      </div>
+    </div>
+  );
+}
