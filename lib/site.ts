@@ -1,5 +1,7 @@
 export type Locale = "pt" | "en";
 
+const rodizioPrices = { adultsMonThu: 28, adultsFriSun: 30, childrenMonFri: 15 };
+
 export const restaurant = {
   phone: "+351 927 955 555",
   call: "tel:+351927955555",
@@ -32,8 +34,13 @@ export const copy = {
       "Entre o interior e a esplanada, há lugar para 280 pessoas. Podes experimentar um kimono, descobrir produtos japoneses ou passar pelas máquinas de jogos depois de jantar.",
     ],
     menuPhotoAlt: "Rolinhos de carne numa travessa", foodLabel: "Rodízio", foodTitle: "ALL YOU CAN EAT",
-    food: "Da vazia e do entrecôte à língua de boi, camarão, polvo e legumes para a grelha. Também há ramen, gyozas, macarrão de peru japonês e arroz negro com molho de lulas. Para beber, escolhe entre cocktails, cerveja, vinho e saké.",
-    weekday: "Durante a semana", weekend: "Fim de semana", prices: ["22,90 €", "24,90 €"],
+    food: "Da vazia e do entrecôte à língua de boi, camarão, polvo e legumes para a grelha. Também há ramen, gyozas, macarrão de peru japonês e arroz negro com molho de lulas. A carta de bebidas tem ainda cocktails, vinho e saké.",
+    prices: [
+      { audience: "Adultos", days: "Segunda a quinta-feira", amount: rodizioPrices.adultsMonThu },
+      { audience: "Adultos", days: "Sexta-feira a domingo e feriados", amount: rodizioPrices.adultsFriSun },
+      { audience: "Crianças dos 4 aos 9 anos", days: "Segunda a sexta-feira", amount: rodizioPrices.childrenMonFri },
+    ],
+    drinksIncluded: "O rodízio inclui cerveja, refrigerantes com refill e bebidas da casa.",
     wagyu: "Wagyu disponível à parte.",
     guideLabel: "Da grelha à mesa", guideTitle: "O NOSSO YAKINIKU",
     guideIntro: "Do karubi ao wagyu, descobre o sabor e a textura dos cortes que fazem parte da tradição yakiniku.",
@@ -66,8 +73,13 @@ export const copy = {
       "There’s room for 280 guests between the dining room and terrace. Try on a kimono, browse Japanese products or stop by the arcade machines after dinner.",
     ],
     menuPhotoAlt: "Beef rolls arranged on a platter", foodLabel: "Rodízio", foodTitle: "ALL YOU CAN EAT",
-    food: "From striploin and ribeye to beef tongue, prawns, octopus and vegetables for the grill. There’s also ramen, gyoza, Japanese turkey noodles and black rice with squid sauce. Pair it with cocktails, beer, wine or sake.",
-    weekday: "Weekdays", weekend: "Weekends", prices: ["€22.90", "€24.90"],
+    food: "From striploin and ribeye to beef tongue, prawns, octopus and vegetables for the grill. There’s also ramen, gyoza, Japanese turkey noodles and black rice with squid sauce. The drinks menu also features cocktails, wine and sake.",
+    prices: [
+      { audience: "Adults", days: "Monday to Thursday", amount: rodizioPrices.adultsMonThu },
+      { audience: "Adults", days: "Friday to Sunday and public holidays", amount: rodizioPrices.adultsFriSun },
+      { audience: "Children aged 4–9", days: "Monday to Friday", amount: rodizioPrices.childrenMonFri },
+    ],
+    drinksIncluded: "The rodízio includes beer, soft drinks with refills and house drinks.",
     wagyu: "Wagyu is available at an extra charge.",
     guideLabel: "From the grill to the table", guideTitle: "OUR YAKINIKU",
     guideIntro: "From karubi to wagyu, discover the flavours and textures of the cuts at the heart of yakiniku.",

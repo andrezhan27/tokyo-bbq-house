@@ -67,6 +67,11 @@ export function SiteFrame({ locale, reservation = false, children }: {
 
 export function HomePage({ locale }: { locale: Locale }) {
   const t = copy[locale];
+  const euro = new Intl.NumberFormat(t.lang, {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  });
 
   return (
     <SiteFrame locale={locale}>
@@ -117,8 +122,14 @@ export function HomePage({ locale }: { locale: Locale }) {
             <h2>{t.foodTitle}</h2>
             <p>{t.food}</p>
             <dl className="prices">
-              {[t.weekday, t.weekend].map((label, index) => <div key={label}><dt>{label}</dt><dd>{t.prices[index]}</dd></div>)}
+              {t.prices.map(({ audience, days, amount }) => (
+                <div key={days}>
+                  <dt>{audience}<span>{days}</span></dt>
+                  <dd>{euro.format(amount)}</dd>
+                </div>
+              ))}
             </dl>
+            <p className="drinks-note">{t.drinksIncluded}</p>
             <p className="wagyu-note">{t.wagyu}</p>
             <a className="button button-red" href={restaurant.menu} target="_blank" rel="noreferrer">{t.menu}<Icon name="external" /></a>
           </div>

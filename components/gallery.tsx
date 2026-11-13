@@ -54,7 +54,7 @@ export function Gallery({ locale }: { locale: Locale }) {
         <div className="dialog-stage">
           <button type="button" className="dialog-prev" aria-label={t.gallery.prev} onClick={() => changePhoto(-1)}><Icon name="left" /></button>
           <div className="dialog-photo">
-            <Image key={active} src={photoPath(active)} alt={t.photoAlts[active] ?? t.gallery.photo} fill sizes="(max-width: 800px) 90vw, 75vw" />
+            <Image key={active} src={photoPath(active)} alt={t.photoAlts[active] ?? t.gallery.photo} width={1280} height={1280} />
           </div>
           <button type="button" className="dialog-next" aria-label={t.gallery.next} onClick={() => changePhoto(1)}><Icon name="right" /></button>
         </div>
