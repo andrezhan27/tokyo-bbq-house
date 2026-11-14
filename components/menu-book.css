@@ -43,7 +43,10 @@
 .menu-booking { white-space: nowrap; }
 .menu-booking svg { width: 14px; height: 14px; }
 .menu-reader {
-  --leaf-width: clamp(350px, calc((100svh - 446px) / 1.125), 456px);
+  --leaf-width: min(
+    calc((100vw - 56px) / 2),
+    clamp(385px, calc((100svh - 378px) / 1.125), 520px)
+  );
   --leaf-height: max(552px, calc(var(--leaf-width) * 1.125 + 216px));
   position: relative;
   width: min(calc(100% - 28px), 1160px);

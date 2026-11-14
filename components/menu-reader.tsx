@@ -37,8 +37,7 @@ const getSpread = () => window.matchMedia(query).matches;
 const getServerSpread = () => false;
 const leftOf = (n: number) => n === 0 ? 0 : n - (n + 1) % 2;
 const pad = (n: number) => String(n).padStart(2, "0");
-const desktopTurnMs = 560;
-const singlePageTurnMs = 320;
+const turnDuration = 320;
 const useSmallPhoto = "(max-width: 520px) and (max-resolution: 2dppx)";
 
 type Jump = (target: number) => void;
@@ -163,7 +162,6 @@ export function MenuReader({ locale }: { locale: Locale }) {
   const [turn, setTurn] = useState<Turn | null>(null);
   const [showContents, setShowContents] = useState(false);
   const spread = useSyncExternalStore(subscribe, getSpread, getServerSpread);
-  const turnDuration = spread ? desktopTurnMs : singlePageTurnMs;
   const active = spread ? leftOf(page) : page;
   const panelButton = useRef<HTMLButtonElement>(null);
   const pointer = useRef<{ id: number; x: number; y: number } | null>(null);
@@ -173,7 +171,7 @@ export function MenuReader({ locale }: { locale: Locale }) {
     if (!turn) return;
     const timer = window.setTimeout(() => setTurn(null), turnDuration + 80);
     return () => window.clearTimeout(timer);
-  }, [turn, turnDuration]);
+  }, [turn]);
 
   useEffect(() => {
     const next = active === 0 ? 1 : active + (spread ? 2 : 1);
