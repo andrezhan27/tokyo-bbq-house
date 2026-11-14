@@ -18,7 +18,7 @@ export const copy = {
   pt: {
     home: "/",
     lang: "pt-PT", languageLabel: "Idioma", skip: "Saltar para o conteúdo",
-    nav: ["Experiência", "Rodízio", "Galeria", "Contactos"],
+    nav: { experience: "Experiência", menu: "Menu", rodizio: "Rodízio", gallery: "Galeria", contact: "Contactos" },
     openNavigation: "Abrir navegação",
     closeNavigation: "Fechar navegação",
     book: "Reservar mesa", menu: "Ver o menu",
@@ -56,7 +56,7 @@ export const copy = {
   en: {
     home: "/en/",
     lang: "en", languageLabel: "Language", skip: "Skip to content",
-    nav: ["Experience", "Rodízio", "Gallery", "Visit"],
+    nav: { experience: "Experience", menu: "Menu", rodizio: "Rodízio", gallery: "Gallery", contact: "Visit" },
     openNavigation: "Open navigation",
     closeNavigation: "Close navigation",
     book: "Book a table", menu: "View the menu",

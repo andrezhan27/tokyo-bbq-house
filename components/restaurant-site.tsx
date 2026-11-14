@@ -28,10 +28,13 @@ export function SiteFrame({ locale, reservation = false, children }: {
   children: ReactNode;
 }) {
   const t = copy[locale];
-  const links = ["historia", "menu", "galeria", "contacto"].map((section, index) => ({
-    href: `${t.home}#${section}`,
-    label: t.nav[index],
-  }));
+  const links = [
+    { href: `${t.home}#historia`, label: t.nav.experience },
+    { href: menuPath(locale), label: t.nav.menu },
+    { href: `${t.home}#menu`, label: t.nav.rodizio },
+    { href: `${t.home}#galeria`, label: t.nav.gallery },
+    { href: `${t.home}#contacto`, label: t.nav.contact },
+  ];
   return (
     <div className={reservation ? "reservation-layout" : undefined}>
       <a className="skip-link" href="#main">{t.skip}</a>
@@ -53,12 +56,16 @@ export function SiteFrame({ locale, reservation = false, children }: {
       <main id="main" className={reservation ? "reservation-main" : undefined}>{children}</main>
       {!reservation && <footer className="site-footer">
         <div className="container footer-inner">
-          <Link href={t.home} aria-label="Tokyo BBQ House"><Image src="/photos/logo.png" alt="Tokyo BBQ House" width={106} height={33} /></Link>
+          <div className="footer-brand">
+            <Link href={t.home} aria-label="Tokyo BBQ House"><Image src="/photos/logo.png" alt="Tokyo BBQ House" width={106} height={33} /></Link>
+            <p>{t.intro}</p>
+          </div>
           <p>Passeio das Tágides · 1990-280 Lisboa</p>
           <div className="footer-links">
             <a href={restaurant.instagram} aria-label="Instagram"><Icon name="instagram" /></a>
             <a href={`mailto:${restaurant.email}`} aria-label={t.email}><Icon name="mail" /></a>
             <a href={restaurant.call} aria-label={t.phone}><Icon name="phone" /></a>
+            <a className="footer-credit" href="https://intelis.pt/">Powered by Intelis</a>
           </div>
         </div>
       </footer>}
@@ -82,15 +89,14 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className="hero-copy">
             <p className="eyebrow"><span />{t.heroLabel}</p>
             <h1 id="hero-title">Tokyo <br /><em>BBQ House</em></h1>
-            <p className="hero-intro">{t.intro}</p>
             <div className="button-row">
               <Link className="button button-red" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
               <Link className="button button-outline" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>
             </div>
           </div>
           <div className="hero-footer">
-            <a className="hero-scroll" href="#historia"><Icon name="down" />{t.scroll}</a>
             <span className="hero-japanese" lang="ja" aria-hidden="true">焼肉</span>
+            <a className="hero-scroll" href="#historia"><Icon name="down" />{t.scroll}</a>
           </div>
         </div>
       </section>
