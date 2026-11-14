@@ -86,6 +86,8 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .button-red:hover { background: #a71920; }
 .button-outline { background: transparent; border-color: #f5ede279; }
 .button-outline:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+.hero-book { background: transparent; border-color: var(--red); }
+.hero-book:hover { background: #e131331f; }
 .nav-book { min-height: 42px; font-size: .8rem; padding-inline: 13px; gap: 8px; }
 .nav-book svg { width: 15px; height: 15px; }
 .reservation-layout { height: 100vh; height: 100dvh; display: grid; grid-template-rows: auto minmax(0, 1fr); }
@@ -242,7 +244,7 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 }
 @media (max-width: 750px) and (orientation: portrait) {
   .hero-image { object-position: center bottom; }
-  .hero-copy { align-self: start; padding-top: 6svh; }
+  .hero-copy { align-self: start; padding-top: clamp(32px, 9svh, 84px); }
   .hero::before { background: linear-gradient(#120e0b19, #120e0b33 45%, transparent 70%); }
 }
 @media (max-width: 520px) {
@@ -275,6 +277,7 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 }
 @media (max-height: 480px) {
   .hero-inner { padding-block: 10px; }
+  .hero-copy { padding-top: 0; }
   .hero h1 { margin-block: 8px; font-size: clamp(1.75rem, min(11vw, 9svh), 3rem); }
   .hero .button { min-height: 39px; padding-block: 6px; }
   .hero-footer { gap: 6px; padding-top: 8px; }

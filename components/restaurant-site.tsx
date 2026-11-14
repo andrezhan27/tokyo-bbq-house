@@ -95,7 +95,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <p className="eyebrow"><span />{t.heroLabel}</p>
             <h1 id="hero-title">Tokyo <br /><em>BBQ House</em></h1>
             <div className="button-row">
-              <Link className="button button-red" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
+              <Link className="button hero-book" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
               <Link className="button button-outline" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>
             </div>
           </div>
