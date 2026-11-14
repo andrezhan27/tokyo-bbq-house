@@ -5,17 +5,19 @@ type Localized = Record<Locale, string>;
 export type MenuItem = { id: string; name: Localized };
 type Section = keyof typeof items;
 
-const chapters: { id: Section; name: Localized; marker: string; counts: number[] }[] = [
-  { id: "starters", name: { pt: "Entradas", en: "Starters" }, marker: "前菜", counts: [6, 6] },
-  { id: "beef", name: { pt: "Cortes de vaca", en: "Beef cuts" }, marker: "牛肉", counts: [5, 5, 5, 5] },
-  { id: "pork", name: { pt: "Porco e cordeiro", en: "Pork & lamb" }, marker: "豚肉", counts: [5, 5] },
-  { id: "chicken", name: { pt: "Frango", en: "Chicken" }, marker: "鶏肉", counts: [5] },
-  { id: "seafood", name: { pt: "Peixe e marisco", en: "Fish & seafood" }, marker: "魚介", counts: [4, 3] },
-  { id: "rice", name: { pt: "Massas e arroz", en: "Noodles & rice" }, marker: "麺・米", counts: [5, 4] },
-  { id: "sides", name: { pt: "Acompanhamentos", en: "Sides" }, marker: "野菜", counts: [5, 5, 4] },
-  { id: "sauces", name: { pt: "Molhos e temperos", en: "Sauces & seasonings" }, marker: "たれ", counts: [4, 3] },
-  { id: "desserts", name: { pt: "Sobremesas", en: "Desserts" }, marker: "甘味", counts: [6] },
-  { id: "drinks", name: { pt: "Bebidas", en: "Drinks" }, marker: "飲み物", counts: [6] },
+const dishesPerPage = 6;
+
+const chapters: { id: Section; name: Localized; marker: string }[] = [
+  { id: "starters", name: { pt: "Entradas", en: "Starters" }, marker: "前菜" },
+  { id: "beef", name: { pt: "Cortes de vaca", en: "Beef cuts" }, marker: "牛肉" },
+  { id: "pork", name: { pt: "Porco e cordeiro", en: "Pork & lamb" }, marker: "豚肉" },
+  { id: "chicken", name: { pt: "Frango", en: "Chicken" }, marker: "鶏肉" },
+  { id: "seafood", name: { pt: "Peixe e marisco", en: "Fish & seafood" }, marker: "魚介" },
+  { id: "rice", name: { pt: "Massas e arroz", en: "Noodles & rice" }, marker: "麺・米" },
+  { id: "sides", name: { pt: "Acompanhamentos", en: "Sides" }, marker: "野菜" },
+  { id: "sauces", name: { pt: "Molhos e temperos", en: "Sauces & seasonings" }, marker: "たれ" },
+  { id: "desserts", name: { pt: "Sobremesas", en: "Desserts" }, marker: "甘味" },
+  { id: "drinks", name: { pt: "Bebidas", en: "Drinks" }, marker: "飲み物" },
 ];
 
 export type MenuLeaf =
@@ -31,18 +33,18 @@ export type MenuLeaf =
     };
 
 export const menuPages: MenuLeaf[] = [{ kind: "cover" }, { kind: "contents" }];
-export const menuSections = chapters.map(({ id, name, marker, counts }) => {
+export const menuSections = chapters.map(({ id, name, marker }) => {
   const page = menuPages.length;
   const dishes = items[id].map(([id, pt, en]) => ({ id, name: { pt, en } }));
-  let offset = 0;
+  const parts = Math.ceil(dishes.length / dishesPerPage);
 
-  counts.forEach((count, part) => {
+  for (let part = 0; part < parts; part++) {
+    const offset = part * dishesPerPage;
     menuPages.push({
       kind: "dishes", section: id, name, marker,
-      part: part + 1, parts: counts.length, items: dishes.slice(offset, offset + count),
+      part: part + 1, parts, items: dishes.slice(offset, offset + dishesPerPage),
     });
-    offset += count;
-  });
+  }
 
   return { id, name, page };
 });

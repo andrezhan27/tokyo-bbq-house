@@ -29,7 +29,12 @@
 .menu-home { justify-self: start; }
 .menu-brand img { object-fit: contain; }
 .menu-header-actions { display: flex; justify-content: end; align-items: center; gap: clamp(6px, 1.8vw, 24px); }
-.menu-header .language-switch summary { min-height: 44px; border-color: var(--book-rule); border-radius: 3px; }
+.menu-header .language-switch summary {
+  position: relative; height: 28px; min-width: 37px; padding-inline: 4px; gap: 2px;
+  border-color: var(--book-rule); border-radius: 3px; font-size: .64rem;
+}
+.menu-header .language-switch summary::after { content: ""; position: absolute; inset: -8px -2px; }
+.menu-header .language-switch summary svg { width: 10px; height: 10px; }
 .menu-header .language-switch summary:hover,
 .menu-header .language-switch[open] summary { color: var(--book-gold); border-color: var(--book-gold); }
 .menu-header .language-options { background: var(--book-paper); border-color: var(--book-rule); }
@@ -40,7 +45,6 @@
 .menu-reader {
   --leaf-width: clamp(350px, calc((100svh - 446px) / 1.125), 456px);
   --leaf-height: max(552px, calc(var(--leaf-width) * 1.125 + 216px));
-  --page-turn: 560ms;
   position: relative;
   width: min(calc(100% - 28px), 1160px);
   margin-inline: auto;
@@ -149,8 +153,9 @@
 .menu-leaf--right::after { inset: 0 auto 0 0; background: linear-gradient(to right, #080706aa, transparent); }
 .menu-leaf--empty { background: #1c1a18; border-color: var(--book-rule); }
 .menu-leaf--cover { padding: 0; overflow: hidden; border-color: #9b815c; background: #1d1916; color: #fff1dd; }
-.menu-cover-art { position: absolute; inset: 25% 0 0; }
-.menu-cover-photo { object-fit: cover; object-position: 55% 57%; }
+.menu-cover-art { position: absolute; inset: 27% 0 2%; overflow: hidden; }
+/* Show only the grill below the lettering in the supplied photo. */
+.menu-cover-photo { position: absolute; inset: auto 0 0; width: 100%; height: 169%; object-fit: cover; object-position: 55% bottom; }
 .menu-cover-art::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, #1d1916 0%, #1d1916a6 13%, transparent 34%, transparent 63%, #1d1916ba 84%, #1d1916 100%);
@@ -162,8 +167,8 @@
 .menu-cover-title { margin-top: clamp(25px, 4vh, 42px); text-align: center; }
 .menu-cover-title p { color: #dfbd87; text-transform: uppercase; font-size: .62rem; letter-spacing: .17em; font-weight: 600; }
 .menu-cover-heading {
-  margin-top: 7px; font: 400 clamp(2.35rem, 4.8vw, 4rem)/1 var(--book-heading);
-  letter-spacing: .025em; text-shadow: 0 2px 18px #120502b0;
+  margin-top: 9px; font: 400 clamp(1.5rem, 5.8vw, 2rem)/1.1 var(--book-heading);
+  letter-spacing: .01em; text-shadow: 0 2px 18px #120502b0;
 }
 .menu-cover-bottom { margin-top: auto; }
 .menu-open {
@@ -264,7 +269,7 @@ button.menu-chapter-link:hover, .menu-chapter-link[aria-current], .menu-index-co
 .menu-stage:not(.is-spread) .menu-turn-sheet {
   transform-origin: left center;
   animation-name: menu-leaf-lift;
-  animation-timing-function: cubic-bezier(.39, .08, .25, 1);
+  animation-timing-function: cubic-bezier(.25, .22, .23, 1);
 }
 .menu-stage:not(.is-spread) .menu-turn-scene.is-backward .menu-turn-sheet {
   animation-direction: reverse;

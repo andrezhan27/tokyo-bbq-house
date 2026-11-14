@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type PointerEvent } from "react";
 import { menuPages, menuSections, type MenuLeaf } from "../lib/menu";
 import { copy, restaurant, type Locale } from "../lib/site";
 import { Icon } from "./icon";
@@ -37,7 +37,9 @@ const getSpread = () => window.matchMedia(query).matches;
 const getServerSpread = () => false;
 const leftOf = (n: number) => n === 0 ? 0 : n - (n + 1) % 2;
 const pad = (n: number) => String(n).padStart(2, "0");
-const length = 560;
+const desktopTurnMs = 560;
+const singlePageTurnMs = 320;
+const useSmallPhoto = "(max-width: 520px) and (max-resolution: 2dppx)";
 
 type Jump = (target: number) => void;
 type Turn = { from: number; to: number; direction: 1 | -1; spread: boolean };
@@ -71,7 +73,7 @@ function Contents({ locale, jump, active, visual }: { locale: Locale; jump: Jump
 function DishPhoto({ id }: { id: string }) {
   return (
     <picture className="menu-dish-photo">
-      <source media="(max-width: 520px) and (max-resolution: 2dppx)" srcSet={`/photos/menu/${id}-small.webp`} />
+      <source media={useSmallPhoto} srcSet={`/photos/menu/${id}-small.webp`} />
       <Image src={`/photos/menu/${id}.webp`} width={640} height={480} alt="" loading="eager" draggable={false} />
     </picture>
   );
@@ -87,14 +89,14 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
     return (
       <div className={classes}>
         <div className="menu-cover-art">
-          <Image src="/photos/gallery-03.webp" alt="" fill priority={!visual} sizes="(max-width: 560px) 90vw, 456px" className="menu-cover-photo" draggable={false} />
+          <Image src="/photos/menu/grill-cover.webp" alt="" width={736} height={736} priority={!visual} className="menu-cover-photo" draggable={false} />
         </div>
         <div className="menu-cover-trim" aria-hidden="true" />
         <div className="menu-cover-copy">
-          <div className="menu-cover-top"><span>Tokyo BBQ House</span><span>Lisboa · PT</span></div>
+          <div className="menu-cover-top"><span>{t.title}</span><span>Lisboa · PT</span></div>
           <div className="menu-cover-title">
             <p>{t.sub}</p>
-            {visual ? <div className="menu-cover-heading">{t.title}</div> : <h1 className="menu-cover-heading">{t.title}</h1>}
+            {visual ? <div className="menu-cover-heading">Tokyo BBQ House</div> : <h1 className="menu-cover-heading">Tokyo BBQ House</h1>}
           </div>
           <div className="menu-cover-bottom">
             {visual ? <span className="menu-open">{t.open}<Icon name="right" /></span> :
@@ -161,6 +163,7 @@ export function MenuReader({ locale }: { locale: Locale }) {
   const [turn, setTurn] = useState<Turn | null>(null);
   const [showContents, setShowContents] = useState(false);
   const spread = useSyncExternalStore(subscribe, getSpread, getServerSpread);
+  const turnDuration = spread ? desktopTurnMs : singlePageTurnMs;
   const active = spread ? leftOf(page) : page;
   const panelButton = useRef<HTMLButtonElement>(null);
   const pointer = useRef<{ id: number; x: number; y: number } | null>(null);
@@ -168,25 +171,23 @@ export function MenuReader({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     if (!turn) return;
-    const timer = window.setTimeout(() => setTurn(null), length + 100);
+    const timer = window.setTimeout(() => setTurn(null), turnDuration + 80);
     return () => window.clearTimeout(timer);
-  }, [turn]);
+  }, [turn, turnDuration]);
 
   useEffect(() => {
     const next = active === 0 ? 1 : active + (spread ? 2 : 1);
-    const smaller = window.matchMedia("(max-width: 520px) and (max-resolution: 2dppx)").matches;
-    const timer = window.setTimeout(() => {
-      const leaves = spread ? menuPages.slice(next, next + 2) : menuPages.slice(next, next + 1);
-      for (const leaf of leaves) {
-        if (leaf.kind !== "dishes") continue;
-        for (const { id } of leaf.items) {
-          const photo = new window.Image();
-          photo.fetchPriority = "low";
-          photo.src = `/photos/menu/${id}${smaller ? "-small" : ""}.webp`;
-        }
+    const smaller = window.matchMedia(useSmallPhoto).matches;
+    // The cover leads to the contents, so also warm the first dish page on phones.
+    const leaves = menuPages.slice(next, next + (spread || active === 0 ? 2 : 1));
+    for (const leaf of leaves) {
+      if (leaf.kind !== "dishes") continue;
+      for (const { id } of leaf.items) {
+        const photo = new window.Image();
+        photo.fetchPriority = "low";
+        photo.src = `/photos/menu/${id}${smaller ? "-small" : ""}.webp`;
       }
-    }, 250);
-    return () => window.clearTimeout(timer);
+    }
   }, [active, spread]);
 
   const go = useCallback<Jump>((target) => {
@@ -270,7 +271,7 @@ export function MenuReader({ locale }: { locale: Locale }) {
       </div>
 
       <div className="menu-desk">
-        <div className={stageClass} onPointerDown={start} onPointerUp={finish}
+        <div className={stageClass} style={{ "--page-turn": `${turnDuration}ms` } as CSSProperties} onPointerDown={start} onPointerUp={finish}
           onPointerCancel={() => { pointer.current = null; }}>
           <div className="menu-stage-content">
             {!cover && <h1 className="menu-visually-hidden">{t.title} · Tokyo BBQ House</h1>}
