@@ -86,7 +86,7 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .button-red:hover { background: #a71920; }
 .button-outline { background: transparent; border-color: #f5ede279; }
 .button-outline:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
-.hero-book { background: transparent; border-color: var(--red); }
+.hero-book { background: #e1313314; border-color: var(--red); }
 .hero-book:hover { background: #e131331f; }
 .nav-book { min-height: 42px; font-size: .8rem; padding-inline: 13px; gap: 8px; }
 .nav-book svg { width: 15px; height: 15px; }
