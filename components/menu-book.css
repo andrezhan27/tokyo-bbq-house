@@ -209,7 +209,6 @@
   gap: 9px clamp(9px, 1.15vw, 16px); margin: 0 0 8px; padding: 0; list-style: none;
 }
 .menu-dishes li { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
-.menu-dish-media { position: relative; }
 .menu-dish-photo {
   display: block; aspect-ratio: 4 / 3; overflow: hidden; background: #161411;
   border-radius: 2px; outline: 1px solid #cbae7e2a; outline-offset: -1px;
@@ -217,15 +216,6 @@
 .menu-dish-photo img { width: 100%; height: 100%; object-fit: cover; }
 .menu-product-photo { background: #eeeae4; }
 .menu-product-photo img { object-fit: contain; }
-.menu-photo-count {
-  position: absolute; right: 4px; bottom: 4px; display: flex; align-items: center; gap: 5px;
-  min-width: 36px; min-height: 31px; padding: 0 7px; border: 1px solid #c5a9767a;
-  border-radius: 3px; background: #1d1915ec; color: var(--book-ink);
-  font-size: .7rem; font-weight: 600;
-}
-button.menu-photo-count::after { content: ""; position: absolute; inset: -6px -3px; }
-.menu-photo-count svg { width: 13px; height: 13px; }
-button.menu-photo-count:hover, button.menu-photo-count:focus-visible { background: #473824; }
 .menu-dishes li p { min-block-size: 2lh; font-size: .79rem; line-height: 1.22; font-weight: 500; }
 .menu-drinks-note { color: var(--book-muted); font-size: .68rem; line-height: 1.25; margin: 0 0 6px; }
 .menu-contents-copy { margin: clamp(16px, 3vh, 32px) 0 13px; }
@@ -258,24 +248,6 @@ button.menu-chapter-link:hover, .menu-chapter-link[aria-current], .menu-index-co
 .menu-counter i { height: 12px; width: 1px; background: #e7c79d6f; transform: rotate(20deg); }
 .menu-counter span:last-child { color: #c6ac95; }
 .menu-turn-hint { margin: 10px auto 0; color: #c6ac95; font-size: .68rem; line-height: 1.4; text-align: center; }
-.menu-photo-dialog {
-  width: min(calc(100% - 24px), 730px); max-width: none; max-height: calc(100% - 24px);
-  padding: 0; border: 1px solid #81694b; border-radius: 6px; background: #211d19; color: var(--book-ink);
-}
-.menu-photo-dialog::backdrop { background: #0a0807cf; }
-.menu-photo-viewer { padding: clamp(12px, 3vw, 22px); }
-.menu-photo-viewer-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; }
-.menu-photo-viewer-header h2 { margin: 0; font: 400 clamp(1rem, 2.5vw, 1.45rem)/1.2 var(--book-heading); }
-.menu-photo-viewer button {
-  flex: none; display: grid; place-items: center; min-width: 44px; min-height: 44px;
-  border: 1px solid var(--book-rule); border-radius: 3px; color: inherit; background: #1b1713;
-}
-.menu-photo-viewer button:hover { background: #473824; }
-.menu-photo-viewer button svg { width: 18px; height: 18px; }
-.menu-photo-viewer-image { height: min(60dvh, 535px); background: #171411; }
-.menu-photo-viewer-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.menu-photo-viewer-nav { display: flex; justify-content: center; align-items: center; gap: 22px; padding-top: 12px; }
-.menu-photo-viewer-nav p { min-width: 5ch; text-align: center; font-size: .78rem; font-variant-numeric: tabular-nums; }
 .menu-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .menu-turn-scene { position: absolute; inset: 0; z-index: 2; pointer-events: none; perspective: 1400px; }
 .menu-turn-sheet { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; transform-origin: 0 50%; animation: menu-turn-next var(--page-turn) cubic-bezier(.44,.02,.24,.98) both; }

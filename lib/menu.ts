@@ -3,9 +3,8 @@ import items from "./menu-items.json";
 import photos from "./menu-photos.json";
 
 type Localized = Record<Locale, string>;
-export type MenuItem = { id: string; name: Localized; alternates: string[]; showPackaging: boolean };
+export type MenuItem = { id: string; name: Localized; showPackaging: boolean };
 type Section = keyof typeof items;
-const alternatePhotos: Partial<Record<string, string[]>> = photos.alternates;
 const packagedItems = new Set(photos.packages);
 
 const dishesPerPage = 6;
@@ -43,7 +42,7 @@ export const menuPages: MenuLeaf[] = [{ kind: "cover" }, { kind: "contents" }];
 export const menuSections = chapters.map(({ id, name, marker }) => {
   const page = menuPages.length;
   const dishes = items[id].map(([id, pt, en]) => ({
-    id, name: { pt, en }, alternates: alternatePhotos[id] ?? [], showPackaging: packagedItems.has(id),
+    id, name: { pt, en }, showPackaging: packagedItems.has(id),
   }));
   const parts = Math.ceil(dishes.length / dishesPerPage);
 
