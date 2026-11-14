@@ -1,7 +1,17 @@
+# Dependencies
 /node_modules/
+
+# Next.js output and generated types
 /.next/
 /out/
 /next-env.d.ts
 *.tsbuildinfo
+
+# Local Vercel link and environment files
+/.vercel/
 .env*
+!.env.example
+
+# Local logs and OS metadata
+npm-debug.log*
 .DS_Store
