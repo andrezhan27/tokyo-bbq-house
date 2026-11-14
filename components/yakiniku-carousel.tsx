@@ -41,10 +41,17 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
     if (!viewportElement || !trackElement || !groupElement) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const touchInput = window.matchMedia("(pointer: coarse)");
+    const supportsScrollEnd = "onscrollend" in viewportElement;
     let playing = !reducedMotion.matches;
     let visible = false;
     let width = 0;
     let offset = 0;
+    let nativeScroll = touchInput.matches;
+    let writtenScroll = 0;
+    let touching = false;
+    let scrolling = false;
+    let scrollEndTimer = 0;
     let momentum = 0;
     let stepRemaining = 0;
     let frame = 0;
@@ -54,14 +61,19 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
     function moveBy(distance: number) {
       if (!width) return;
       offset = ((offset + distance) % width + width) % width;
-      trackElement!.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      if (nativeScroll) {
+        viewportElement!.scrollLeft = width + offset;
+        writtenScroll = viewportElement!.scrollLeft;
+      } else {
+        trackElement!.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      }
     }
 
     function animate(time: number) {
       frame = 0;
       const elapsed = Math.min(time - lastFrame, 40);
       lastFrame = time;
-      if (visible && !drag) {
+      if (visible && !drag && !touching && !scrolling) {
         const step = Math.abs(stepRemaining) < 0.25
           ? stepRemaining
           : stepRemaining * (1 - Math.exp(-elapsed / 85));
@@ -74,7 +86,7 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
     }
 
     function schedule(time = performance.now()) {
-      if (frame || !visible || drag || !(playing || momentum || stepRemaining)) return;
+      if (frame || !visible || drag || touching || scrolling || !(playing || momentum || stepRemaining)) return;
       lastFrame = time;
       frame = requestAnimationFrame(animate);
     }
@@ -83,11 +95,11 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
       const nextWidth = groupElement!.getBoundingClientRect().width;
       if (width) offset *= nextWidth / width;
       width = nextWidth;
-      moveBy(0);
+      if (!touching && !scrolling) moveBy(0);
     }
 
     function startDrag(event: PointerEvent) {
-      if (drag || !event.isPrimary || event.button !== 0) return;
+      if (nativeScroll || drag || !event.isPrimary || event.button !== 0) return;
       drag = { id: event.pointerId, x: event.clientX, time: event.timeStamp, speed: 0 };
       momentum = 0;
       stepRemaining = 0;
@@ -115,6 +127,61 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
       }
       drag = null;
       viewportElement!.removeAttribute("data-dragging");
+      schedule();
+    }
+
+    function finishScroll() {
+      if (!nativeScroll) return;
+      scrolling = false;
+      offset = viewportElement!.scrollLeft - width;
+      if (touching) return;
+      // Recenter the repeating track only after the browser has finished its momentum.
+      moveBy(0);
+      schedule();
+    }
+
+    function watchForScrollEnd() {
+      if (supportsScrollEnd) return;
+      window.clearTimeout(scrollEndTimer);
+      scrollEndTimer = window.setTimeout(finishScroll, 90);
+    }
+
+    function onScroll() {
+      if (!nativeScroll || viewportElement!.scrollLeft === writtenScroll) return;
+      scrolling = true;
+      stepRemaining = 0;
+      watchForScrollEnd();
+    }
+
+    function startTouch() {
+      if (!nativeScroll) return;
+      touching = true;
+      stepRemaining = 0;
+    }
+
+    function endTouch(event: TouchEvent) {
+      if (!nativeScroll || event.touches.length) return;
+      touching = false;
+      if (scrolling) watchForScrollEnd();
+      else schedule();
+    }
+
+    function onScrollEnd() {
+      if (scrolling) finishScroll();
+    }
+
+    function updateInputMode() {
+      nativeScroll = touchInput.matches;
+      viewportElement!.setAttribute("data-ready", nativeScroll ? "native" : "drag");
+      window.clearTimeout(scrollEndTimer);
+      touching = false;
+      scrolling = false;
+      momentum = 0;
+      drag = null;
+      viewportElement!.removeAttribute("data-dragging");
+      viewportElement!.scrollLeft = 0;
+      trackElement!.style.transform = "";
+      measure();
       schedule();
     }
 
@@ -150,11 +217,15 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
       schedule();
     });
     intersection.observe(viewportElement);
-    measure();
-    viewportElement.setAttribute("data-ready", "");
-    viewportElement.scrollLeft = 0;
+    updateInputMode();
     updateMotionPreference();
     reducedMotion.addEventListener("change", updateMotionPreference);
+    touchInput.addEventListener("change", updateInputMode);
+    viewportElement.addEventListener("scroll", onScroll, { passive: true });
+    viewportElement.addEventListener("scrollend", onScrollEnd);
+    viewportElement.addEventListener("touchstart", startTouch, { passive: true });
+    viewportElement.addEventListener("touchend", endTouch, { passive: true });
+    viewportElement.addEventListener("touchcancel", endTouch, { passive: true });
     viewportElement.addEventListener("pointerdown", startDrag);
     viewportElement.addEventListener("pointermove", dragBy);
     viewportElement.addEventListener("pointerup", endDrag);
@@ -163,10 +234,17 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
 
     return () => {
       cancelAnimationFrame(frame);
+      window.clearTimeout(scrollEndTimer);
       resize.disconnect();
       intersection.disconnect();
       controls.current = null;
       reducedMotion.removeEventListener("change", updateMotionPreference);
+      touchInput.removeEventListener("change", updateInputMode);
+      viewportElement.removeEventListener("scroll", onScroll);
+      viewportElement.removeEventListener("scrollend", onScrollEnd);
+      viewportElement.removeEventListener("touchstart", startTouch);
+      viewportElement.removeEventListener("touchend", endTouch);
+      viewportElement.removeEventListener("touchcancel", endTouch);
       viewportElement.removeEventListener("pointerdown", startDrag);
       viewportElement.removeEventListener("pointermove", dragBy);
       viewportElement.removeEventListener("pointerup", endDrag);
@@ -182,18 +260,18 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
     <div className="guide-carousel" role="group" aria-label={labels.label}>
       <div className="guide-carousel-viewport" ref={viewport}>
         <div className="guide-carousel-track" ref={track}>
-          {[false, true].map((duplicate) => (
+          {["leading", "original", "trailing"].map((position) => (
             <ul
-              className={duplicate ? "guide-carousel-photos guide-carousel-duplicate" : "guide-carousel-photos"}
-              key={String(duplicate)}
-              ref={duplicate ? undefined : group}
-              aria-hidden={duplicate || undefined}
+              className={`guide-carousel-photos${position === "leading" ? " guide-carousel-leading" : position === "trailing" ? " guide-carousel-duplicate" : ""}`}
+              key={position}
+              ref={position === "original" ? group : undefined}
+              aria-hidden={position !== "original" || undefined}
             >
               {photos.map(([file, pt, en]) => (
                 <li key={file}>
                   <Image
                     src={`/photos/yakiniku/${file}.webp`}
-                    alt={duplicate ? "" : locale === "pt" ? pt : en}
+                    alt={position === "original" ? (locale === "pt" ? pt : en) : ""}
                     fill
                     draggable={false}
                     sizes="(max-width: 750px) 79vw, (max-width: 1440px) 34vw, 490px"

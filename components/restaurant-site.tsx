@@ -84,7 +84,12 @@ export function HomePage({ locale }: { locale: Locale }) {
   return (
     <SiteFrame locale={locale}>
       <section className="hero" aria-labelledby="hero-title">
-        <Image className="hero-image" src="/photos/hero.webp" alt="" fill preload sizes="100vw" />
+        <picture className="hero-art">
+          <source media="(max-width: 750px) and (orientation: portrait)" srcSet="/photos/hero-mobile.webp" />
+          {/* A single picture lets the browser load only the matching hero asset. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="hero-image" src="/photos/hero-desktop.webp" alt="" fetchPriority="high" />
+        </picture>
         <div className="container hero-inner">
           <div className="hero-copy">
             <p className="eyebrow"><span />{t.heroLabel}</p>
