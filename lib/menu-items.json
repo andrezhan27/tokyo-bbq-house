@@ -1,502 +1,298 @@
 {
   "starters": [
-    [
-      "miso",
-      "Sopa miso vegetariana",
-      "Vegetarian miso soup"
-    ],
-    [
-      "seafood-soup",
-      "Sopa de frutos do mar",
-      "Seafood soup"
-    ],
-    [
-      "tempura",
-      "Tempura de legumes",
-      "Vegetable tempura"
-    ],
-    [
-      "takoyaki",
-      "Takoyaki",
-      "Takoyaki"
-    ],
-    [
-      "prawn-roll",
-      "Crepe de camarão",
-      "Prawn spring roll"
-    ],
-    [
-      "vegetable-roll",
-      "Crepe de legumes",
-      "Vegetable spring roll"
-    ],
-    [
-      "fried-prawns",
-      "Camarão frito",
-      "Fried prawns"
-    ],
-    [
-      "chicken-gyoza",
-      "Gyozas de frango",
-      "Chicken gyoza"
-    ],
-    [
-      "pork-gyoza",
-      "Gyozas de porco",
-      "Pork gyoza"
-    ],
-    [
-      "vegetable-gyoza",
-      "Gyozas de legumes",
-      "Vegetable gyoza"
-    ],
-    [
-      "vegetable-crepe",
-      "Crepe de legumes na chapa",
-      "Griddled vegetable crêpe"
-    ],
-    [
-      "seafood-cakes",
-      "Bolinhas de frutos do mar à japonesa",
-      "Japanese seafood cakes"
-    ]
+    ["miso", "Sopa miso vegetariana", "Vegetarian miso soup"],
+    ["seafood-soup", "Sopa de frutos do mar", "Seafood soup"],
+    ["tempura", "Tempura de legumes", "Vegetable tempura"],
+    ["takoyaki", "Takoyaki", "Takoyaki"],
+    ["prawn-roll", "Crepe de camarão", "Prawn spring roll"],
+    ["vegetable-roll", "Crepe de legumes", "Vegetable spring roll"],
+    ["fried-prawns", "Camarão frito", "Fried prawns"],
+    ["chicken-gyoza", "Gyozas de frango", "Chicken gyoza"],
+    ["pork-gyoza", "Gyozas de porco", "Pork gyoza"],
+    ["vegetable-gyoza", "Gyozas de legumes", "Vegetable gyoza"],
+    ["vegetable-crepe", "Crepe de legumes na chapa", "Griddled vegetable crêpe"],
+    ["seafood-cakes", "Bolinhas de frutos do mar à japonesa", "Japanese seafood cakes"],
+    ["mixed-salad", "Salada mista", "Mixed salad"],
+    ["nori", "Algas nori", "Nori seaweed"],
+    ["seaweed-salad", "Salada de algas", "Seaweed salad"],
+    ["black-olives", "Azeitonas pretas", "Black olives"],
+    ["edamame", "Edamame", "Edamame"],
+    ["breaded-sticks", "Palitos panados", "Breaded sticks"],
+    ["fried-bites", "Bocados fritos", "Fried bites"],
+    ["fried-crisps", "Bocados crocantes", "Crispy bites"],
+    ["crispy-balls", "Bolinhas crocantes", "Crispy fritters"],
+    ["kani-tempura", "Tempura de delícias do mar", "Crab stick tempura"],
+    ["calamari", "Anéis de lula fritos", "Fried squid rings"],
+    ["prawn-crackers", "Tostas de camarão", "Prawn crackers"],
+    ["crispy-dumplings", "Pastéis crocantes", "Crispy dumplings"],
+    ["fried-buns", "Pãezinhos fritos", "Fried buns"],
+    ["breaded-patties", "Medalhões panados", "Breaded patties"],
+    ["steamed-dumplings", "Dumplings ao vapor", "Steamed dumplings"],
+    ["steamed-buns", "Pãezinhos ao vapor", "Steamed buns"],
+    ["pink-dumplings", "Dumplings rosados ao vapor", "Pink steamed dumplings"],
+    ["steamed-pink-bites", "Bocados rosados ao vapor", "Pink steamed bites"],
+    ["breaded-fritters", "Bolinhas panadas", "Breaded fritters"],
+    ["fried-dumpling-bites", "Bocados de massa frita", "Fried dumpling bites"],
+    ["breaded-medallions", "Rodelas panadas", "Breaded rounds"],
+    ["cold-seaweed", "Salada de algas escuras", "Dark seaweed salad"],
+    ["cucumber-dip", "Pepino com molho", "Cucumber with dipping sauce"],
+    ["grill-parcels", "Trouxas para grelhar", "Parcels for grilling"],
+    ["house-salad", "Salada da casa", "House salad"]
   ],
   "beef": [
-    [
-      "beef-selection",
-      "Seleção de carne de vaca",
-      "Beef selection"
-    ],
-    [
-      "short-ribs",
-      "Costela pequena de paleta",
-      "Beef chuck short ribs"
-    ],
-    [
-      "marbled-shank",
-      "Canela bovina marmorizada",
-      "Marbled beef shank"
-    ],
-    [
-      "picanha",
-      "Picanha",
-      "Picanha"
-    ],
-    [
-      "beef-fillet-slices",
-      "Filé de boi",
-      "Sliced beef fillet"
-    ],
-    [
-      "onion-fillet",
-      "Filé mignon com cebola",
-      "Fillet steak with onion"
-    ],
-    [
-      "beef-tongue",
-      "Língua de boi",
-      "Beef tongue"
-    ],
-    [
-      "striploin",
-      "Vazia",
-      "Striploin"
-    ],
-    [
-      "beef-fillet",
-      "Filete de vaca",
-      "Beef fillet"
-    ],
-    [
-      "skirt-steak",
-      "Entraña",
-      "Skirt steak"
-    ],
-    [
-      "ribeye",
-      "Entrecôte de lombo alto",
-      "Ribeye"
-    ],
-    [
-      "garlic-beef",
-      "Cubos de bovino com manteiga e alho",
-      "Beef cubes with garlic butter"
-    ],
-    [
-      "tongue-onion",
-      "Língua de boi com sal e cebola",
-      "Beef tongue with salt and onion"
-    ],
-    [
-      "beef-fruit",
-      "Carne de vaca com frutas",
-      "Beef with fruit"
-    ],
-    [
-      "fillet-salt-onion",
-      "Filete de vaca com cebola e sal",
-      "Beef fillet with salt and onion"
-    ],
-    [
-      "wasabi-roll",
-      "Rolinho de carne com wasabi",
-      "Beef roll with wasabi"
-    ],
-    [
-      "coriander-beef",
-      "Carne de vaca com coentros",
-      "Beef with coriander"
-    ],
-    [
-      "beef-cheese",
-      "Rolinho de carne com queijo",
-      "Beef and cheese roll"
-    ],
-    [
-      "ribeye-sauce",
-      "Entrecôte de lombo alto com molho",
-      "Ribeye with sauce"
-    ],
-    [
-      "grilled-beef",
-      "Churrasco de vaca",
-      "Barbecue beef"
-    ]
+    ["beef-selection", "Seleção de carne de vaca", "Beef selection"],
+    ["short-ribs", "Costela pequena de paleta", "Beef chuck short ribs"],
+    ["marbled-shank", "Canela bovina marmorizada", "Marbled beef shank"],
+    ["picanha", "Picanha", "Picanha"],
+    ["beef-fillet-slices", "Filé de boi", "Sliced beef fillet"],
+    ["onion-fillet", "Filé mignon com cebola", "Fillet steak with onion"],
+    ["beef-tongue", "Língua de boi", "Beef tongue"],
+    ["striploin", "Vazia", "Striploin"],
+    ["beef-fillet", "Filete de vaca", "Beef fillet"],
+    ["skirt-steak", "Entraña", "Skirt steak"],
+    ["ribeye", "Entrecôte de lombo alto", "Ribeye"],
+    ["garlic-beef", "Cubos de bovino com manteiga e alho", "Beef cubes with garlic butter"],
+    ["tongue-onion", "Língua de boi com sal e cebola", "Beef tongue with salt and onion"],
+    ["beef-fruit", "Carne de vaca com frutas", "Beef with fruit"],
+    ["fillet-salt-onion", "Filete de vaca com cebola e sal", "Beef fillet with salt and onion"],
+    ["wasabi-roll", "Rolinho de carne com wasabi", "Beef roll with wasabi"],
+    ["coriander-beef", "Carne de vaca com coentros", "Beef with coriander"],
+    ["beef-cheese", "Rolinho de carne com queijo", "Beef and cheese roll"],
+    ["ribeye-sauce", "Entrecôte de lombo alto com molho", "Ribeye with sauce"],
+    ["grilled-beef", "Churrasco de vaca", "Barbecue beef"],
+    ["marbled-beef-slices", "Fatias de carne marmorizada", "Marbled beef slices"],
+    ["seasoned-marbled-beef", "Carne marmorizada com tempero", "Seasoned marbled beef"],
+    ["marinated-beef-steak", "Bife marinado", "Marinated beef steak"],
+    ["beef-grill-cut", "Corte de vaca para grelhar", "Beef cut for grilling"],
+    ["marbled-steak", "Bife marmorizado", "Marbled steak"],
+    ["thin-beef-slices", "Fatias finas de carne de vaca", "Thinly sliced beef"],
+    ["beef-herb-crust", "Carne de vaca com ervas", "Herb crusted beef"],
+    ["pepper-beef", "Carne de vaca com pimenta", "Pepper crusted beef"],
+    ["seasoned-beef-cubes", "Cubos de vaca temperados", "Seasoned beef cubes"],
+    ["beef-strips", "Tiras de vaca temperadas", "Seasoned beef strips"],
+    ["beef-red-onion", "Carne de vaca com cebola roxa", "Beef with red onion"]
   ],
   "pork": [
-    [
-      "orange-pork",
-      "Costeleta de porco com laranja",
-      "Pork chop with orange"
-    ],
-    [
-      "bacon-thick",
-      "Bacon em tiras grossas",
-      "Thick-cut bacon"
-    ],
-    [
-      "japanese-sausage",
-      "Salsicha japonesa",
-      "Japanese sausage"
-    ],
-    [
-      "luncheon-meat",
-      "Carne enlatada",
-      "Luncheon meat"
-    ],
-    [
-      "creole-sausage",
-      "Salsicha crioula",
-      "Creole sausage"
-    ],
-    [
-      "taiwan-sausage",
-      "Salsicha de Taiwan",
-      "Taiwanese sausage"
-    ],
-    [
-      "pork-tripe",
-      "Tripas de porco",
-      "Pork tripe"
-    ],
-    [
-      "bacon",
-      "Bacon fatiado",
-      "Sliced bacon"
-    ],
-    [
-      "pork-slices",
-      "Porco fatiado",
-      "Sliced pork"
-    ],
-    [
-      "lamb-chop",
-      "Costeleta de cordeiro",
-      "Lamb chop"
-    ]
+    ["orange-pork", "Costeleta de porco com laranja", "Pork chop with orange"],
+    ["bacon-thick", "Bacon em tiras grossas", "Thick-cut bacon"],
+    ["japanese-sausage", "Salsicha japonesa", "Japanese sausage"],
+    ["luncheon-meat", "Carne enlatada", "Luncheon meat"],
+    ["creole-sausage", "Salsicha crioula", "Creole sausage"],
+    ["taiwan-sausage", "Salsicha de Taiwan", "Taiwanese sausage"],
+    ["pork-tripe", "Tripas de porco", "Pork tripe"],
+    ["bacon", "Bacon fatiado", "Sliced bacon"],
+    ["pork-slices", "Porco fatiado", "Sliced pork"],
+    ["lamb-chop", "Costeleta de cordeiro", "Lamb chop"],
+    ["pork-grill-bites", "Bocados de carne para grelhar", "Grill bites"],
+    ["sausage-bites", "Salsichas para grelhar", "Grill sausages"],
+    ["grill-slices-on-greens", "Fatias para grelhar com alface", "Grill slices with lettuce"]
   ],
   "chicken": [
-    [
-      "orleans-wings",
-      "Asas de frango à Orleans",
-      "Orleans-style chicken wings"
-    ],
-    [
-      "sweet-chicken",
-      "Frango com molho doce japonês",
-      "Chicken with Japanese sweet sauce"
-    ],
-    [
-      "chicken-onion",
-      "Frango com cebola salgada",
-      "Chicken with salted onion"
-    ],
-    [
-      "chicken-thigh",
-      "Coxa de frango grelhada clássica",
-      "Classic grilled chicken thigh"
-    ],
-    [
-      "gizzards",
-      "Moelas",
-      "Chicken gizzards"
-    ]
+    ["orleans-wings", "Asas de frango à Orleans", "Orleans-style chicken wings"],
+    ["sweet-chicken", "Frango com molho doce japonês", "Chicken with Japanese sweet sauce"],
+    ["chicken-onion", "Frango com cebola salgada", "Chicken with salted onion"],
+    ["chicken-thigh", "Coxa de frango grelhada clássica", "Classic grilled chicken thigh"],
+    ["gizzards", "Moelas", "Chicken gizzards"],
+    ["fried-chicken", "Frango frito", "Fried chicken"],
+    ["chicken-skewers", "Espetadas de frango", "Chicken skewers"]
   ],
   "seafood": [
-    [
-      "butter-clams",
-      "Amêijoas com manteiga",
-      "Clams with butter"
-    ],
-    [
-      "cheese-prawns",
-      "Camarão com queijo",
-      "Prawns with cheese"
-    ],
-    [
-      "cuttlefish",
-      "Choco",
-      "Cuttlefish"
-    ],
-    [
-      "whole-squid",
-      "Pota inteira",
-      "Whole squid"
-    ],
-    [
-      "squid",
-      "Pota",
-      "Squid"
-    ],
-    [
-      "mackerel",
-      "Cavalinha",
-      "Mackerel"
-    ],
-    [
-      "prawns",
-      "Camarão",
-      "Prawns"
-    ]
+    ["butter-clams", "Amêijoas com manteiga", "Clams with butter"],
+    ["cheese-prawns", "Camarão com queijo", "Prawns with cheese"],
+    ["cuttlefish", "Choco", "Cuttlefish"],
+    ["whole-squid", "Pota inteira", "Whole squid"],
+    ["squid", "Pota", "Squid"],
+    ["mackerel", "Cavalinha", "Mackerel"],
+    ["prawns", "Camarão", "Prawns"],
+    ["seafood-selection", "Seleção de peixe e marisco", "Fish and seafood selection"],
+    ["scallops", "Vieiras", "Scallops"],
+    ["prawns-on-leaf", "Camarão em folha", "Prawns on a leaf"],
+    ["prawn-foil", "Camarão em papelote", "Prawns in foil"],
+    ["seafood-foil", "Marisco em papelote com molho", "Seafood in foil with sauce"],
+    ["foil-shellfish", "Marisco na concha", "Shellfish in the shell"],
+    ["seafood-grill-box", "Caixa de marisco", "Seafood selection box"]
   ],
   "rice": [
-    [
-      "udon",
-      "Udon de carne de vaca",
-      "Beef udon"
-    ],
-    [
-      "spicy-noodles",
-      "Massa japonesa picante",
-      "Spicy Japanese noodles"
-    ],
-    [
-      "macarrao",
-      "Macarrão",
-      "Macarrão"
-    ],
-    [
-      "ramen",
-      "Ramen",
-      "Ramen"
-    ],
-    [
-      "sukiyaki",
-      "Sukiyaki",
-      "Sukiyaki"
-    ],
-    [
-      "white-rice",
-      "Arroz branco",
-      "White rice"
-    ],
-    [
-      "egg-rice",
-      "Arroz Cêso Chao com ovo japonês",
-      "Cêso Chao rice with Japanese egg"
-    ],
-    [
-      "japanese-beef-rice",
-      "Arroz com carne bovina japonesa",
-      "Japanese beef rice"
-    ],
-    [
-      "black-rice",
-      "Arroz negro",
-      "Black rice"
-    ]
+    ["udon", "Udon de carne de vaca", "Beef udon"],
+    ["spicy-noodles", "Massa japonesa picante", "Spicy Japanese noodles"],
+    ["macarrao", "Macarrão", "Macarrão"],
+    ["ramen", "Ramen", "Ramen"],
+    ["sukiyaki", "Sukiyaki", "Sukiyaki"],
+    ["white-rice", "Arroz branco", "White rice"],
+    ["egg-rice", "Arroz Cêso Chao com ovo japonês", "Cêso Chao rice with Japanese egg"],
+    ["japanese-beef-rice", "Arroz com carne bovina japonesa", "Japanese beef rice"],
+    ["black-rice", "Arroz negro", "Black rice"],
+    ["rice-bowl", "Taça de arroz com guarnição", "Rice bowl with toppings"],
+    ["egg-seaweed-noodles", "Massa com ovo e algas", "Noodles with egg and seaweed"],
+    ["seasoned-noodles", "Massa temperada", "Seasoned noodles"],
+    ["banzai-classic", "Banzai Noodle original", "Original Banzai Noodle"],
+    ["banzai-spicy", "Banzai Noodle picante", "Spicy Banzai Noodle"]
   ],
   "sides": [
-    [
-      "lotus-root",
-      "Fatias de raiz de lótus",
-      "Sliced lotus root"
-    ],
-    [
-      "asparagus",
-      "Espargos",
-      "Asparagus"
-    ],
-    [
-      "sweetcorn",
-      "Milho doce",
-      "Sweetcorn"
-    ],
-    [
-      "potato",
-      "Fatias de batata",
-      "Sliced potato"
-    ],
-    [
-      "okra",
-      "Quiabo",
-      "Okra"
-    ],
-    [
-      "mixed-vegetables",
-      "Seleção de legumes",
-      "Mixed vegetables"
-    ],
-    [
-      "cherry-tomatoes",
-      "Tomate-cereja",
-      "Cherry tomatoes"
-    ],
-    [
-      "padron",
-      "Pimentos Padrón",
-      "Padrón peppers"
-    ],
-    [
-      "sweet-potato",
-      "Batata-doce",
-      "Sweet potato"
-    ],
-    [
-      "stuffed-mushrooms",
-      "Cogumelos recheados",
-      "Stuffed mushrooms"
-    ],
-    [
-      "enoki",
-      "Enoki",
-      "Enoki mushrooms"
-    ],
-    [
-      "pumpkin",
-      "Abóbora",
-      "Pumpkin"
-    ],
-    [
-      "courgette",
-      "Courgette",
-      "Courgette"
-    ],
-    [
-      "egg",
-      "Ovo",
-      "Egg"
-    ]
+    ["lotus-root", "Fatias de raiz de lótus", "Sliced lotus root"],
+    ["asparagus", "Espargos", "Asparagus"],
+    ["sweetcorn", "Milho doce", "Sweetcorn"],
+    ["potato", "Fatias de batata", "Sliced potato"],
+    ["okra", "Quiabo", "Okra"],
+    ["mixed-vegetables", "Seleção de legumes", "Mixed vegetables"],
+    ["cherry-tomatoes", "Tomate-cereja", "Cherry tomatoes"],
+    ["padron", "Pimentos Padrón", "Padrón peppers"],
+    ["sweet-potato", "Batata-doce", "Sweet potato"],
+    ["stuffed-mushrooms", "Cogumelos recheados", "Stuffed mushrooms"],
+    ["enoki", "Enoki", "Enoki mushrooms"],
+    ["pumpkin", "Abóbora", "Pumpkin"],
+    ["courgette", "Courgette", "Courgette"],
+    ["egg", "Ovo", "Egg"],
+    ["french-fries", "Batatas fritas", "French fries"],
+    ["mushrooms", "Cogumelos para grelhar", "Mushrooms for grilling"],
+    ["sweet-peppers", "Pimentos verdes e vermelhos", "Green and red peppers"],
+    ["corn-cheese", "Milho com queijo", "Sweetcorn with cheese"],
+    ["lettuce", "Alface", "Lettuce"],
+    ["leafy-greens", "Legumes verdes", "Leafy greens"],
+    ["grill-enoki", "Enoki em papelote", "Enoki in foil"],
+    ["pineapple", "Ananás fatiado", "Sliced pineapple"],
+    ["grill-skewer", "Espetada na grelha", "Grilled skewer"]
   ],
   "sauces": [
-    [
-      "bbq-sauce",
-      "Molho BBQ",
-      "BBQ sauce"
-    ],
-    [
-      "ketchup",
-      "Ketchup",
-      "Ketchup"
-    ],
-    [
-      "mayo",
-      "Maionese",
-      "Mayonnaise"
-    ],
-    [
-      "sweet-chilli",
-      "Molho sweet chilli",
-      "Sweet chilli sauce"
-    ],
-    [
-      "spicy-rub",
-      "Tempero seco picante para carne",
-      "Spicy dry rub"
-    ],
-    [
-      "chopped-garlic",
-      "Alho picado",
-      "Chopped garlic"
-    ],
-    [
-      "garlic",
-      "Alho",
-      "Garlic"
-    ]
+    ["bbq-sauce", "Molho BBQ", "BBQ sauce"],
+    ["ketchup", "Ketchup", "Ketchup"],
+    ["mayo", "Maionese", "Mayonnaise"],
+    ["sweet-chilli", "Molho sweet chilli", "Sweet chilli sauce"],
+    ["spicy-rub", "Tempero seco picante para carne", "Spicy dry rub"],
+    ["chopped-garlic", "Alho picado", "Chopped garlic"],
+    ["garlic", "Alho", "Garlic"],
+    ["sesame-sauce", "Molho de sésamo", "Sesame sauce"],
+    ["soy-sauce", "Molho de soja", "Soy sauce"],
+    ["spicy-sauce", "Molho picante", "Chilli sauce"],
+    ["sriracha", "Sriracha", "Sriracha"],
+    ["mustard", "Mostarda", "Mustard"],
+    ["burger-sauce", "Molho para hambúrguer", "Burger sauce"]
   ],
   "desserts": [
-    [
-      "matcha-cheesecake",
-      "Cheesecake de matcha",
-      "Matcha cheesecake"
-    ],
-    [
-      "pistachio-cheesecake",
-      "Cheesecake de pistácio",
-      "Pistachio cheesecake"
-    ],
-    [
-      "mochi",
-      "Mochi",
-      "Mochi"
-    ],
-    [
-      "viennetta",
-      "Viennetta",
-      "Viennetta"
-    ],
-    [
-      "mini-ice-cream",
-      "Mini gelado",
-      "Mini ice lolly"
-    ],
-    [
-      "tiramisu",
-      "Tiramisú",
-      "Tiramisu"
-    ]
+    ["matcha-cheesecake", "Cheesecake de matcha", "Matcha cheesecake"],
+    ["pistachio-cheesecake", "Cheesecake de pistácio", "Pistachio cheesecake"],
+    ["mochi", "Mochi", "Mochi"],
+    ["viennetta", "Viennetta", "Viennetta"],
+    ["mini-ice-cream", "Mini gelado", "Mini ice lolly"],
+    ["tiramisu", "Tiramisú", "Tiramisu"],
+    ["caramel-pudding", "Pudim de caramelo", "Caramel pudding"],
+    ["cocoa-cream", "Creme de cacau", "Cocoa cream"],
+    ["cookie-cheesecake", "Cheesecake de bolacha de chocolate", "Chocolate cookie cheesecake"],
+    ["berry-cheesecake", "Cheesecake de frutos vermelhos", "Berry cheesecake"],
+    ["matcha-layer-cake", "Bolo de camadas de matcha", "Matcha layer cake"],
+    ["ice-cream-roll", "Rolo de gelado", "Ice cream roll"],
+    ["mochi-selection", "Seleção de mochi", "Mochi selection"],
+    ["chocolate-dessert", "Sobremesa de chocolate", "Chocolate dessert"],
+    ["matcha-dessert", "Sobremesa de matcha", "Matcha dessert"],
+    ["glazed-dessert", "Sobremesa com cobertura", "Glazed dessert"],
+    ["fruit-ice-lollies", "Gelados de fruta", "Fruit ice lollies"],
+    ["orange-sorbet", "Sorvete de fruta", "Fruit sorbet"],
+    ["cream-ice-cream", "Gelado de creme", "Cream ice cream"],
+    ["cookie-ice-cream", "Gelado de bolacha", "Cookie ice cream"],
+    ["sesame-ice-cream", "Gelado de sésamo", "Sesame ice cream"],
+    ["caramel-ice-cream", "Gelado de caramelo", "Caramel ice cream"],
+    ["matcha-ice-cream", "Gelado de matcha", "Matcha ice cream"],
+    ["sweet-sesame-balls", "Bolinhas doces de sésamo", "Sweet sesame balls"],
+    ["cream-puffs", "Profiteroles", "Cream puffs"],
+    ["sweet-rice-balls", "Bolinhas doces de arroz", "Sweet rice balls"],
+    ["berry-cup", "Sobremesa de frutos vermelhos", "Berry dessert cup"],
+    ["cream-cup", "Taça de creme", "Cream dessert cup"],
+    ["filled-ice-cream", "Gelado recheado", "Filled ice cream"]
   ],
   "drinks": [
-    [
-      "beer",
-      "Cerveja",
-      "Beer"
-    ],
-    [
-      "soft-drinks",
-      "Refrigerantes com refill",
-      "Soft drinks with refills"
-    ],
-    [
-      "house-drinks",
-      "Bebidas da casa",
-      "House drinks"
-    ],
-    [
-      "cocktails",
-      "Cocktails",
-      "Cocktails"
-    ],
-    [
-      "wine",
-      "Vinho",
-      "Wine"
-    ],
-    [
-      "sake",
-      "Saké",
-      "Sake"
-    ]
+    ["beer", "Cerveja", "Beer"],
+    ["soft-drinks", "Refrigerantes com refill", "Soft drinks with refills"],
+    ["house-drinks", "Bebidas da casa", "House drinks"],
+    ["cocktails", "Cocktails", "Cocktails"],
+    ["coca-cola", "Coca-Cola", "Coca-Cola"],
+    ["coca-cola-zero", "Coca-Cola Zero", "Coca-Cola Zero"],
+    ["fanta-orange", "Fanta Laranja", "Fanta Orange"],
+    ["seven-up", "7UP", "7UP"],
+    ["iced-tea-mango", "Lipton Ice Tea de manga", "Lipton Mango Ice Tea"],
+    ["iced-tea-peach", "Lipton Ice Tea de pêssego", "Lipton Peach Ice Tea"],
+    ["iced-tea-lemon", "Ice Tea de limão", "Lemon iced tea"],
+    ["sparkling-water", "Água das Pedras", "Pedras sparkling water"],
+    ["tonic-water", "Schweppes Tónica", "Schweppes Tonic"],
+    ["lemonade", "Limonada", "Lemonade"],
+    ["orange-juice", "Sumo de laranja", "Orange juice"],
+    ["passion-fruit", "Bebida de maracujá", "Passion fruit drink"],
+    ["watermelon", "Bebida de melancia", "Watermelon drink"],
+    ["lime-drink", "Bebida de lima", "Lime drink"],
+    ["coconut-spritz", "Spritz tropical", "Tropical spritz"],
+    ["citrus-cocktail", "Cocktail cítrico", "Citrus cocktail"],
+    ["red-sangria", "Sangria tinta", "Red sangria"],
+    ["white-sangria", "Sangria branca", "White sangria"],
+    ["rose-sangria", "Sangria rosé", "Rosé sangria"],
+    ["kirin", "Kirin Ichiban", "Kirin Ichiban"],
+    ["asahi", "Asahi Super Dry", "Asahi Super Dry"],
+    ["sapporo", "Sapporo Premium", "Sapporo Premium"],
+    ["somersby", "Somersby de maçã", "Somersby Apple"]
+  ],
+  "wine": [
+    ["wine", "Vinho", "Wine"],
+    ["red-wine", "Vinho tinto", "Red wine"],
+    ["white-wine", "Vinho branco", "White wine"],
+    ["mateus-rose", "Mateus Rosé", "Mateus Rosé"],
+    ["planalto", "Planalto Reserva Branco", "Planalto Reserva White"],
+    ["planura-white", "Planura Branco", "Planura White"],
+    ["planura-red", "Planura Tinto", "Planura Red"],
+    ["planura-rose", "Planura Rosé", "Planura Rosé"],
+    ["casal-garcia", "Casal Garcia Vinho Verde", "Casal Garcia Vinho Verde"],
+    ["muralhas", "Muralhas de Monção", "Muralhas de Monção"],
+    ["cartuxa", "Vinhos Cartuxa", "Cartuxa wines"],
+    ["esporao", "Esporão", "Esporão"],
+    ["monte-sacro-red", "Monte Sacro Tinto", "Monte Sacro Red"],
+    ["monte-sacro-white", "Monte Sacro Branco", "Monte Sacro White"],
+    ["mazouco-white", "Mazouco Branco", "Mazouco White"],
+    ["marques-borba", "Marquês de Borba Tinto", "Marquês de Borba Red"],
+    ["pouca-roupa", "Pouca Roupa", "Pouca Roupa"],
+    ["quinta-deserta", "Quinta da Deserta", "Quinta da Deserta"],
+    ["azulejo", "Azulejo", "Azulejo"],
+    ["cem-hectares", "100 Hectares 17", "100 Hectares 17"],
+    ["flor-de-sal", "Flor de Sal Bronze Tinto", "Flor de Sal Bronze Red"],
+    ["vale-daldeia", "Quinta Vale d’Aldeia Grande Reserva", "Quinta Vale d’Aldeia Grande Reserva"],
+    ["telhas", "Telhas Tinto", "Telhas Red"],
+    ["xaino", "Xaino Selection Tinto", "Xaino Selection Red"],
+    ["adega-borba", "Adega de Borba Reserva", "Adega de Borba Reserva"],
+    ["red-reserve", "Vinho tinto reserva", "Reserve red wine"]
+  ],
+  "sake": [
+    ["sake", "Saké", "Sake"],
+    ["yuzu-sake", "Saké de yuzu", "Yuzu sake"],
+    ["toko", "Tōkō Saké", "Tōkō Sake"],
+    ["toraya", "Saké Toraya", "Toraya Sake"],
+    ["ozeki", "Saké japonês em garrafa âmbar", "Japanese sake in an amber bottle"],
+    ["kiku", "Kiku-Masamune", "Kiku-Masamune"],
+    ["horaisen", "Horaisen", "Horaisen"],
+    ["kubota", "Kubota", "Kubota"],
+    ["tenshin", "Tenshin", "Tenshin"],
+    ["junmai-sake", "Saké junmai", "Junmai sake"],
+    ["green-bottle-sake", "Saké japonês em garrafa verde", "Japanese sake in a green bottle"],
+    ["kita-akita", "Kita Akita", "Kita Akita"],
+    ["tsukinoi", "Tsukinoi", "Tsukinoi"],
+    ["shogun", "Shogun Saké", "Shogun Sake"],
+    ["plum-drink", "Bebida japonesa de ameixa", "Japanese plum drink"],
+    ["japanese-bottle", "Bebida japonesa engarrafada", "Japanese bottled drink"]
+  ],
+  "spirits": [
+    ["yamazaki", "The Yamazaki 12", "The Yamazaki 12"],
+    ["taketsuru", "Nikka Taketsuru Pure Malt", "Nikka Taketsuru Pure Malt"],
+    ["hibiki", "Suntory Hibiki", "Suntory Hibiki"],
+    ["macallan", "The Macallan", "The Macallan"],
+    ["courvoisier", "Courvoisier XO", "Courvoisier XO"],
+    ["alianca", "Aliança XO", "Aliança XO"],
+    ["gin-bica", "Bica Premium Gin", "Bica Premium Gin"],
+    ["boeira", "Quinta da Boeira Diamond", "Quinta da Boeira Diamond"],
+    ["house-spirit", "Destilado da casa", "House spirit"],
+    ["whisky-rocks", "Whisky com gelo", "Whisky on the rocks"],
+    ["tonic-cocktail", "Cocktails com tónica", "Tonic cocktails"]
+  ],
+  "coffee": [
+    ["espresso", "Café expresso", "Espresso"],
+    ["cafe-cheio", "Café cheio", "Long espresso"],
+    ["pingado", "Pingado", "Espresso with a dash of milk"],
+    ["cappuccino", "Cappuccino", "Cappuccino"],
+    ["galao", "Galão", "Galão coffee"],
+    ["green-tea", "Chá verde", "Green tea"]
   ]
 }

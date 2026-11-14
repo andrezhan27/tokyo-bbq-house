@@ -1,9 +1,12 @@
 import type { Locale } from "./site";
 import items from "./menu-items.json";
+import photos from "./menu-photos.json";
 
 type Localized = Record<Locale, string>;
-export type MenuItem = { id: string; name: Localized };
+export type MenuItem = { id: string; name: Localized; alternates: string[]; showPackaging: boolean };
 type Section = keyof typeof items;
+const alternatePhotos: Partial<Record<string, string[]>> = photos.alternates;
+const packagedItems = new Set(photos.packages);
 
 const dishesPerPage = 6;
 
@@ -18,6 +21,10 @@ const chapters: { id: Section; name: Localized; marker: string }[] = [
   { id: "sauces", name: { pt: "Molhos e temperos", en: "Sauces & seasonings" }, marker: "たれ" },
   { id: "desserts", name: { pt: "Sobremesas", en: "Desserts" }, marker: "甘味" },
   { id: "drinks", name: { pt: "Bebidas", en: "Drinks" }, marker: "飲み物" },
+  { id: "wine", name: { pt: "Vinhos", en: "Wines" }, marker: "ワイン" },
+  { id: "sake", name: { pt: "Saké e bebidas japonesas", en: "Sake & Japanese drinks" }, marker: "日本酒" },
+  { id: "spirits", name: { pt: "Destilados", en: "Spirits" }, marker: "蒸留酒" },
+  { id: "coffee", name: { pt: "Café e chá", en: "Coffee & tea" }, marker: "お茶" },
 ];
 
 export type MenuLeaf =
@@ -35,7 +42,9 @@ export type MenuLeaf =
 export const menuPages: MenuLeaf[] = [{ kind: "cover" }, { kind: "contents" }];
 export const menuSections = chapters.map(({ id, name, marker }) => {
   const page = menuPages.length;
-  const dishes = items[id].map(([id, pt, en]) => ({ id, name: { pt, en } }));
+  const dishes = items[id].map(([id, pt, en]) => ({
+    id, name: { pt, en }, alternates: alternatePhotos[id] ?? [], showPackaging: packagedItems.has(id),
+  }));
   const parts = Math.ceil(dishes.length / dishesPerPage);
 
   for (let part = 0; part < parts; part++) {

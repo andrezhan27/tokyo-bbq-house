@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type PointerEvent } from "react";
-import { menuPages, menuSections, type MenuLeaf } from "../lib/menu";
+import { menuPages, menuSections, type MenuItem, type MenuLeaf } from "../lib/menu";
 import { copy, restaurant, type Locale } from "../lib/site";
 import { Icon } from "./icon";
 
@@ -14,6 +14,7 @@ const words = {
     chapters: "Capítulos", home: "Voltar à capa", turn: "Desliza ou usa as setas para folhear",
     edition: "PARQUE DAS NAÇÕES · LISBOA", menu: "Carta da casa",
     checkDrinks: "A equipa pode indicar as opções e os preços das bebidas.",
+    photos: "Fotografias",
     thanks: "Até já, à mesa.", seeAgain: "Obrigado pela visita.",
   },
   en: {
@@ -22,6 +23,7 @@ const words = {
     chapters: "Chapters", home: "Back to cover", turn: "Swipe or use the arrows to turn pages",
     edition: "PARQUE DAS NAÇÕES · LISBON", menu: "The house menu",
     checkDrinks: "Ask our team about drink options and prices.",
+    photos: "Photos",
     thanks: "See you at the table.", seeAgain: "Thank you for visiting.",
   },
 };
@@ -48,6 +50,7 @@ type PageProps = {
   jump: Jump;
   side?: "left" | "right";
   visual?: boolean;
+  openPhotos?: (item: MenuItem, opener: HTMLButtonElement) => void;
 };
 
 function Contents({ locale, jump, active, visual }: { locale: Locale; jump: Jump; active?: number; visual?: boolean }) {
@@ -69,16 +72,16 @@ function Contents({ locale, jump, active, visual }: { locale: Locale; jump: Jump
   );
 }
 
-function DishPhoto({ id }: { id: string }) {
+function DishPhoto({ item }: { item: MenuItem }) {
   return (
-    <picture className="menu-dish-photo">
-      <source media={useSmallPhoto} srcSet={`/photos/menu/${id}-small.webp`} />
-      <Image src={`/photos/menu/${id}.webp`} width={640} height={480} alt="" loading="eager" draggable={false} />
+    <picture className={`menu-dish-photo${item.showPackaging ? " menu-product-photo" : ""}`}>
+      <source media={useSmallPhoto} srcSet={`/photos/menu/${item.id}-small.webp`} />
+      <Image src={`/photos/menu/${item.id}.webp`} width={640} height={480} alt="" loading="eager" draggable={false} />
     </picture>
   );
 }
 
-function Leaf({ index, locale, jump, side, visual }: PageProps) {
+function Leaf({ index, locale, jump, side, visual, openPhotos }: PageProps) {
   const t = words[locale];
   const leaf: MenuLeaf | undefined = menuPages[index];
   const classes = `menu-leaf menu-leaf--${leaf?.kind ?? "empty"}${side ? ` menu-leaf--${side}` : ""}`;
@@ -146,11 +149,25 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
         {leaf.parts > 1 && <span aria-hidden="true">{pad(leaf.part)} / {pad(leaf.parts)}</span>}
       </div>
       <ul className="menu-dishes">
-        {leaf.items.map(({ id, name }) => (
-          <li key={id}><DishPhoto id={id} /><p>{name[locale]}</p></li>
+        {leaf.items.map((item) => (
+          <li key={item.id}>
+            <div className="menu-dish-media">
+              <DishPhoto item={item} />
+              {item.alternates.length > 0 && (visual ? (
+                <span className="menu-photo-count"><Icon name="external" />{item.alternates.length + 1}</span>
+              ) : (
+                <button type="button" className="menu-photo-count"
+                  aria-label={`${t.photos} · ${item.name[locale]}`}
+                  onClick={(event) => openPhotos?.(item, event.currentTarget)}>
+                  <Icon name="external" />{item.alternates.length + 1}
+                </button>
+              ))}
+            </div>
+            <p>{item.name[locale]}</p>
+          </li>
         ))}
       </ul>
-      {leaf.section === "drinks" && <p className="menu-drinks-note">{t.checkDrinks}</p>}
+      {["drinks", "wine", "sake", "spirits", "coffee"].includes(leaf.section) && <p className="menu-drinks-note">{t.checkDrinks}</p>}
       <div className="menu-leaf-footer"><span>Tokyo BBQ House</span><span>{pad(index)}</span></div>
     </section>
   );
@@ -161,9 +178,13 @@ export function MenuReader({ locale }: { locale: Locale }) {
   const [page, setPage] = useState(0);
   const [turn, setTurn] = useState<Turn | null>(null);
   const [showContents, setShowContents] = useState(false);
+  const [photoItem, setPhotoItem] = useState<MenuItem | null>(null);
+  const [photoIndex, setPhotoIndex] = useState(0);
   const spread = useSyncExternalStore(subscribe, getSpread, getServerSpread);
   const active = spread ? leftOf(page) : page;
   const panelButton = useRef<HTMLButtonElement>(null);
+  const photoDialog = useRef<HTMLDialogElement>(null);
+  const photoOpener = useRef<HTMLButtonElement>(null);
   const pointer = useRef<{ id: number; x: number; y: number } | null>(null);
   const animating = turn !== null && turn.spread === spread;
 
@@ -188,6 +209,23 @@ export function MenuReader({ locale }: { locale: Locale }) {
     }
   }, [active, spread]);
 
+  useEffect(() => {
+    if (photoItem && !photoDialog.current?.open) photoDialog.current?.showModal();
+  }, [photoItem]);
+
+  function openPhotos(item: MenuItem, opener: HTMLButtonElement) {
+    if (animating) return;
+    photoOpener.current = opener;
+    setPhotoIndex(0);
+    setPhotoItem(item);
+  }
+
+  function changePhoto(direction: 1 | -1) {
+    if (!photoItem) return;
+    const count = photoItem.alternates.length + 1;
+    setPhotoIndex((index) => (index + direction + count) % count);
+  }
+
   const go = useCallback<Jump>((target) => {
     const next = Math.max(0, Math.min(last, target));
     const nextView = spread ? leftOf(next) : next;
@@ -210,7 +248,7 @@ export function MenuReader({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     function key(e: KeyboardEvent) {
-      if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.repeat) return;
+      if (photoDialog.current?.open || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.repeat) return;
       if (showContents && e.key === "Escape") { closeContents(); return; }
       if (showContents) return;
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
@@ -248,7 +286,7 @@ export function MenuReader({ locale }: { locale: Locale }) {
   const pageLabel = cover ? t.cover : !spread && active === last ? t.back
     : `${t.page} ${pad(active)}${spread && active < last ? `–${pad(active + 1)}` : ""}`;
   const stageClass = `menu-stage${spread ? " is-spread" : ""}${cover ? " is-closed" : ""}${turningCover ? " is-turning-cover" : ""}`;
-  const leafProps = { locale, jump: go };
+  const leafProps = { locale, jump: go, openPhotos };
 
   return (
     <div className="menu-reader">
@@ -319,6 +357,40 @@ export function MenuReader({ locale }: { locale: Locale }) {
         <button type="button" onClick={() => step(1)} disabled={atEnd} aria-label={t.next}><span>{t.next}</span><Icon name="right" /></button>
       </nav>
       <p className="menu-turn-hint">{t.turn}</p>
+      <dialog ref={photoDialog} className="menu-photo-dialog" aria-label={t.photos}
+        onClose={() => {
+          setPhotoItem(null);
+          photoOpener.current?.focus({ preventScroll: true });
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) event.currentTarget.close();
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            changePhoto(event.key === "ArrowLeft" ? -1 : 1);
+          }
+        }}>
+        {photoItem && (
+          <div className="menu-photo-viewer">
+            <div className="menu-photo-viewer-header">
+              <h2>{photoItem.name[locale]}</h2>
+              <button type="button" autoFocus aria-label={t.close} onClick={() => photoDialog.current?.close()}><Icon name="close" /></button>
+            </div>
+            <div className="menu-photo-viewer-image">
+              <Image
+                src={photoIndex === 0 ? `/photos/menu/${photoItem.id}.webp` : `/photos/menu/alternates/${photoItem.alternates[photoIndex - 1]}.webp`}
+                alt={photoItem.name[locale]} width={1000} height={900} loading="eager"
+              />
+            </div>
+            <div className="menu-photo-viewer-nav">
+              <button type="button" aria-label={t.previous} onClick={() => changePhoto(-1)}><Icon name="left" /></button>
+              <p aria-live="polite">{photoIndex + 1} / {photoItem.alternates.length + 1}</p>
+              <button type="button" aria-label={t.next} onClick={() => changePhoto(1)}><Icon name="right" /></button>
+            </div>
+          </div>
+        )}
+      </dialog>
     </div>
   );
 }
