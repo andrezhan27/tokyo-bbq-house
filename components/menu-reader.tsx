@@ -12,7 +12,7 @@ const words = {
     title: "Menu", sub: "Yakiniku japonês", open: "Abrir menu", previous: "Anterior", next: "Seguinte",
     contents: "Índice", close: "Fechar", cover: "Capa", back: "Contracapa", page: "Página",
     chapters: "Capítulos", home: "Voltar à capa", turn: "Desliza ou usa as setas para folhear",
-    edition: "PARQUE DAS NAÇÕES · LISBOA", menu: "Carta da casa", intro: "Da cozinha à grelha, ao teu ritmo.",
+    edition: "PARQUE DAS NAÇÕES · LISBOA", menu: "Carta da casa",
     checkDrinks: "A equipa pode indicar as opções e os preços das bebidas.",
     thanks: "Até já, à mesa.", seeAgain: "Obrigado pela visita.",
   },
@@ -20,7 +20,7 @@ const words = {
     title: "Menu", sub: "Japanese yakiniku", open: "Open menu", previous: "Previous", next: "Next",
     contents: "Contents", close: "Close", cover: "Cover", back: "Back cover", page: "Page",
     chapters: "Chapters", home: "Back to cover", turn: "Swipe or use the arrows to turn pages",
-    edition: "PARQUE DAS NAÇÕES · LISBON", menu: "The house menu", intro: "From the kitchen to the grill, at your own pace.",
+    edition: "PARQUE DAS NAÇÕES · LISBON", menu: "The house menu",
     checkDrinks: "Ask our team about drink options and prices.",
     thanks: "See you at the table.", seeAgain: "Thank you for visiting.",
   },
@@ -37,7 +37,7 @@ const getSpread = () => window.matchMedia(query).matches;
 const getServerSpread = () => false;
 const leftOf = (n: number) => n === 0 ? 0 : n - (n + 1) % 2;
 const pad = (n: number) => String(n).padStart(2, "0");
-const length = 530;
+const length = 560;
 
 type Jump = (target: number) => void;
 type Turn = { from: number; to: number; direction: 1 | -1; spread: boolean };
@@ -72,7 +72,7 @@ function DishPhoto({ id }: { id: string }) {
   return (
     <picture className="menu-dish-photo">
       <source media="(max-width: 520px) and (max-resolution: 2dppx)" srcSet={`/photos/menu/${id}-small.webp`} />
-      <Image src={`/photos/menu/${id}.webp`} width={600} height={400} alt="" loading="eager" draggable={false} />
+      <Image src={`/photos/menu/${id}.webp`} width={640} height={480} alt="" loading="eager" draggable={false} />
     </picture>
   );
 }
@@ -86,12 +86,14 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
   if (leaf.kind === "cover") {
     return (
       <div className={classes}>
-        <Image src="/photos/menu/cover.webp" alt="" fill priority sizes="(max-width: 560px) 94vw, 510px" className="menu-cover-photo" draggable={false} />
+        <div className="menu-cover-art">
+          <Image src="/photos/gallery-03.webp" alt="" fill priority={!visual} sizes="(max-width: 560px) 90vw, 456px" className="menu-cover-photo" draggable={false} />
+        </div>
         <div className="menu-cover-trim" aria-hidden="true" />
         <div className="menu-cover-copy">
           <div className="menu-cover-top"><span>Tokyo BBQ House</span><span>Lisboa · PT</span></div>
           <div className="menu-cover-title">
-            <p><span />{t.sub}</p>
+            <p>{t.sub}</p>
             {visual ? <div className="menu-cover-heading">{t.title}</div> : <h1 className="menu-cover-heading">{t.title}</h1>}
           </div>
           <div className="menu-cover-bottom">
@@ -126,7 +128,6 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
         <div className="menu-contents-copy">
           <p>{t.sub}</p>
           <h2>{t.contents}</h2>
-          <p>{t.intro}</p>
         </div>
         <Contents locale={locale} jump={jump} visual={visual} />
         <div className="menu-leaf-footer"><span>{t.edition}</span><span>{pad(index)}</span></div>
@@ -138,12 +139,12 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
 
   return (
     <section className={classes} aria-label={leaf.name[locale]}>
-      <div className="menu-leaf-header"><span>{t.chapters} / {pad(leaf.chapter)}</span><span lang="ja" aria-hidden="true">{leaf.marker}</span></div>
+      <div className="menu-leaf-header"><span>{t.menu}</span><span lang="ja" aria-hidden="true">{leaf.marker}</span></div>
       <div className="menu-section-heading">
         <h2>{leaf.name[locale]}</h2>
         {leaf.parts > 1 && <span aria-hidden="true">{pad(leaf.part)} / {pad(leaf.parts)}</span>}
       </div>
-      <ul className={`menu-dishes menu-dishes--${leaf.items.length}`}>
+      <ul className="menu-dishes">
         {leaf.items.map(({ id, name }) => (
           <li key={id}><DishPhoto id={id} /><p>{name[locale]}</p></li>
         ))}
@@ -167,7 +168,7 @@ export function MenuReader({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     if (!turn) return;
-    const timer = window.setTimeout(() => setTurn(null), length);
+    const timer = window.setTimeout(() => setTurn(null), length + 100);
     return () => window.clearTimeout(timer);
   }, [turn]);
 
@@ -281,6 +282,9 @@ export function MenuReader({ locale }: { locale: Locale }) {
             )}
           </div>
           {move && <div className={`menu-turn-scene ${move.direction === 1 ? "is-forward" : "is-backward"}${turningCover ? " turns-cover" : ""}`} aria-hidden="true" inert>
+            {!spread && move.direction === -1 && (
+              <div className="menu-turn-base"><Leaf {...leafProps} index={move.from} visual /></div>
+            )}
             {spread && (turningCover ?
               <div className="menu-turn-base">
                 <Leaf {...leafProps} index={openingSpread} side="left" visual />
@@ -290,14 +294,18 @@ export function MenuReader({ locale }: { locale: Locale }) {
                 <Leaf {...leafProps} index={move.direction === 1 ? move.from : move.to} side="left" visual />
                 <Leaf {...leafProps} index={(move.direction === 1 ? move.to : move.from) + 1} side="right" visual />
               </div>)}
-            <div className="menu-turn-sheet">
+            <div className="menu-turn-sheet" onAnimationEnd={(event) => {
+              if (event.target === event.currentTarget) setTurn(null);
+            }}>
               <div className="menu-turn-front">
-                <Leaf {...leafProps} index={turningCover ? 0 : spread ? (move.direction === 1 ? move.from + 1 : move.from) : move.from}
+                <Leaf {...leafProps} index={turningCover ? 0 : spread ? (move.direction === 1 ? move.from + 1 : move.from) : move.direction === 1 ? move.from : move.to}
                   side={turningCover || !spread ? undefined : move.direction === 1 ? "right" : "left"} visual />
               </div>
               <div className="menu-turn-back">
-                <Leaf {...leafProps} index={turningCover ? openingSpread : spread && move.direction === -1 ? move.to + 1 : move.to}
-                  side={spread ? turningCover || move.direction === 1 ? "left" : "right" : undefined} visual />
+                {spread && (
+                  <Leaf {...leafProps} index={turningCover ? openingSpread : move.direction === -1 ? move.to + 1 : move.to}
+                    side={turningCover || move.direction === 1 ? "left" : "right"} visual />
+                )}
               </div>
             </div>
           </div>}

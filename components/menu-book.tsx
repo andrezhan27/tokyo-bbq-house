@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { copy, restaurant, menuPath, type Locale } from "../lib/site";
 import { Icon } from "./icon";
+import { LanguageDropdown } from "./language-dropdown";
 import { MenuReader } from "./menu-reader";
 import "./menu-book.css";
 
@@ -19,7 +20,6 @@ export function menuMetadata(locale: Locale): Metadata {
 
 export function MenuBook({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const altLocale = locale === "pt" ? "en" : "pt";
 
   return (
     <div className="menu-experience">
@@ -32,10 +32,7 @@ export function MenuBook({ locale }: { locale: Locale }) {
           <Image src="/photos/logo.png" alt="Tokyo BBQ House" width={111} height={34} priority />
         </Link>
         <div className="menu-header-actions">
-          <Link className="menu-language" href={menuPath(altLocale)} hrefLang={copy[altLocale].lang} lang={copy[altLocale].lang}
-            aria-label={altLocale === "en" ? "Read the menu in English" : "Ler o menu em português"}>
-            {altLocale.toUpperCase()}
-          </Link>
+          <LanguageDropdown locale={locale} paths={{ pt: menuPath("pt"), en: menuPath("en") }} />
           <Link className="menu-booking" href={restaurant.reservationPath}>{t.book}<Icon name="external" /></Link>
         </div>
       </header>

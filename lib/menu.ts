@@ -25,21 +25,20 @@ export type MenuLeaf =
       section: Section;
       name: Localized;
       marker: string;
-      chapter: number;
       part: number;
       parts: number;
       items: MenuItem[];
     };
 
 export const menuPages: MenuLeaf[] = [{ kind: "cover" }, { kind: "contents" }];
-export const menuSections = chapters.map(({ id, name, marker, counts }, index) => {
+export const menuSections = chapters.map(({ id, name, marker, counts }) => {
   const page = menuPages.length;
   const dishes = items[id].map(([id, pt, en]) => ({ id, name: { pt, en } }));
   let offset = 0;
 
   counts.forEach((count, part) => {
     menuPages.push({
-      kind: "dishes", section: id, name, marker, chapter: index + 1,
+      kind: "dishes", section: id, name, marker,
       part: part + 1, parts: counts.length, items: dishes.slice(offset, offset + count),
     });
     offset += count;

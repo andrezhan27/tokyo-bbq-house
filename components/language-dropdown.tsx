@@ -10,7 +10,7 @@ const languages = [
   { locale: "en", label: "English" },
 ] as const;
 
-export function LanguageDropdown({ locale }: { locale: Locale }) {
+export function LanguageDropdown({ locale, paths }: { locale: Locale; paths?: Record<Locale, string> }) {
   const dropdown = useRef<HTMLDetailsElement>(null);
   const summary = useRef<HTMLElement>(null);
 
@@ -46,7 +46,7 @@ export function LanguageDropdown({ locale }: { locale: Locale }) {
           const { home, lang } = copy[option];
           return (
             <li key={option}>
-              <Link href={home} hrefLang={lang} lang={lang} aria-current={option === locale ? "true" : undefined} onClick={(event) => {
+              <Link href={paths?.[option] ?? home} hrefLang={lang} lang={lang} aria-current={option === locale ? "true" : undefined} onClick={(event) => {
                 close();
                 if (option === locale) {
                   event.preventDefault();
