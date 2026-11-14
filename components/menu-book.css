@@ -165,7 +165,7 @@
 }
 .menu-cover-trim { position: absolute; inset: 12px; z-index: 1; border: 1px solid #e3be8063; pointer-events: none; }
 .menu-cover-copy {
-  z-index: 2; flex: 1; display: grid; grid-template-rows: 1fr auto 1.22fr;
+  z-index: 2; flex: 1; display: grid; grid-template-rows: 1fr auto 1.45fr;
   padding: clamp(25px, 3vw, 37px);
 }
 .menu-cover-top {
