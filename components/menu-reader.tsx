@@ -93,13 +93,13 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
         <div className="menu-cover-trim" aria-hidden="true" />
         <div className="menu-cover-copy">
           <div className="menu-cover-top"><span>{t.title}</span><span>Lisboa · PT</span></div>
-          <div className="menu-cover-title">
+          <div className="menu-cover-intro">
             <p>{t.sub}</p>
             {visual ? <div className="menu-cover-heading">Tokyo BBQ House</div> : <h1 className="menu-cover-heading">Tokyo BBQ House</h1>}
-          </div>
-          <div className="menu-cover-bottom">
             {visual ? <span className="menu-open">{t.open}<Icon name="right" /></span> :
               <button type="button" className="menu-open" onClick={() => jump(1)}>{t.open}<Icon name="right" /></button>}
+          </div>
+          <div className="menu-cover-bottom">
             <span className="menu-cover-kanji" lang="ja" aria-hidden="true">焼肉</span>
           </div>
         </div>
