@@ -124,9 +124,7 @@
     ["black-rice", "Arroz negro", "Black rice"],
     ["rice-bowl", "Taça de arroz com guarnição", "Rice bowl with toppings"],
     ["egg-seaweed-noodles", "Massa com ovo e algas", "Noodles with egg and seaweed"],
-    ["seasoned-noodles", "Massa temperada", "Seasoned noodles"],
-    ["banzai-classic", "Banzai Noodle original", "Original Banzai Noodle"],
-    ["banzai-spicy", "Banzai Noodle picante", "Spicy Banzai Noodle"]
+    ["seasoned-noodles", "Massa temperada", "Seasoned noodles"]
   ],
   "sides": [
     ["lotus-root", "Fatias de raiz de lótus", "Sliced lotus root"],
