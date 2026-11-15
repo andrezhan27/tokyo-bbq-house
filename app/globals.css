@@ -86,8 +86,7 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .button-red:hover { background: #a71920; }
 .button-outline { background: transparent; border-color: #f5ede279; }
 .button-outline:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
-.hero-book { background: #3c1212a8; border-color: #ff625b; text-shadow: 0 1px 3px #000b; }
-.hero-book:hover { background: #5c191bb8; border-color: #ff827a; }
+.hero-book { background: transparent; border-color: var(--red); text-shadow: 0 1px 3px #000b; }
 .nav-book { min-height: 42px; font-size: .8rem; padding-inline: 13px; gap: 8px; }
 .nav-book svg { width: 15px; height: 15px; }
 .reservation-layout { height: 100vh; height: 100dvh; display: grid; grid-template-rows: auto minmax(0, 1fr); }
