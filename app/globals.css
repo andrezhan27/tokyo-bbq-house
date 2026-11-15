@@ -1,7 +1,7 @@
 @font-face {
-  font-family: "Barlow Condensed";
-  src: url("./fonts/barlow-condensed-800.woff2") format("woff2");
-  font-weight: 800;
+  font-family: "Knewave";
+  src: url("./fonts/knewave.woff2") format("woff2");
+  font-weight: 400;
   font-display: swap;
 }
 @font-face {
@@ -25,7 +25,7 @@
   --nav-height: 70px;
   --muted: #bdb2a7;
   --body-font: "DM Sans", Arial, sans-serif;
-  --display-font: "Barlow Condensed", Impact, "Arial Narrow", sans-serif;
+  --display-font: "Knewave", Impact, "Arial Narrow", sans-serif;
   color-scheme: dark;
 }
 *, *::before, *::after { box-sizing: border-box; }
@@ -37,8 +37,8 @@ button { cursor: pointer; border-radius: var(--corner-radius); }
 img { display: block; }
 h1, h2, h3, p, dl, dd { margin: 0; }
 h1, h2, h3 { line-height: .91; }
-h1, h2 { font-family: var(--display-font); font-weight: 800; letter-spacing: -.022em; }
-h2 { font-size: clamp(4rem, 8.1vw, 7.7rem); }
+h1, h2 { font-family: var(--display-font); font-weight: 400; line-height: 1.08; }
+h2 { font-size: clamp(2.25rem, 5.8vw, 5.25rem); }
 em { font-style: normal; }
 ::selection { color: white; background: #b12128; }
 :focus-visible { outline: 2px solid #f57676; outline-offset: 5px; }
@@ -113,8 +113,8 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .eyebrow { display: flex; align-items: center; gap: 11px; color: #f1e6d8; font-size: .71rem; font-weight: 700; line-height: 1.4; letter-spacing: .2em; text-transform: uppercase; }
 .eyebrow span { width: 20px; height: 2px; background: var(--red); display: inline-block; flex: 0 0 auto; }
 .light-section .eyebrow { color: #6e342d; }
-.hero h1 { margin: 14px 0 20px; font-size: clamp(2.25rem, min(11vw, 15svh), 7.5rem); text-transform: uppercase; }
-.hero h1 em { color: #ff4b4d; white-space: nowrap; }
+.hero h1 { margin: 16px 0 24px; }
+.hero-wordmark { width: min(100%, 650px, 76svh); height: auto; margin-inline: auto; }
 .hero-footer { display: grid; justify-items: center; gap: 10px; padding-top: 20px; }
 .hero-scroll { display: inline-flex; gap: 9px; align-items: center; font-size: .68rem; letter-spacing: .16em; font-weight: 700; text-transform: uppercase; }
 .hero-scroll svg { width: 17px; height: 17px; color: #ff7774; }
@@ -144,18 +144,18 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .menu-grid { gap: clamp(37px, 6vw, 90px); }
 .menu-image { position: relative; min-height: clamp(370px, 41vw, 575px); background: #30231d; }
 .menu-image img { object-position: 43% 50%; }
-.menu-copy h2 { font-size: clamp(4.1rem, 7.4vw, 7rem); margin: 14px 0 21px; }
+.menu-copy h2 { font-size: clamp(2.25rem, 5.3vw, 4.7rem); margin: 14px 0 21px; }
 .menu-copy > p:not(.eyebrow) { color: #e1d5c9; }
 .prices { border-block: 1px solid #ffe5cf35; margin-top: 24px; }
 .prices div { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 10px; }
 .prices div + div { border-top: 1px solid #ffe5cf35; }
 .prices dt { font-weight: 700; line-height: 1.35; }
 .prices dt span { display: block; color: #e5d2c0; font-size: .8rem; font-weight: 400; margin-top: 2px; }
-.prices dd { color: #ff7774; font: 800 clamp(2.2rem, 3.6vw, 3.5rem)/1 var(--display-font); white-space: nowrap; }
+.prices dd { color: #ed4438; font: 400 clamp(2rem, 3.4vw, 3.25rem)/1.15 var(--display-font); white-space: nowrap; }
 .menu-copy .drinks-note { margin: 13px 0 22px; font-size: .9rem; font-weight: 700; }
 .guide-callout { padding-block: clamp(53px, 7vw, 100px); }
 .guide-callout-header { margin-bottom: clamp(24px, 4vw, 42px); }
-.guide-callout h2 { margin: 11px 0 16px; font-size: clamp(4rem, 6.8vw, 6.7rem); }
+.guide-callout h2 { margin: 11px 0 16px; }
 .guide-callout p:not(.eyebrow) { max-width: 49ch; }
 .guide-carousel { --photo-width: min(34vw, 490px); --photo-gap: clamp(8px, 1.2vw, 18px); }
 .guide-carousel-viewport { overflow-x: auto; }
@@ -199,7 +199,7 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 
 .press-section { background: var(--paper); }
 .press-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding-block: 39px; }
-.press-inner h2 { margin-top: 8px; font-size: clamp(2.35rem, 4.7vw, 4.5rem); }
+.press-inner h2 { margin-top: 8px; font-size: clamp(1.85rem, 3.8vw, 3.7rem); }
 .press-inner .text-link { flex-shrink: 0; }
 .visit-section { background: #1b1613; }
 .visit-grid { gap: clamp(35px, 8vw, 130px); }
@@ -231,6 +231,12 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 }
 @media (max-width: 750px) {
   .container, .nav-shell { width: calc(100% - 40px); }
+  .hero-copy { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .hero h1 { margin: 14px 0 19px; }
+  .hero .button-row { gap: 9px; }
+  .hero .button { min-height: 44px; padding: 8px 15px; gap: 8px; font-size: .8125rem; }
+  .hero .button svg { width: 15px; height: 15px; }
+  .hero .button-outline:not(:hover) { background: #110f0e70; }
   .split { grid-template-columns: minmax(0, 1fr); }
   .section-space { padding-block: 70px; }
   .guide-carousel { --photo-width: min(79vw, 490px); }
@@ -244,7 +250,8 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 }
 @media (max-width: 750px) and (orientation: portrait) {
   .hero-image { object-position: center bottom; }
-  .hero-copy { align-self: start; padding-top: clamp(32px, 9svh, 84px); }
+  .hero-copy { align-self: start; padding-top: clamp(32px, 8svh, 84px); }
+  .hero-wordmark { width: min(100%, 74vw, 41svh, 340px); }
   .hero::before { background: linear-gradient(#120e0b19, #120e0b33 45%, transparent 70%); }
 }
 @media (max-width: 520px) {
@@ -272,14 +279,13 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
   .brand img { width: 78px; }
   .button { padding-inline: 13px; }
   .nav-book { padding-inline: 6px; }
-  .hero .button-row { gap: 8px; }
-  .hero .button { gap: 7px; }
+  .hero .button { padding-inline: 9px; gap: 6px; }
 }
 @media (max-height: 480px) {
   .hero-inner { padding-block: 10px; }
   .hero-copy { padding-top: 0; }
-  .hero h1 { margin-block: 8px; font-size: clamp(1.75rem, min(11vw, 9svh), 3rem); }
-  .hero .button { min-height: 39px; padding-block: 6px; }
+  .hero h1 { margin-block: 8px; }
+  .hero-wordmark { width: min(100%, 54svh); }
   .hero-footer { gap: 6px; padding-top: 8px; }
   .hero-japanese { font-size: 1.55rem; }
 }

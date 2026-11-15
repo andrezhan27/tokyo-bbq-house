@@ -93,7 +93,9 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="container hero-inner">
           <div className="hero-copy">
             <p className="eyebrow"><span />{t.heroLabel}</p>
-            <h1 id="hero-title">Tokyo <br /><em>BBQ House</em></h1>
+            <h1 id="hero-title">
+              <Image className="hero-wordmark" src="/photos/hero-wordmark.webp" alt="Tokyo BBQ House" width={1440} height={531} preload />
+            </h1>
             <div className="button-row">
               <Link className="button hero-book" href={restaurant.reservationPath}><Icon name="calendar" />{t.book}</Link>
               <Link className="button button-outline" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>

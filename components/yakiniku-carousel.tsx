@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { copy, type Locale } from "../lib/site";
 import { Icon } from "./icon";
 
@@ -24,15 +24,12 @@ const photos = [
   ["TOKYO-BBQ-HOUSE-30", "Cortes de carne com milho, tomate e lima", "Beef cuts with corn, tomato and lime"],
 ] as const;
 
-const autoplaySpeed = 0.038; // Pixels per millisecond.
-
 export function YakinikuCarousel({ locale }: { locale: Locale }) {
   const labels = copy[locale].carousel;
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const group = useRef<HTMLUListElement>(null);
-  const controls = useRef<{ toggle: () => void; step: (direction: number) => void }>(null);
-  const [paused, setPaused] = useState(false);
+  const stepByPhoto = useRef<(direction: number) => void>(null);
 
   useEffect(() => {
     const viewportElement = viewport.current;
@@ -43,7 +40,6 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const touchInput = window.matchMedia("(pointer: coarse)");
     const supportsScrollEnd = "onscrollend" in viewportElement;
-    let playing = !reducedMotion.matches;
     let visible = false;
     let width = 0;
     let offset = 0;
@@ -78,7 +74,7 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
           ? stepRemaining
           : stepRemaining * (1 - Math.exp(-elapsed / 85));
         stepRemaining -= step;
-        moveBy(step + ((playing ? autoplaySpeed : 0) + momentum) * elapsed);
+        moveBy(step + momentum * elapsed);
         momentum *= Math.exp(-elapsed / 155);
         if (Math.abs(momentum) < 0.005) momentum = 0;
         schedule(time);
@@ -86,7 +82,7 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
     }
 
     function schedule(time = performance.now()) {
-      if (frame || !visible || drag || touching || scrolling || !(playing || momentum || stepRemaining)) return;
+      if (frame || !visible || drag || touching || scrolling || !(momentum || stepRemaining)) return;
       lastFrame = time;
       frame = requestAnimationFrame(animate);
     }
@@ -122,7 +118,7 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
       if (drag?.id !== event.pointerId) return;
       if (event.type === "pointerup" && !reducedMotion.matches) {
         const speed = drag.speed * Math.exp(-(event.timeStamp - drag.time) / 55);
-        momentum = Math.max(-2.1, Math.min(2.1, speed - (playing ? autoplaySpeed : 0)));
+        momentum = Math.max(-2.1, Math.min(2.1, speed));
         if (Math.abs(speed) < 0.04) momentum = 0;
       }
       drag = null;
@@ -185,29 +181,22 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
       schedule();
     }
 
-    function setPlaying(next: boolean) {
-      playing = next;
-      setPaused(!next);
-      if (!next) momentum = 0;
-      schedule();
-    }
-
     function updateMotionPreference() {
-      setPlaying(!reducedMotion.matches);
+      if (!reducedMotion.matches) return;
+      momentum = 0;
+      moveBy(stepRemaining);
+      stepRemaining = 0;
     }
 
-    controls.current = {
-      toggle: () => setPlaying(!playing),
-      step: (direction) => {
-        momentum = 0;
-        const distance = direction * width / photos.length;
-        if (reducedMotion.matches) {
-          moveBy(distance);
-        } else {
-          stepRemaining += distance;
-          schedule();
-        }
-      },
+    stepByPhoto.current = (direction) => {
+      momentum = 0;
+      const distance = direction * width / photos.length;
+      if (reducedMotion.matches) {
+        moveBy(distance);
+      } else {
+        stepRemaining += distance;
+        schedule();
+      }
     };
 
     const resize = new ResizeObserver(measure);
@@ -218,7 +207,6 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
     });
     intersection.observe(viewportElement);
     updateInputMode();
-    updateMotionPreference();
     reducedMotion.addEventListener("change", updateMotionPreference);
     touchInput.addEventListener("change", updateInputMode);
     viewportElement.addEventListener("scroll", onScroll, { passive: true });
@@ -237,7 +225,7 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
       window.clearTimeout(scrollEndTimer);
       resize.disconnect();
       intersection.disconnect();
-      controls.current = null;
+      stepByPhoto.current = null;
       reducedMotion.removeEventListener("change", updateMotionPreference);
       touchInput.removeEventListener("change", updateInputMode);
       viewportElement.removeEventListener("scroll", onScroll);
@@ -283,9 +271,8 @@ export function YakinikuCarousel({ locale }: { locale: Locale }) {
         </div>
       </div>
       <div className="guide-carousel-controls">
-        <button type="button" aria-label={labels.previous} onClick={() => controls.current?.step(-1)}><Icon name="left" /></button>
-        <button type="button" aria-label={paused ? labels.play : labels.pause} onClick={() => controls.current?.toggle()}><Icon name={paused ? "play" : "pause"} /></button>
-        <button type="button" aria-label={labels.next} onClick={() => controls.current?.step(1)}><Icon name="right" /></button>
+        <button type="button" aria-label={labels.previous} onClick={() => stepByPhoto.current?.(-1)}><Icon name="left" /></button>
+        <button type="button" aria-label={labels.next} onClick={() => stepByPhoto.current?.(1)}><Icon name="right" /></button>
       </div>
     </div>
   );

@@ -178,7 +178,7 @@
   letter-spacing: .17em; font-weight: 600; text-shadow: 0 1px 5px #120502;
 }
 .menu-cover-heading {
-  font: 400 clamp(1.5rem, 5.8vw, 2rem)/1.1 var(--book-heading);
+  font: 400 clamp(1.5rem, 5.8vw, 2rem)/1.1 var(--display-font);
   letter-spacing: .01em; text-shadow: 0 2px 8px #120502, 0 2px 18px #120502b0;
 }
 .menu-cover-bottom { align-self: end; justify-self: end; }
