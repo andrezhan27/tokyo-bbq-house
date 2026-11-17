@@ -15,6 +15,8 @@ const words = {
     chapters: "Capítulos", home: "Voltar à capa", turn: "Desliza ou usa as setas para folhear",
     edition: "PARQUE DAS NAÇÕES · LISBOA", menu: "Carta da casa",
     prices: "Preços do rodízio",
+    included: "Incluído no rodízio",
+    checkExtras: "Consulta a equipa sobre os extras disponíveis e os respetivos preços.",
     checkDrinks: "A equipa pode indicar as opções e os preços das bebidas.",
     thanks: "Até já, à mesa.", seeAgain: "Obrigado pela visita.",
   },
@@ -24,6 +26,8 @@ const words = {
     chapters: "Chapters", home: "Back to cover", turn: "Swipe or use the arrows to turn pages",
     edition: "PARQUE DAS NAÇÕES · LISBON", menu: "The house menu",
     prices: "Rodízio prices",
+    included: "Included in the rodízio",
+    checkExtras: "Ask our team about available extras and prices.",
     checkDrinks: "Ask our team about drink options and prices.",
     thanks: "See you at the table.", seeAgain: "Thank you for visiting.",
   },
@@ -160,15 +164,20 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
         <h2>{leaf.name[locale]}</h2>
         {leaf.parts > 1 && <span aria-hidden="true">{pad(leaf.part)} / {pad(leaf.parts)}</span>}
       </div>
-      <ul className="menu-dishes">
+      {leaf.items.length > 0 && <ul className="menu-dishes">
         {leaf.items.map((item) => (
           <li key={item.id}>
             <DishPhoto item={item} />
-            <p>{item.name[locale]}</p>
+            <p>
+              {item.name[locale]}
+              {item.included && <small className="menu-dish-included">{t.included}</small>}
+            </p>
           </li>
         ))}
-      </ul>
-      {["drinks", "wine", "sake", "spirits", "coffee"].includes(leaf.section) && <p className="menu-drinks-note">{t.checkDrinks}</p>}
+      </ul>}
+      {leaf.section === "extras" && <p>{t.checkExtras}</p>}
+      {["drinks", "wine", "sake", "coffee"].includes(leaf.section) &&
+        leaf.items.some((item) => !item.included) && <p className="menu-drinks-note">{t.checkDrinks}</p>}
       <div className="menu-leaf-footer"><span>Tokyo BBQ House</span><span>{pad(index)}</span></div>
     </section>
   );

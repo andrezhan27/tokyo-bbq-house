@@ -3,27 +3,36 @@ import items from "./menu-items.json";
 import photos from "./menu-photos.json";
 
 type Localized = Record<Locale, string>;
-export type MenuItem = { id: string; name: Localized; showPackaging: boolean };
+export type MenuItem = { id: string; name: Localized; showPackaging: boolean; included: boolean };
 type Section = keyof typeof items;
 const packagedItems = new Set(photos.packages);
+const includedDrinks = new Set([
+  "coca-cola", "coca-cola-zero", "sprite", "fanta-orange",
+  "iced-tea-lemon", "iced-tea-mango", "iced-tea-peach",
+  "passion-fruit", "passion-fruit-lime", "pineapple-lime", "strawberry-lime",
+  "caneca", "tulipa", "imperial", "red-wine", "white-wine", "champagne",
+]);
 
 const dishesPerPage = 6;
 
 const chapters: { id: Section; name: Localized; marker: string }[] = [
-  { id: "starters", name: { pt: "Entradas", en: "Starters" }, marker: "前菜" },
-  { id: "beef", name: { pt: "Cortes de vaca", en: "Beef cuts" }, marker: "牛肉" },
-  { id: "pork", name: { pt: "Porco e cordeiro", en: "Pork & lamb" }, marker: "豚肉" },
-  { id: "chicken", name: { pt: "Frango", en: "Chicken" }, marker: "鶏肉" },
-  { id: "seafood", name: { pt: "Peixe e marisco", en: "Fish & seafood" }, marker: "魚介" },
-  { id: "rice", name: { pt: "Massas e arroz", en: "Noodles & rice" }, marker: "麺・米" },
-  { id: "sides", name: { pt: "Acompanhamentos", en: "Sides" }, marker: "野菜" },
-  { id: "sauces", name: { pt: "Molhos e temperos", en: "Sauces & seasonings" }, marker: "たれ" },
-  { id: "desserts", name: { pt: "Sobremesas", en: "Desserts" }, marker: "甘味" },
   { id: "drinks", name: { pt: "Bebidas", en: "Drinks" }, marker: "飲み物" },
+  { id: "sake", name: { pt: "Bebidas japonesas", en: "Japanese drinks" }, marker: "日本酒" },
   { id: "wine", name: { pt: "Vinhos", en: "Wines" }, marker: "ワイン" },
-  { id: "sake", name: { pt: "Saké e bebidas japonesas", en: "Sake & Japanese drinks" }, marker: "日本酒" },
-  { id: "spirits", name: { pt: "Destilados", en: "Spirits" }, marker: "蒸留酒" },
-  { id: "coffee", name: { pt: "Café e chá", en: "Coffee & tea" }, marker: "お茶" },
+  { id: "sauces", name: { pt: "Molhos e temperos", en: "Sauces & seasonings" }, marker: "たれ" },
+  { id: "starters", name: { pt: "Entradas", en: "Starters" }, marker: "前菜" },
+  { id: "fried", name: { pt: "Fritos", en: "Fried dishes" }, marker: "揚げ物" },
+  { id: "rice", name: { pt: "Massas e arroz", en: "Noodles & rice" }, marker: "麺・米" },
+  { id: "beef", name: { pt: "Cortes de vaca", en: "Beef cuts" }, marker: "牛肉" },
+  { id: "chicken", name: { pt: "Frango", en: "Chicken" }, marker: "鶏肉" },
+  { id: "pork", name: { pt: "Porco", en: "Pork" }, marker: "豚肉" },
+  { id: "lamb", name: { pt: "Cordeiro", en: "Lamb" }, marker: "羊肉" },
+  { id: "seafood", name: { pt: "Peixe e marisco", en: "Fish & seafood" }, marker: "魚介" },
+  { id: "sides", name: { pt: "Acompanhamentos", en: "Sides" }, marker: "野菜" },
+  { id: "extras", name: { pt: "Extras pagos", en: "Paid extras" }, marker: "追加" },
+  { id: "desserts", name: { pt: "Sobremesas", en: "Desserts" }, marker: "甘味" },
+  { id: "iceCream", name: { pt: "Gelados", en: "Ice cream" }, marker: "アイス" },
+  { id: "coffee", name: { pt: "Café", en: "Coffee" }, marker: "珈琲" },
 ];
 
 export type MenuLeaf =
@@ -46,8 +55,9 @@ const dishSections = chapters.map(({ id, name, marker }) => {
   const page = menuPages.length;
   const dishes = items[id].map(([id, pt, en]) => ({
     id, name: { pt, en }, showPackaging: packagedItems.has(id),
+    included: includedDrinks.has(id),
   }));
-  const parts = Math.ceil(dishes.length / dishesPerPage);
+  const parts = Math.max(1, Math.ceil(dishes.length / dishesPerPage));
 
   for (let part = 0; part < parts; part++) {
     const offset = part * dishesPerPage;

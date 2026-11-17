@@ -231,11 +231,14 @@
 .menu-product-photo { background: #eeeae4; }
 .menu-product-photo img { object-fit: contain; }
 .menu-dishes li p { min-block-size: 2lh; font-size: .79rem; line-height: 1.22; font-weight: 500; }
+.menu-dish-included { display: block; color: var(--book-gold); font-size: .68rem; margin-top: 2px; }
 .menu-drinks-note { color: var(--book-muted); font-size: .68rem; line-height: 1.25; margin: 0 0 6px; }
 .menu-contents-copy { margin: clamp(16px, 3vh, 32px) 0 13px; }
 .menu-contents-copy > p { color: var(--book-gold); text-transform: uppercase; font-size: .63rem; font-weight: 600; letter-spacing: .15em; }
 .menu-contents-copy h2 { margin: 6px 0 0; }
 .menu-chapters { margin: 0 0 9px; padding: 0; list-style: none; }
+.menu-leaf--contents .menu-chapters { min-height: 0; overflow-y: auto; }
+.menu-leaf--contents .menu-chapter-link { min-height: 26px; }
 .menu-chapters li { border-bottom: 1px solid var(--book-rule); }
 .menu-chapter-link {
   display: grid; grid-template-columns: 24px 1fr auto; align-items: center; gap: 6px; min-height: 30px;
@@ -323,7 +326,7 @@ button.menu-chapter-link:hover, .menu-chapter-link[aria-current], .menu-index-co
   .menu-reader-top { margin-bottom: 15px; }
   .menu-reader-city { display: none; }
   .menu-section-heading h2 { font-size: clamp(1.24rem, 6vw, 1.65rem); }
-  .menu-leaf--contents .menu-chapter-link { min-height: 28px; }
+  .menu-leaf--contents .menu-chapter-link { min-height: 24px; }
   .menu-index-toggle, .menu-controls button { padding-inline: 10px; }
   .menu-counter { gap: 5px; font-size: .7rem; }
   .menu-controls { margin-top: 22px; }
