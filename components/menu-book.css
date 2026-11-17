@@ -206,11 +206,14 @@
 .menu-section-heading span { white-space: nowrap; font-size: .64rem; color: var(--book-gold); font-variant-numeric: tabular-nums; }
 .menu-leaf--prices .rodizio-inclusions { padding: 8px 10px; margin-bottom: 9px; font-size: .8rem; }
 .menu-leaf--prices .rodizio-inclusions strong { font-size: .91rem; }
-.menu-leaf--prices .prices { border-color: var(--book-rule); }
-.menu-leaf--prices .prices div { gap: 10px; padding-block: clamp(9px, 1.5vh, 15px); }
-.menu-leaf--prices .prices div + div { border-color: var(--book-rule); }
+.menu-leaf--prices .rodizio-price-group + .rodizio-price-group {
+  margin-top: 6px; padding-top: 10px; border-color: var(--book-rule);
+}
+.menu-leaf--prices .rodizio-price-days { font-size: .86rem; }
+.menu-leaf--prices .rodizio-price-days span { font-size: .74rem; }
+.menu-leaf--prices .prices div { gap: 10px; padding-block: clamp(6px, 1vh, 10px); }
 .menu-leaf--prices .prices dt { font-size: .9rem; }
-.menu-leaf--prices .prices dt span { color: var(--book-muted); }
+.menu-leaf--prices .rodizio-hours { color: var(--book-muted); font-size: .75rem; }
 .menu-leaf--prices .prices dd {
   color: var(--book-gold);
   font: 400 clamp(1.4rem, 3.6vw, 2.15rem)/1 var(--book-heading);
@@ -327,8 +330,7 @@ button.menu-chapter-link:hover, .menu-chapter-link[aria-current], .menu-index-co
 }
 @media (max-width: 345px) {
   .menu-leaf--prices .menu-section-heading { margin-block: 9px; }
-  .menu-leaf--prices .prices div { padding-block: 7px; }
-  .menu-leaf--prices .prices dt span { font-size: .73rem; }
+  .menu-leaf--prices .prices div { padding-block: 5px; }
   .menu-leaf--prices .prices dd { font-size: 1.2rem; }
   .menu-controls button span { display: none; }
   .menu-controls button { min-width: 44px; }

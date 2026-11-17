@@ -151,12 +151,19 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
   background: #e4af741a; color: #f0dfce; font-size: .9rem; line-height: 1.4;
 }
 .rodizio-inclusions strong { display: block; margin-bottom: 2px; color: #ffe5c0; font-size: 1rem; }
-.prices { border-block: 1px solid #ffe5cf35; }
+.rodizio-price-group + .rodizio-price-group {
+  margin-top: 11px; padding-top: 15px; border-top: 1px solid #ffe5cf35;
+}
+.rodizio-price-days {
+  display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 9px; row-gap: 2px;
+  color: #ffe5c0;
+  font-size: .95rem; font-weight: 700; line-height: 1.35;
+}
+.rodizio-price-days span { color: #ead4b9; font-size: .78rem; font-weight: 600; }
 .prices div { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 10px; }
-.prices div + div { border-top: 1px solid #ffe5cf35; }
 .prices dt { font-weight: 700; line-height: 1.35; }
-.prices dt span { display: block; color: #e5d2c0; font-size: .8rem; font-weight: 400; margin-top: 2px; }
 .prices dd { color: #ed4438; font: 400 clamp(2rem, 3.4vw, 3.25rem)/1.15 var(--display-font); white-space: nowrap; }
+.rodizio-hours { margin-top: 10px; color: #e5d2c0; font-size: .82rem; line-height: 1.35; }
 .guide-callout { padding-block: clamp(53px, 7vw, 100px); }
 .guide-callout-header { margin-bottom: clamp(24px, 4vw, 42px); }
 .guide-callout h2 { margin: 11px 0 16px; }

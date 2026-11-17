@@ -3,11 +3,11 @@ export const menuPath = (locale: Locale) => locale === "pt" ? "/menu/" : "/en/me
 
 const lunchHours = "12:00–15:30";
 const dinnerHours = "19:00–23:00";
-const rodizioRates = {
-  weekdayLunch: { amount: 22, hours: lunchHours },
-  weekdayDinner: { amount: 28, hours: dinnerHours },
-  weekendAndHolidays: { amount: 30, hours: `${lunchHours} · ${dinnerHours}` },
-  children: { amount: 15, hours: `${lunchHours} · ${dinnerHours}` },
+const rodizioPrices = {
+  weekdayLunch: 22,
+  weekdayDinner: 28,
+  weekendAndHolidays: 30,
+  children: 15,
 };
 
 export const restaurant = {
@@ -42,12 +42,26 @@ export const copy = {
     ],
     menuPhotoAlt: "Rolinhos de carne numa travessa", foodLabel: "Rodízio", foodTitle: "ALL YOU CAN EAT",
     food: "Da vazia e do entrecôte à língua de boi, camarão, polvo e legumes para a grelha. Também há ramen, gyozas, macarrão de peru japonês e arroz negro com molho de lulas. A carta de bebidas tem ainda cocktails, vinho e saké.",
-    prices: [
-      { audience: "Adultos · Almoço", days: "Segunda a quinta-feira, exceto feriados", ...rodizioRates.weekdayLunch },
-      { audience: "Adultos · Jantar", days: "Segunda a quinta-feira, exceto feriados", ...rodizioRates.weekdayDinner },
-      { audience: "Adultos", days: "Sexta-feira a domingo e todos os feriados", ...rodizioRates.weekendAndHolidays },
-      { audience: "Crianças dos 4 aos 9 anos", days: "Todos os dias, incluindo feriados", ...rodizioRates.children },
+    priceGroups: [
+      {
+        days: "Segunda a quinta-feira",
+        holidayNote: "Exceto feriados",
+        rates: [
+          { label: "Almoço", amount: rodizioPrices.weekdayLunch },
+          { label: "Jantar", amount: rodizioPrices.weekdayDinner },
+          { label: "Crianças dos 4 aos 9 anos", amount: rodizioPrices.children },
+        ],
+      },
+      {
+        days: "Sexta a domingo e todos os feriados",
+        rates: [
+          { label: "Almoço", amount: rodizioPrices.weekendAndHolidays },
+          { label: "Jantar", amount: rodizioPrices.weekendAndHolidays },
+          { label: "Crianças dos 4 aos 9 anos", amount: rodizioPrices.children },
+        ],
+      },
     ],
+    rodizioHours: [`Almoço ${lunchHours}`, `Jantar ${dinnerHours}`],
     drinksIncludedLabel: "Bebidas incluídas no preço",
     drinksIncluded: "Cerveja, refrigerantes com refill e bebidas caseiras.",
     guideLabel: "Da grelha à mesa", guideTitle: "O NOSSO YAKINIKU",
@@ -82,12 +96,26 @@ export const copy = {
     ],
     menuPhotoAlt: "Beef rolls arranged on a platter", foodLabel: "Rodízio", foodTitle: "ALL YOU CAN EAT",
     food: "From striploin and ribeye to beef tongue, prawns, octopus and vegetables for the grill. There’s also ramen, gyoza, Japanese turkey noodles and black rice with squid sauce. The drinks menu also features cocktails, wine and sake.",
-    prices: [
-      { audience: "Adults · Lunch", days: "Monday to Thursday, excluding public holidays", ...rodizioRates.weekdayLunch },
-      { audience: "Adults · Dinner", days: "Monday to Thursday, excluding public holidays", ...rodizioRates.weekdayDinner },
-      { audience: "Adults", days: "Friday to Sunday and all public holidays", ...rodizioRates.weekendAndHolidays },
-      { audience: "Children aged 4–9", days: "Every day, including public holidays", ...rodizioRates.children },
+    priceGroups: [
+      {
+        days: "Monday to Thursday",
+        holidayNote: "Excluding public holidays",
+        rates: [
+          { label: "Lunch", amount: rodizioPrices.weekdayLunch },
+          { label: "Dinner", amount: rodizioPrices.weekdayDinner },
+          { label: "Children aged 4–9", amount: rodizioPrices.children },
+        ],
+      },
+      {
+        days: "Friday to Sunday and all public holidays",
+        rates: [
+          { label: "Lunch", amount: rodizioPrices.weekendAndHolidays },
+          { label: "Dinner", amount: rodizioPrices.weekendAndHolidays },
+          { label: "Children aged 4–9", amount: rodizioPrices.children },
+        ],
+      },
     ],
+    rodizioHours: [`Lunch ${lunchHours}`, `Dinner ${dinnerHours}`],
     drinksIncludedLabel: "Drinks included in the price",
     drinksIncluded: "Beer, soft drinks with refills and homemade drinks.",
     guideLabel: "From the grill to the table", guideTitle: "OUR YAKINIKU",
