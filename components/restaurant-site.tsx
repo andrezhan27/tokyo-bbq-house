@@ -134,7 +134,6 @@ export function HomePage({ locale }: { locale: Locale }) {
             <h2>{t.foodTitle}</h2>
             <p>{t.food}</p>
             <RodizioPrices locale={locale} />
-            <p className="drinks-note">{t.drinksIncluded}</p>
             <Link className="button button-red" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>
           </div>
         </div>

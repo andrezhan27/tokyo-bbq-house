@@ -146,7 +146,6 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
         <div className="menu-leaf-header"><span>{t.menu}</span><span>Tokyo BBQ House</span></div>
         <div className="menu-section-heading"><h2>{t.prices}</h2></div>
         <RodizioPrices locale={locale} />
-        <p className="menu-prices-drinks">{copy[locale].drinksIncluded}</p>
         <div className="menu-leaf-footer"><span>{t.edition}</span><span>{pad(index)}</span></div>
       </section>
     );

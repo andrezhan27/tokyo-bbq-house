@@ -145,13 +145,18 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .menu-image img { object-position: 43% 50%; }
 .menu-copy h2 { font-size: clamp(2.25rem, 5.3vw, 4.7rem); margin: 14px 0 21px; }
 .menu-copy > p:not(.eyebrow) { color: #e1d5c9; }
-.prices { border-block: 1px solid #ffe5cf35; margin-top: 24px; }
+.menu-copy .rodizio-rates { margin: 24px 0 22px; }
+.rodizio-inclusions {
+  margin: 0 0 12px; padding: 10px 13px; border-inline-start: 3px solid #e4af74;
+  background: #e4af741a; color: #f0dfce; font-size: .9rem; line-height: 1.4;
+}
+.rodizio-inclusions strong { display: block; margin-bottom: 2px; color: #ffe5c0; font-size: 1rem; }
+.prices { border-block: 1px solid #ffe5cf35; }
 .prices div { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 10px; }
 .prices div + div { border-top: 1px solid #ffe5cf35; }
 .prices dt { font-weight: 700; line-height: 1.35; }
 .prices dt span { display: block; color: #e5d2c0; font-size: .8rem; font-weight: 400; margin-top: 2px; }
 .prices dd { color: #ed4438; font: 400 clamp(2rem, 3.4vw, 3.25rem)/1.15 var(--display-font); white-space: nowrap; }
-.menu-copy .drinks-note { margin: 13px 0 22px; font-size: .9rem; font-weight: 700; }
 .guide-callout { padding-block: clamp(53px, 7vw, 100px); }
 .guide-callout-header { margin-bottom: clamp(24px, 4vw, 42px); }
 .guide-callout h2 { margin: 11px 0 16px; }
