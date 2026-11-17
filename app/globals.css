@@ -144,7 +144,7 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .menu-image { position: relative; min-height: clamp(370px, 41vw, 575px); background: #30231d; }
 .menu-image img { object-position: 43% 50%; }
 .menu-copy h2 { font-size: clamp(2.25rem, 5.3vw, 4.7rem); margin: 14px 0 21px; }
-.menu-copy > p:not(.eyebrow) { color: #e1d5c9; }
+.menu-description { margin-top: 14px; color: #e1d5c9; }
 .menu-copy .rodizio-rates { margin: 24px 0 22px; }
 .rodizio-inclusions {
   margin: 0 0 12px; padding: 10px 13px; border-inline-start: 3px solid #e4af74;
@@ -240,6 +240,23 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
   .mobile-nav { display: block; }
   .brand, .nav-actions > a { position: relative; z-index: 2; }
 }
+@media (width > 750px) {
+  .menu-section[id] { padding-block: clamp(50px, 6.4svh + 10px, 92px); scroll-margin-top: 0; }
+  .menu-grid { max-width: 1260px; gap: clamp(34px, 5.5vw, 80px); }
+  .menu-image { min-height: clamp(365px, 62svh, 550px); }
+  .menu-copy h2 { font-size: clamp(2.05rem, 4.7vw, 4.25rem); margin: 11px 0 17px; }
+  .menu-copy .rodizio-rates { margin: 17px 0 18px; }
+  .menu-copy .rodizio-inclusions { padding-block: 9px; }
+  .menu-copy .rodizio-price-group + .rodizio-price-group { margin-top: 9px; padding-top: 12px; }
+  .menu-copy .prices div { padding-block: clamp(4px, calc(1.5svh - 7px), 7px); }
+  .menu-copy .prices dd { font-size: clamp(1.95rem, 4.8svh, 2.95rem); }
+  .menu-copy .button { min-height: 48px; }
+}
+@media (width > 750px) and (height <= 800px) {
+  .menu-copy .rodizio-rates { margin-bottom: 14px; }
+  .menu-copy .rodizio-price-group + .rodizio-price-group { padding-top: 8px; }
+  .menu-copy .prices div { padding-block: 3px; }
+}
 @media (max-width: 750px) {
   .container, .nav-shell { width: calc(100% - 40px); }
   .hero-copy { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -251,7 +268,8 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
   .split { grid-template-columns: minmax(0, 1fr); }
   .section-space { padding-block: 70px; }
   .guide-carousel { --photo-width: min(79vw, 490px); }
-  .menu-image { order: 2; min-height: 0; aspect-ratio: 1.3; }
+  .menu-media { order: 2; }
+  .menu-image { min-height: 0; aspect-ratio: 1.3; }
   .experience-images { min-height: clamp(350px, 73vw, 530px); }
   .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer-inner { flex-wrap: wrap; }

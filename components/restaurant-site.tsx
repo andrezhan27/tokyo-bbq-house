@@ -128,11 +128,13 @@ export function HomePage({ locale }: { locale: Locale }) {
 
       <section className="menu-section section-space" id="menu">
         <div className="container split menu-grid">
-          <div className="menu-image"><Image src="/photos/menu.webp" alt={t.menuPhotoAlt} fill sizes="(max-width: 750px) 92vw, 50vw" /></div>
+          <div className="menu-media">
+            <div className="menu-image"><Image src="/photos/menu.webp" alt={t.menuPhotoAlt} fill sizes="(max-width: 750px) 92vw, 50vw" /></div>
+            <p className="menu-description">{t.food}</p>
+          </div>
           <div className="menu-copy">
             <p className="eyebrow"><span />{t.foodLabel}</p>
             <h2>{t.foodTitle}</h2>
-            <p>{t.food}</p>
             <RodizioPrices locale={locale} />
             <Link className="button button-red" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>
           </div>
