@@ -7,6 +7,7 @@ import { Gallery } from "./gallery";
 import { Icon } from "./icon";
 import { LanguageDropdown } from "./language-dropdown";
 import { MobileNav } from "./mobile-nav";
+import { RodizioPrices } from "./rodizio-prices";
 import { YakinikuCarousel } from "./yakiniku-carousel";
 
 export function siteMetadata(locale: Locale): Metadata {
@@ -75,11 +76,6 @@ export function SiteFrame({ locale, reservation = false, children }: {
 
 export function HomePage({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const euro = new Intl.NumberFormat(t.lang, {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  });
 
   return (
     <SiteFrame locale={locale}>
@@ -137,14 +133,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <p className="eyebrow"><span />{t.foodLabel}</p>
             <h2>{t.foodTitle}</h2>
             <p>{t.food}</p>
-            <dl className="prices">
-              {t.prices.map(({ audience, days, amount }) => (
-                <div key={days}>
-                  <dt>{audience}<span>{days}</span></dt>
-                  <dd>{euro.format(amount)}</dd>
-                </div>
-              ))}
-            </dl>
+            <RodizioPrices locale={locale} />
             <p className="drinks-note">{t.drinksIncluded}</p>
             <Link className="button button-red" href={menuPath(locale)}>{t.menu}<Icon name="arrow" /></Link>
           </div>

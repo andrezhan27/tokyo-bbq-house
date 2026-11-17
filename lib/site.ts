@@ -1,7 +1,14 @@
 export type Locale = "pt" | "en";
 export const menuPath = (locale: Locale) => locale === "pt" ? "/menu/" : "/en/menu/";
 
-const rodizioPrices = { adultsMonThu: 28, adultsFriSun: 30, childrenMonFri: 15 };
+const lunchHours = "12:00–15:30";
+const dinnerHours = "19:00–23:00";
+const rodizioRates = {
+  weekdayLunch: { amount: 22, hours: lunchHours },
+  weekdayDinner: { amount: 28, hours: dinnerHours },
+  weekendAndHolidays: { amount: 30, hours: `${lunchHours} · ${dinnerHours}` },
+  children: { amount: 15, hours: `${lunchHours} · ${dinnerHours}` },
+};
 
 export const restaurant = {
   phone: "+351 927 955 555",
@@ -36,9 +43,10 @@ export const copy = {
     menuPhotoAlt: "Rolinhos de carne numa travessa", foodLabel: "Rodízio", foodTitle: "ALL YOU CAN EAT",
     food: "Da vazia e do entrecôte à língua de boi, camarão, polvo e legumes para a grelha. Também há ramen, gyozas, macarrão de peru japonês e arroz negro com molho de lulas. A carta de bebidas tem ainda cocktails, vinho e saké.",
     prices: [
-      { audience: "Adultos", days: "Segunda a quinta-feira", amount: rodizioPrices.adultsMonThu },
-      { audience: "Adultos", days: "Sexta-feira a domingo e feriados", amount: rodizioPrices.adultsFriSun },
-      { audience: "Crianças dos 4 aos 9 anos", days: "Segunda a sexta-feira", amount: rodizioPrices.childrenMonFri },
+      { audience: "Adultos · Almoço", days: "Segunda a quinta-feira, exceto feriados", ...rodizioRates.weekdayLunch },
+      { audience: "Adultos · Jantar", days: "Segunda a quinta-feira, exceto feriados", ...rodizioRates.weekdayDinner },
+      { audience: "Adultos", days: "Sexta-feira a domingo e todos os feriados", ...rodizioRates.weekendAndHolidays },
+      { audience: "Crianças dos 4 aos 9 anos", days: "Todos os dias, incluindo feriados", ...rodizioRates.children },
     ],
     drinksIncluded: "O rodízio inclui cerveja, refrigerantes com refill e bebidas da casa.",
     guideLabel: "Da grelha à mesa", guideTitle: "O NOSSO YAKINIKU",
@@ -74,9 +82,10 @@ export const copy = {
     menuPhotoAlt: "Beef rolls arranged on a platter", foodLabel: "Rodízio", foodTitle: "ALL YOU CAN EAT",
     food: "From striploin and ribeye to beef tongue, prawns, octopus and vegetables for the grill. There’s also ramen, gyoza, Japanese turkey noodles and black rice with squid sauce. The drinks menu also features cocktails, wine and sake.",
     prices: [
-      { audience: "Adults", days: "Monday to Thursday", amount: rodizioPrices.adultsMonThu },
-      { audience: "Adults", days: "Friday to Sunday and public holidays", amount: rodizioPrices.adultsFriSun },
-      { audience: "Children aged 4–9", days: "Monday to Friday", amount: rodizioPrices.childrenMonFri },
+      { audience: "Adults · Lunch", days: "Monday to Thursday, excluding public holidays", ...rodizioRates.weekdayLunch },
+      { audience: "Adults · Dinner", days: "Monday to Thursday, excluding public holidays", ...rodizioRates.weekdayDinner },
+      { audience: "Adults", days: "Friday to Sunday and all public holidays", ...rodizioRates.weekendAndHolidays },
+      { audience: "Children aged 4–9", days: "Every day, including public holidays", ...rodizioRates.children },
     ],
     drinksIncluded: "The rodízio includes beer, soft drinks with refills and house drinks.",
     guideLabel: "From the grill to the table", guideTitle: "OUR YAKINIKU",

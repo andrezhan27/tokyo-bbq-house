@@ -27,7 +27,7 @@ const chapters: { id: Section; name: Localized; marker: string }[] = [
 ];
 
 export type MenuLeaf =
-  | { kind: "cover" | "contents" | "back" }
+  | { kind: "cover" | "contents" | "prices" | "back" }
   | {
       kind: "dishes";
       section: Section;
@@ -39,7 +39,10 @@ export type MenuLeaf =
     };
 
 export const menuPages: MenuLeaf[] = [{ kind: "cover" }, { kind: "contents" }];
-export const menuSections = chapters.map(({ id, name, marker }) => {
+const pricePage = menuPages.length;
+menuPages.push({ kind: "prices" });
+
+const dishSections = chapters.map(({ id, name, marker }) => {
   const page = menuPages.length;
   const dishes = items[id].map(([id, pt, en]) => ({
     id, name: { pt, en }, showPackaging: packagedItems.has(id),
@@ -56,5 +59,10 @@ export const menuSections = chapters.map(({ id, name, marker }) => {
 
   return { id, name, page };
 });
+
+export const menuSections = [
+  { id: "prices", name: { pt: "Preços do rodízio", en: "Rodízio prices" }, page: pricePage },
+  ...dishSections,
+];
 
 menuPages.push({ kind: "back" });

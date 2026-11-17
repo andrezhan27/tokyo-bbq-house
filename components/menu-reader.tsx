@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type CS
 import { menuPages, menuSections, type MenuItem, type MenuLeaf } from "../lib/menu";
 import { copy, restaurant, type Locale } from "../lib/site";
 import { Icon } from "./icon";
+import { RodizioPrices } from "./rodizio-prices";
 
 const words = {
   pt: {
@@ -13,6 +14,7 @@ const words = {
     contents: "Índice", close: "Fechar", cover: "Capa", back: "Contracapa", page: "Página",
     chapters: "Capítulos", home: "Voltar à capa", turn: "Desliza ou usa as setas para folhear",
     edition: "PARQUE DAS NAÇÕES · LISBOA", menu: "Carta da casa",
+    prices: "Preços do rodízio",
     checkDrinks: "A equipa pode indicar as opções e os preços das bebidas.",
     thanks: "Até já, à mesa.", seeAgain: "Obrigado pela visita.",
   },
@@ -21,6 +23,7 @@ const words = {
     contents: "Contents", close: "Close", cover: "Cover", back: "Back cover", page: "Page",
     chapters: "Chapters", home: "Back to cover", turn: "Swipe or use the arrows to turn pages",
     edition: "PARQUE DAS NAÇÕES · LISBON", menu: "The house menu",
+    prices: "Rodízio prices",
     checkDrinks: "Ask our team about drink options and prices.",
     thanks: "See you at the table.", seeAgain: "Thank you for visiting.",
   },
@@ -55,11 +58,12 @@ function Contents({ locale, jump, active, visual }: { locale: Locale; jump: Jump
     <ol className="menu-chapters">
       {menuSections.map(({ id, name, page }, i) => {
         const current = active !== undefined && menuPages[active];
+        const isCurrent = active === page || (current && current.kind === "dishes" && current.section === id);
         return (
           <li key={id}>
             {visual ? <span className="menu-chapter-link"><i>{pad(i + 1)}</i>{name[locale]}<b>{pad(page)}</b></span> :
               <button className="menu-chapter-link" type="button" onClick={() => jump(page)}
-                aria-current={current && current.kind === "dishes" && current.section === id ? "location" : undefined}>
+                aria-current={isCurrent ? "location" : undefined}>
                 <i>{pad(i + 1)}</i>{name[locale]}<b>{pad(page)}</b>
               </button>}
           </li>
@@ -133,6 +137,18 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
         <Contents locale={locale} jump={jump} visual={visual} />
         <div className="menu-leaf-footer"><span>{t.edition}</span><span>{pad(index)}</span></div>
       </div>
+    );
+  }
+
+  if (leaf.kind === "prices") {
+    return (
+      <section className={classes} aria-label={t.prices}>
+        <div className="menu-leaf-header"><span>{t.menu}</span><span>Tokyo BBQ House</span></div>
+        <div className="menu-section-heading"><h2>{t.prices}</h2></div>
+        <RodizioPrices locale={locale} />
+        <p className="menu-prices-drinks">{copy[locale].drinksIncluded}</p>
+        <div className="menu-leaf-footer"><span>{t.edition}</span><span>{pad(index)}</span></div>
+      </section>
     );
   }
 

@@ -204,6 +204,16 @@
   color: var(--book-ink);
 }
 .menu-section-heading span { white-space: nowrap; font-size: .64rem; color: var(--book-gold); font-variant-numeric: tabular-nums; }
+.menu-leaf--prices .prices { border-color: var(--book-rule); margin-top: 0; }
+.menu-leaf--prices .prices div { gap: 10px; padding-block: clamp(11px, 1.8vh, 18px); }
+.menu-leaf--prices .prices div + div { border-color: var(--book-rule); }
+.menu-leaf--prices .prices dt { font-size: .9rem; }
+.menu-leaf--prices .prices dt span { color: var(--book-muted); }
+.menu-leaf--prices .prices dd {
+  color: var(--book-gold);
+  font: 400 clamp(1.4rem, 3.6vw, 2.15rem)/1 var(--book-heading);
+}
+.menu-prices-drinks { color: var(--book-muted); font-size: .83rem; line-height: 1.4; margin: 14px 0; }
 .menu-dishes {
   display: grid; grid-template: repeat(3, 1fr) / repeat(2, minmax(0, 1fr));
   gap: 9px clamp(9px, 1.15vw, 16px); margin: 0 0 8px; padding: 0; list-style: none;
