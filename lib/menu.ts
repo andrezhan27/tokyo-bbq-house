@@ -17,7 +17,6 @@ const dishesPerPage = 6;
 
 const chapters: { id: Section; name: Localized; marker: string }[] = [
   { id: "drinks", name: { pt: "Bebidas", en: "Drinks" }, marker: "飲み物" },
-  { id: "sake", name: { pt: "Bebidas japonesas", en: "Japanese drinks" }, marker: "日本酒" },
   { id: "wine", name: { pt: "Vinhos", en: "Wines" }, marker: "ワイン" },
   { id: "sauces", name: { pt: "Molhos e temperos", en: "Sauces & seasonings" }, marker: "たれ" },
   { id: "starters", name: { pt: "Entradas", en: "Starters" }, marker: "前菜" },
@@ -29,10 +28,7 @@ const chapters: { id: Section; name: Localized; marker: string }[] = [
   { id: "lamb", name: { pt: "Cordeiro", en: "Lamb" }, marker: "羊肉" },
   { id: "seafood", name: { pt: "Peixe e marisco", en: "Fish & seafood" }, marker: "魚介" },
   { id: "sides", name: { pt: "Acompanhamentos", en: "Sides" }, marker: "野菜" },
-  { id: "extras", name: { pt: "Extras pagos", en: "Paid extras" }, marker: "追加" },
   { id: "desserts", name: { pt: "Sobremesas", en: "Desserts" }, marker: "甘味" },
-  { id: "iceCream", name: { pt: "Gelados", en: "Ice cream" }, marker: "アイス" },
-  { id: "coffee", name: { pt: "Café", en: "Coffee" }, marker: "珈琲" },
 ];
 
 export type MenuLeaf =
@@ -65,8 +61,6 @@ const dishSections = chapters.map(({ id, name, marker }) => {
       pages.push({ included, items: group.slice(offset, offset + dishesPerPage) });
     }
   }
-  if (pages.length === 0) pages.push({ included: false, items: [] });
-
   pages.forEach((content, index) => {
     menuPages.push({
       kind: "dishes", section: id, name, marker,

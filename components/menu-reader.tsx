@@ -16,7 +16,6 @@ const words = {
     edition: "PARQUE DAS NAÇÕES · LISBOA", menu: "Carta da casa",
     prices: "Preços do rodízio",
     included: "Incluído no rodízio",
-    checkExtras: "Consulta a equipa sobre os extras disponíveis e os respetivos preços.",
     checkDrinks: "A equipa pode indicar as opções e os preços das bebidas.",
     thanks: "Até já, à mesa.", seeAgain: "Obrigado pela visita.",
   },
@@ -27,7 +26,6 @@ const words = {
     edition: "PARQUE DAS NAÇÕES · LISBON", menu: "The house menu",
     prices: "Rodízio prices",
     included: "Included in the rodízio",
-    checkExtras: "Ask our team about available extras and prices.",
     checkDrinks: "Ask our team about drink options and prices.",
     thanks: "See you at the table.", seeAgain: "Thank you for visiting.",
   },
@@ -157,7 +155,7 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
 
   if (leaf.kind !== "dishes") return null;
 
-  const isDrinkPage = ["drinks", "wine", "sake", "coffee"].includes(leaf.section);
+  const isDrinkPage = leaf.section === "drinks" || leaf.section === "wine";
 
   return (
     <section className={isDrinkPage ? `${classes} menu-leaf--drinks` : classes} aria-label={leaf.name[locale]}>
@@ -177,7 +175,6 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
           </li>
         ))}
       </ul>}
-      {leaf.section === "extras" && <p>{t.checkExtras}</p>}
       {isDrinkPage && !leaf.included && <p className="menu-drinks-note">{t.checkDrinks}</p>}
       <div className="menu-leaf-footer"><span>Tokyo BBQ House</span><span>{pad(index)}</span></div>
     </section>
