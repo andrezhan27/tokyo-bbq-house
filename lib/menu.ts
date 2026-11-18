@@ -3,7 +3,7 @@ import items from "./menu-items.json";
 import photos from "./menu-photos.json";
 
 type Localized = Record<Locale, string>;
-export type MenuItem = { id: string; name: Localized; showPackaging: boolean; included: boolean };
+export type MenuItem = { id: string; name: Localized; showPackaging: boolean };
 type Section = keyof typeof items;
 const packagedItems = new Set(photos.packages);
 const includedDrinks = new Set([
@@ -44,6 +44,7 @@ export type MenuLeaf =
       marker: string;
       part: number;
       parts: number;
+      included: boolean;
       items: MenuItem[];
     };
 
@@ -55,17 +56,23 @@ const dishSections = chapters.map(({ id, name, marker }) => {
   const page = menuPages.length;
   const dishes = items[id].map(([id, pt, en]) => ({
     id, name: { pt, en }, showPackaging: packagedItems.has(id),
-    included: includedDrinks.has(id),
   }));
-  const parts = Math.max(1, Math.ceil(dishes.length / dishesPerPage));
+  const pages: { items: MenuItem[]; included: boolean }[] = [];
 
-  for (let part = 0; part < parts; part++) {
-    const offset = part * dishesPerPage;
+  for (const included of [true, false]) {
+    const group = dishes.filter(({ id }) => includedDrinks.has(id) === included);
+    for (let offset = 0; offset < group.length; offset += dishesPerPage) {
+      pages.push({ included, items: group.slice(offset, offset + dishesPerPage) });
+    }
+  }
+  if (pages.length === 0) pages.push({ included: false, items: [] });
+
+  pages.forEach((content, index) => {
     menuPages.push({
       kind: "dishes", section: id, name, marker,
-      part: part + 1, parts, items: dishes.slice(offset, offset + dishesPerPage),
+      part: index + 1, parts: pages.length, ...content,
     });
-  }
+  });
 
   return { id, name, page };
 });

@@ -204,6 +204,8 @@
   color: var(--book-ink);
 }
 .menu-section-heading span { white-space: nowrap; font-size: .64rem; color: var(--book-gold); font-variant-numeric: tabular-nums; }
+.menu-section-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.menu-section-title small { color: var(--book-gold); font-size: .68rem; line-height: 1.25; }
 .menu-leaf--prices .rodizio-inclusions { padding: 8px 10px; margin-bottom: 9px; font-size: .8rem; }
 .menu-leaf--prices .rodizio-inclusions strong { font-size: .91rem; }
 .menu-leaf--prices .rodizio-price-group + .rodizio-price-group {
@@ -231,7 +233,12 @@
 .menu-product-photo { background: #eeeae4; }
 .menu-product-photo img { object-fit: contain; }
 .menu-dishes li p { min-block-size: 2lh; font-size: .79rem; line-height: 1.22; font-weight: 500; }
-.menu-dish-included { display: block; color: var(--book-gold); font-size: .68rem; margin-top: 2px; }
+.menu-leaf--drinks .menu-dishes { min-height: 0; grid-template-rows: repeat(3, minmax(0, 1fr) auto); }
+.menu-leaf--drinks .menu-dishes li {
+  display: grid; grid-row: span 2; grid-template-rows: subgrid; min-height: 0;
+}
+.menu-leaf--drinks .menu-dish-photo { min-height: 0; }
+.menu-leaf--drinks .menu-leaf-footer { flex-shrink: 0; }
 .menu-drinks-note { color: var(--book-muted); font-size: .68rem; line-height: 1.25; margin: 0 0 6px; }
 .menu-contents-copy { margin: clamp(16px, 3vh, 32px) 0 13px; }
 .menu-contents-copy > p { color: var(--book-gold); text-transform: uppercase; font-size: .63rem; font-weight: 600; letter-spacing: .15em; }

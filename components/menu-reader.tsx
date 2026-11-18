@@ -157,27 +157,28 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
 
   if (leaf.kind !== "dishes") return null;
 
+  const isDrinkPage = ["drinks", "wine", "sake", "coffee"].includes(leaf.section);
+
   return (
-    <section className={classes} aria-label={leaf.name[locale]}>
+    <section className={isDrinkPage ? `${classes} menu-leaf--drinks` : classes} aria-label={leaf.name[locale]}>
       <div className="menu-leaf-header"><span>{t.menu}</span><span lang="ja" aria-hidden="true">{leaf.marker}</span></div>
       <div className="menu-section-heading">
-        <h2>{leaf.name[locale]}</h2>
+        <div className="menu-section-title">
+          <h2>{leaf.name[locale]}</h2>
+          {leaf.included && <small>{t.included}</small>}
+        </div>
         {leaf.parts > 1 && <span aria-hidden="true">{pad(leaf.part)} / {pad(leaf.parts)}</span>}
       </div>
       {leaf.items.length > 0 && <ul className="menu-dishes">
         {leaf.items.map((item) => (
           <li key={item.id}>
             <DishPhoto item={item} />
-            <p>
-              {item.name[locale]}
-              {item.included && <small className="menu-dish-included">{t.included}</small>}
-            </p>
+            <p>{item.name[locale]}</p>
           </li>
         ))}
       </ul>}
       {leaf.section === "extras" && <p>{t.checkExtras}</p>}
-      {["drinks", "wine", "sake", "coffee"].includes(leaf.section) &&
-        leaf.items.some((item) => !item.included) && <p className="menu-drinks-note">{t.checkDrinks}</p>}
+      {isDrinkPage && !leaf.included && <p className="menu-drinks-note">{t.checkDrinks}</p>}
       <div className="menu-leaf-footer"><span>Tokyo BBQ House</span><span>{pad(index)}</span></div>
     </section>
   );
