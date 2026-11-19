@@ -23,4 +23,4 @@ Run `npm ci` and `npm run build` from a fresh checkout. Next.js exports all page
 2. In Vercel, import the repository and select the **Next.js** framework preset. Use the repository root and leave the install command, build command, and output directory at their defaults. Vercel detects the static export from `next.config.ts`.
 3. Deploy. The build uses Node.js 22 from `package.json` and needs no environment variables or server functions. Vercel builds production from the selected production branch and creates previews for other branches.
 
-Restaurant links, prices and translations live in `lib/site.ts`. The reservation page at `/reservaiton/` embeds the restaurant’s Intelis booking form.
+Restaurant links, prices and translations live in `lib/site.ts`. The reservation page at `/reservation/` embeds the restaurant’s Intelis booking form.

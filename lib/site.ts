@@ -13,7 +13,7 @@ const rodizioPrices = {
 export const restaurant = {
   phone: "+351 927 955 555",
   call: "tel:+351927955555",
-  reservationPath: "/reservaiton/",
+  reservationPath: "/reservation/",
   reservationUrl: "https://reserve.intelis.pt/tokyo-bbq-house",
   email: "geral@tokyobbqhouse.com",
   instagram: "https://www.instagram.com/tokyobbq.house/",
