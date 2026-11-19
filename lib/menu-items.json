@@ -139,10 +139,6 @@
     ["iced-tea-lemon", "Fuze Tea Limão (copo de 300 ml)", "Fuze Tea Lemon (300 ml glass)"],
     ["iced-tea-mango", "Fuze Tea Manga e Ananás (copo de 300 ml)", "Fuze Tea Mango & Pineapple (300 ml glass)"],
     ["iced-tea-peach", "Fuze Tea Pêssego e Hibisco (copo de 300 ml)", "Fuze Tea Peach & Hibiscus (300 ml glass)"],
-    ["passion-fruit", "Sumo de maracujá (1 L)", "Passion fruit juice (1 L)"],
-    ["passion-fruit-lime", "Maracujá e lima (1 L)", "Passion fruit & lime (1 L)"],
-    ["pineapple-lime", "Ananás e lima (1 L)", "Pineapple & lime (1 L)"],
-    ["strawberry-lime", "Morango e lima", "Strawberry & lime"],
     ["caneca", "Caneca de cerveja (50 cl)", "Caneca draft beer (50 cl)"],
     ["tulipa", "Tulipa de cerveja (380 ml)", "Tulipa draft beer (380 ml)"],
     ["imperial", "Imperial (20 cl)", "Imperial draft beer (20 cl)"]

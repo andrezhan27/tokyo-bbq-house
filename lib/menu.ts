@@ -9,7 +9,6 @@ const packagedItems = new Set(photos.packages);
 const includedDrinks = new Set([
   "coca-cola", "coca-cola-zero", "sprite", "fanta-orange",
   "iced-tea-lemon", "iced-tea-mango", "iced-tea-peach",
-  "passion-fruit", "passion-fruit-lime", "pineapple-lime", "strawberry-lime",
   "caneca", "tulipa", "imperial", "red-wine", "white-wine", "champagne",
 ]);
 
