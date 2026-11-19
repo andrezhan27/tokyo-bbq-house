@@ -16,6 +16,7 @@ const words = {
     edition: "PARQUE DAS NAÇÕES · LISBOA", menu: "Carta da casa",
     prices: "Preços do rodízio",
     included: "Incluído no rodízio",
+    includedExceptWater: "Incluído no rodízio, exceto a água",
     checkDrinks: "A equipa pode indicar as opções e os preços das bebidas.",
     thanks: "Até já, à mesa.", seeAgain: "Obrigado pela visita.",
   },
@@ -26,6 +27,7 @@ const words = {
     edition: "PARQUE DAS NAÇÕES · LISBON", menu: "The house menu",
     prices: "Rodízio prices",
     included: "Included in the rodízio",
+    includedExceptWater: "Included in the rodízio, except water",
     checkDrinks: "Ask our team about drink options and prices.",
     thanks: "See you at the table.", seeAgain: "Thank you for visiting.",
   },
@@ -156,6 +158,7 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
   if (leaf.kind !== "dishes") return null;
 
   const isDrinkPage = leaf.section === "drinks" || leaf.section === "wine";
+  const hasWater = leaf.items.some(({ id }) => id === "still-water");
 
   return (
     <section className={isDrinkPage ? `${classes} menu-leaf--drinks` : classes} aria-label={leaf.name[locale]}>
@@ -163,7 +166,7 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
       <div className="menu-section-heading">
         <div className="menu-section-title">
           <h2>{leaf.name[locale]}</h2>
-          {leaf.included && <small>{t.included}</small>}
+          {(leaf.included || hasWater) && <small>{hasWater ? t.includedExceptWater : t.included}</small>}
         </div>
         {leaf.parts > 1 && <span aria-hidden="true">{pad(leaf.part)} / {pad(leaf.parts)}</span>}
       </div>
@@ -175,7 +178,7 @@ function Leaf({ index, locale, jump, side, visual }: PageProps) {
           </li>
         ))}
       </ul>}
-      {isDrinkPage && !leaf.included && <p className="menu-drinks-note">{t.checkDrinks}</p>}
+      {isDrinkPage && !leaf.included && !hasWater && <p className="menu-drinks-note">{t.checkDrinks}</p>}
       <div className="menu-leaf-footer"><span>Tokyo BBQ House</span><span>{pad(index)}</span></div>
     </section>
   );

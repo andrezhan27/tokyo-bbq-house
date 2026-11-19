@@ -52,20 +52,17 @@ const dishSections = chapters.map(({ id, name, marker }) => {
   const dishes = items[id].map(([id, pt, en]) => ({
     id, name: { pt, en }, showPackaging: packagedItems.has(id),
   }));
-  const pages: { items: MenuItem[]; included: boolean }[] = [];
+  const parts = Math.ceil(dishes.length / dishesPerPage);
 
-  for (const included of [true, false]) {
-    const group = dishes.filter(({ id }) => includedDrinks.has(id) === included);
-    for (let offset = 0; offset < group.length; offset += dishesPerPage) {
-      pages.push({ included, items: group.slice(offset, offset + dishesPerPage) });
-    }
-  }
-  pages.forEach((content, index) => {
+  for (let offset = 0; offset < dishes.length; offset += dishesPerPage) {
+    const pageItems = dishes.slice(offset, offset + dishesPerPage);
     menuPages.push({
       kind: "dishes", section: id, name, marker,
-      part: index + 1, parts: pages.length, ...content,
+      part: offset / dishesPerPage + 1, parts,
+      included: pageItems.every(({ id }) => includedDrinks.has(id)),
+      items: pageItems,
     });
-  });
+  }
 
   return { id, name, page };
 });

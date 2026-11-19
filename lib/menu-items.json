@@ -132,6 +132,7 @@
     ["breaded-patties", "Bolinhos de abóbora (2 un.)", "Pumpkin cakes (2 pcs)"]
   ],
   "drinks": [
+    ["still-water", "Água sem gás (50 cl)", "Still water (50 cl)"],
     ["coca-cola", "Coca-Cola (copo de 300 ml)", "Coca-Cola (300 ml glass)"],
     ["coca-cola-zero", "Coca-Cola Zero (copo de 300 ml)", "Coca-Cola Zero (300 ml glass)"],
     ["sprite", "Sprite (copo de 300 ml)", "Sprite (300 ml glass)"],
