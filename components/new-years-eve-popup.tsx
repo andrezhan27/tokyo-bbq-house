@@ -110,7 +110,10 @@ export function NewYearsEvePopup({ locale, children }: { locale: Locale; childre
               <p className="eyebrow"><span /><time dateTime="2026-12-31">{t.date}</time></p>
               <h2 id="new-year-title">{t.title}</h2>
               <p id="new-year-description">{t.description}</p>
-              <p className="new-year-time">{t.dinner} <time dateTime="19:00">19:00</time></p>
+              <p className="new-year-time">
+                {t.dinner} <time dateTime="2026-12-31T19:00:00Z">19:00</time>{" "}
+                {t.dinnerEnd} <time dateTime="2027-01-01T00:30:00Z">00:30</time>.
+              </p>
             </header>
             <dl className="new-year-prices">
               <div><dt>{t.adults}</dt><dd><strong>{price.format(80)}</strong> {t.perPerson}</dd></div>
