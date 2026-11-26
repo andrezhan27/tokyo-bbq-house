@@ -23,6 +23,7 @@ export const restaurant = {
 
 export const newYearsEve = {
   pt: {
+    banner: "Menu de Passagem de Ano",
     date: "31 de dezembro de 2026",
     title: "Jantar de Passagem de Ano",
     description: "Nesta noite, o menu habitual do Tokyo BBQ House inclui uma seleção especial de peixe e marisco e bebidas à discrição.",
@@ -44,6 +45,7 @@ export const newYearsEve = {
     close: "Fechar o menu de Passagem de Ano",
   },
   en: {
+    banner: "New Year’s Eve Menu",
     date: "31 December 2026",
     title: "New Year’s Eve Dinner",
     description: "Celebrate with the usual Tokyo BBQ House menu, plus a special seafood selection and unlimited drinks.",

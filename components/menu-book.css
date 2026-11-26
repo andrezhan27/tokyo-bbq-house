@@ -5,7 +5,7 @@
   --book-gold: #cdae7f;
   --book-rule: #ab8e603f;
   --book-heading: Georgia, "Times New Roman", serif;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--new-year-banner-height));
   background: radial-gradient(ellipse at 50% 34%, #2b2722 0%, #1c1916 46%, #121110 79%);
   color: #f5e9da;
 }

@@ -23,13 +23,15 @@
   --red-button: #ca272b;
   --corner-radius: 8px;
   --nav-height: 70px;
+  --new-year-banner-height: 0px;
   --muted: #bdb2a7;
   --body-font: "DM Sans", Arial, sans-serif;
   --display-font: "Knewave", Impact, "Arial Narrow", sans-serif;
   color-scheme: dark;
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+:root:has(.new-year-banner) { --new-year-banner-height: 44px; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--new-year-banner-height); }
 body { margin: 0; background: var(--black); color: var(--white); font: 400 16px/1.65 var(--body-font); }
 a { color: inherit; text-decoration: none; }
 button, input, textarea { font: inherit; }
@@ -89,15 +91,15 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .hero-book { background: transparent; border-color: var(--red); text-shadow: 0 1px 3px #000b; }
 .nav-book { min-height: 42px; font-size: .8rem; padding-inline: 13px; gap: 8px; }
 .nav-book svg { width: 15px; height: 15px; }
-.reservation-layout { height: 100vh; height: 100dvh; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.reservation-layout { height: calc(100vh - var(--new-year-banner-height)); height: calc(100dvh - var(--new-year-banner-height)); display: grid; grid-template-rows: auto minmax(0, 1fr); }
 .reservation-main { min-width: 0; background: #fff; }
 .reservation-frame { display: block; width: 100%; height: 100%; border: 0; }
 
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: calc(100vh - var(--nav-height) - 1px);
-  min-height: calc(100svh - var(--nav-height) - 1px);
+  min-height: calc(100vh - var(--nav-height) - var(--new-year-banner-height) - 1px);
+  min-height: calc(100svh - var(--nav-height) - var(--new-year-banner-height) - 1px);
   overflow: hidden;
   display: grid;
 }
@@ -208,6 +210,27 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .dialog-close { position: absolute; top: 0; right: 0; }
 .dialog-count { text-align: center; margin-top: 12px; font-size: .85rem; }
 
+.new-year-banner {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: var(--new-year-banner-height);
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: var(--red-button);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+}
+.new-year-banner svg { width: 17px; height: 17px; flex: none; }
+.new-year-banner:hover { background: var(--red-dark); }
+.new-year-banner:focus-visible { outline-color: #fff; outline-offset: -4px; }
 body:has(.new-year-dialog[open]) { overflow: hidden; }
 .new-year-dialog {
   width: min(44rem, calc(100% - 1.5rem));
@@ -370,7 +393,7 @@ body:has(.new-year-dialog[open]) { overflow: hidden; }
 }
 @media (max-width: 750px) and (orientation: portrait) {
   .hero-art {
-    --hero-photo-width: calc((100svh - var(--nav-height) - 1px) * .58);
+    --hero-photo-width: calc((100svh - var(--nav-height) - var(--new-year-banner-height) - 1px) * .58);
     --hero-photo-fade: clamp(0px, calc((100vw - var(--hero-photo-width)) / 3), 40px);
     background: #0e0c0b;
   }

@@ -6,8 +6,7 @@ export default function EnglishLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        {children}
-        <NewYearsEvePopup locale="en" />
+        <NewYearsEvePopup locale="en">{children}</NewYearsEvePopup>
       </body>
     </html>
   );
