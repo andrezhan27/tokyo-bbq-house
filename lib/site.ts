@@ -30,7 +30,7 @@ export const newYearsEve = {
     dinner: "O jantar começa às",
     dinnerEnd: "e prolonga-se até às",
     adults: "Adultos",
-    children: "Crianças dos 4 aos 9 anos",
+    children: "Crianças dos 4 aos 12 anos",
     perPerson: "por pessoa",
     seafoodTitle: "Peixe e marisco por pessoa",
     seafood: [
@@ -53,7 +53,7 @@ export const newYearsEve = {
     dinner: "Dinner starts at",
     dinnerEnd: "and continues until",
     adults: "Adults",
-    children: "Children aged 4–9",
+    children: "Children aged 4–12",
     perPerson: "per person",
     seafoodTitle: "Special seafood menu per person",
     seafood: [
