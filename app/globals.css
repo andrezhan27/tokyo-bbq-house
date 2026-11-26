@@ -208,6 +208,97 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + 1px); }
 .dialog-close { position: absolute; top: 0; right: 0; }
 .dialog-count { text-align: center; margin-top: 12px; font-size: .85rem; }
 
+body:has(.new-year-dialog[open]) { overflow: hidden; }
+.new-year-dialog {
+  width: min(44rem, calc(100% - 1.5rem));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #ffffff26;
+  border-top: 3px solid var(--red);
+  border-radius: var(--corner-radius);
+  background: var(--panel);
+  color: var(--white);
+  box-shadow: 0 24px 80px #0008;
+}
+.new-year-dialog::backdrop { background: #110d0bc9; }
+.new-year-panel {
+  --popup-padding: clamp(16px, 4.8vw, 34px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 1.5rem);
+  max-height: calc(100dvh - 1.5rem);
+}
+.new-year-close {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid #ffffff35;
+  background: var(--panel);
+  color: var(--white);
+}
+.new-year-close:hover { background: var(--red-button); }
+.new-year-content {
+  min-height: 0;
+  padding: var(--popup-padding) var(--popup-padding) 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  font-size: .9375rem;
+  line-height: 1.5;
+}
+.new-year-content:focus-visible { outline-offset: -4px; }
+.new-year-heading .eyebrow, .new-year-heading h2 { margin-right: 44px; }
+.new-year-heading h2 { margin-block: 9px 12px; font-size: clamp(1.9rem, 6vw, 3.2rem); }
+.new-year-heading p:not(.eyebrow) { color: var(--muted); }
+.new-year-time { margin-top: 9px; }
+.new-year-time time { color: var(--white); font-weight: 700; }
+.new-year-prices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-block: 18px;
+}
+.new-year-prices div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 9px 12px;
+  border: 1px solid #ffffff26;
+  border-radius: var(--corner-radius);
+  background: var(--black);
+}
+.new-year-prices dt { font-size: .84rem; font-weight: 700; line-height: 1.3; }
+.new-year-prices dd { color: var(--muted); font-size: .8rem; }
+.new-year-prices strong { color: var(--white); font-size: 1.4rem; line-height: 1; }
+.new-year-menus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
+.new-year-menus h3 { font-size: .95rem; line-height: 1.35; }
+.new-year-menus ul { margin: 6px 0 0; padding-inline-start: 1.1em; color: var(--muted); }
+.new-year-menus li::marker { color: #f57676; }
+.new-year-invitation { margin-top: 16px; }
+.new-year-actions {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  padding: 12px var(--popup-padding);
+  border-top: 1px solid #ffffff26;
+  background: var(--black);
+}
+@media (max-width: 540px) {
+  .new-year-close { top: 8px; right: 8px; }
+  .new-year-menus { grid-template-columns: 1fr; }
+  .new-year-actions .button { width: 100%; min-height: 44px; }
+}
+
 .press-section { background: var(--paper); }
 .press-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding-block: 39px; }
 .press-inner h2 { margin-top: 8px; font-size: clamp(1.85rem, 3.8vw, 3.7rem); }

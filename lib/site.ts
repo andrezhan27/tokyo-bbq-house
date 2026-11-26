@@ -21,6 +21,51 @@ export const restaurant = {
   press: "https://www.nit.pt/comida/restaurantes/toquio-bbq-house-neste-novo-barbecue-japones-pode-comer-tudo-o-que-quiser-por-22e",
 };
 
+export const newYearsEve = {
+  pt: {
+    date: "31 de dezembro de 2026",
+    title: "Jantar de Passagem de Ano",
+    description: "Nesta noite, o menu habitual do Tokyo BBQ House inclui uma seleção especial de peixe e marisco e bebidas à discrição.",
+    dinner: "O jantar começa às",
+    adults: "Adultos",
+    children: "Crianças dos 4 aos 9 anos",
+    perPerson: "por pessoa",
+    seafoodTitle: "Peixe e marisco por pessoa",
+    seafood: [
+      "Meia lagosta portuguesa de águas profundas",
+      "Pedaços de salmão",
+      "1 camarão-tigre",
+      "2 vieiras",
+      "1 mousse de estilo japonês",
+    ],
+    drinksTitle: "Bebidas à discrição até às 00:30",
+    drinks: ["Cerveja", "Saké japonês", "Champanhe", "Vinho de maracujá", "Vinho de frutos vermelhos", "Refrigerantes", "Vinho tinto e branco"],
+    invitation: "Vem brindar ao Ano Novo connosco!",
+    close: "Fechar o menu de Passagem de Ano",
+  },
+  en: {
+    date: "31 December 2026",
+    title: "New Year’s Eve Dinner",
+    description: "Celebrate with the usual Tokyo BBQ House menu, plus a special seafood selection and unlimited drinks.",
+    dinner: "Dinner starts at",
+    adults: "Adults",
+    children: "Children aged 4–9",
+    perPerson: "per person",
+    seafoodTitle: "Special seafood menu per person",
+    seafood: [
+      "Half a Portuguese deep-sea lobster",
+      "Salmon pieces",
+      "1 tiger prawn",
+      "2 scallops",
+      "1 Japanese-style mousse dessert",
+    ],
+    drinksTitle: "Unlimited drinks until 00:30",
+    drinks: ["Beer", "Japanese sake", "Champagne", "Passion fruit wine", "Red fruit wine", "Soft drinks", "Red and white wine"],
+    invitation: "Join us for a memorable evening and welcome the New Year in style!",
+    close: "Close the New Year’s Eve menu",
+  },
+};
+
 export const copy = {
   pt: {
     home: "/",
