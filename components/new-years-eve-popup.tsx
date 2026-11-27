@@ -114,6 +114,7 @@ export function NewYearsEvePopup({ locale, children }: { locale: Locale; childre
                 {t.dinner} <time dateTime="2026-12-31T19:00:00Z">19:00</time>{" "}
                 {t.dinnerEnd} <time dateTime="2027-01-01T00:30:00Z">00:30</time>.
               </p>
+              <p>{t.tableTime}</p>
             </header>
             <dl className="new-year-prices">
               <div><dt>{t.adults}</dt><dd><strong>{price.format(80)}</strong> {t.perPerson}</dd></div>
